@@ -1,0 +1,110 @@
+.about-section {
+  font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+}
+.services-section {
+  font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+}
+.services-wrapper {
+  /* background: hsla(47, 81%, 80%, 1);
+
+  background: linear-gradient(
+    90deg,
+    hsla(47, 81%, 80%, 1) 0%,
+    hsla(357, 40%, 71%, 1) 100%
+  );
+
+  background: -moz-linear-gradient(
+    90deg,
+    hsla(47, 81%, 80%, 1) 0%,
+    hsla(357, 40%, 71%, 1) 100%
+  );
+
+  background: -webkit-linear-gradient(
+    90deg,
+    hsla(47, 81%, 80%, 1) 0%,
+    hsla(357, 40%, 71%, 1) 100%
+  );
+
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#F5E3A1", endColorstr="#D3989B", GradientType=1 ); */
+}
+.footer-section {
+  font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  background: hsla(47, 81%, 80%, 1);
+
+  background: linear-gradient(
+    270deg,
+    hsla(47, 81%, 80%, 1) 39%,
+    hsla(357, 40%, 71%, 1) 100%
+  );
+
+  background: -moz-linear-gradient(
+    270deg,
+    hsla(47, 81%, 80%, 1) 39%,
+    hsla(357, 40%, 71%, 1) 100%
+  );
+
+  background: -webkit-linear-gradient(
+    270deg,
+    hsla(47, 81%, 80%, 1) 39%,
+    hsla(357, 40%, 71%, 1) 100%
+  );
+
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#F5E3A1", endColorstr="#D3989B", GradientType=1 );
+}
+.contact-section {
+  font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+}
+
+.preloader-wrapper {
+  transition: opacity 1s ease-out; /* Smooth fade-out transition */
+}
+
+.fade-out {
+  opacity: 0; /* Trigger opacity change */
+}
+
+/* Scroll Up */
+.scrollup {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  text-decoration: none;
+  height: 60px;
+  width: 60px;
+  background-color: #333;
+  color: white;
+  position: fixed;
+  border-radius: 20px;
+  right: 20px;
+  bottom: -60px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
+  transition: 0.6s;
+  z-index: 2;
+  outline: none;
+}
+
+.scrollup-icon {
+  text-decoration: none;
+  color: white;
+}
+
+.scrollup:hover {
+  transition: 0.5s;
+}
+
+/* Show scroll */
+.show-scroll {
+  bottom: 20px;
+}
+
+@media (max-width: 500px) {
+  .scrollup {
+    height: 50px;
+    width: 50px;
+    font-size: 11px;
+  }
+}

@@ -1,0 +1,112 @@
+.navbar-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  /* background-color: #f5c518; */
+  transition: 0.6s;
+}
+
+.navbar {
+  /* background-color: #f5c518; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 40px;
+  position: relative;
+  height: 80px;
+  gap: 130px;
+  font-family: "Kalam";
+  font-weight: 400;
+  font-style: normal;
+}
+
+.navbar-wrapper.sticky {
+  width: 100%;
+  background-color: #f5c518;
+  box-shadow: 1px -1px 83px -29px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 1px -1px 83px -29px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 1px -1px 83px -29px rgba(0, 0, 0, 0.75);
+  z-index: 1000;
+}
+
+.nav-left,
+.nav-right {
+  display: flex;
+
+  gap: 40px;
+  align-items: center;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #000;
+  font-size: 20px;
+}
+
+.navbar-links li {
+  /* margin-left: 1.5rem; */
+  transition: 0.6s;
+  position: relative;
+  cursor: pointer;
+}
+
+.navbar-links li::after {
+  content: "";
+  width: 0;
+  height: 2px;
+  background: #000;
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  transition: 0.5s;
+}
+
+.navbar-links li:hover::after {
+  width: 100%;
+}
+
+.shop-button {
+  background: #fff;
+  padding: 6px 14px;
+  border-radius: 10px;
+  border: none;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.shop-button::before {
+  content: "🛒";
+  font-size: 16px;
+}
+
+.logo-wrapper {
+  position: relative;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 auto; /* Prevent from stretching */
+  padding: 0 40px;
+  /* border: 1px solid #000; */
+}
+
+.logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  border-radius: 50%;
+  padding: 5px;
+  width: 100px;
+}
+
+.logo img {
+  max-width: 100%;
+  max-height: 100%;
+}
