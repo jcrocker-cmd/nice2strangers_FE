@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Section from "../common/Section";
 import Slide_1 from "../../assets/img/image1.png";
 import Slide_2 from "../../assets/img/image2.png";
 import Slide_3 from "../../assets/img/image3.png";
@@ -36,36 +37,37 @@ const CustomCarousel: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative w-full overflow-hidden h-screen">
-      {/* Slide Track */}
-      <div
-        className="flex transition-transform duration-700 ease-in-out h-full"
-        style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-      >
-        {slides.map((slide) => (
-          <div key={slide.id} className="w-full flex-shrink-0 h-full">
-            <img
-              src={slide.image}
-              alt={slide.alt}
-              className="w-full h-full object-cover"
+    <Section id="carousel-page">
+      <div className="relative w-full overflow-hidden h-screen">
+        {/* Slide Track */}
+        <div
+          className="flex transition-transform duration-700 ease-in-out h-full"
+          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+        >
+          {slides.map((slide) => (
+            <div key={slide.id} className="w-full flex-shrink-0 h-full">
+              <img
+                src={slide.image}
+                alt={slide.alt}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          ))}
+        </div>
+        {/* Dots */}
+        <div className="flex justify-center mt-4 gap-2 absolute bottom-4 left-1/2 transform -translate-x-1/2">
+          {slides.map((_, index) => (
+            <button
+              key={index}
+              className={`w-2 h-2 rounded-full ${
+                index === currentIndex ? "bg-gray-800" : "bg-gray-400"
+              }`}
+              onClick={() => goToSlide(index)}
             />
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-
-      {/* Dots */}
-      <div className="flex justify-center mt-4 gap-2 absolute bottom-4 left-1/2 transform -translate-x-1/2">
-        {slides.map((_, index) => (
-          <button
-            key={index}
-            className={`w-2 h-2 rounded-full ${
-              index === currentIndex ? "bg-gray-800" : "bg-gray-400"
-            }`}
-            onClick={() => goToSlide(index)}
-          />
-        ))}
-      </div>
-    </div>
+    </Section>
   );
 };
 

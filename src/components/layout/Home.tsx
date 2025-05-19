@@ -9,8 +9,8 @@ import Section from "../common/Section";
 const Homepage = () => {
   return (
     <>
+      <Navbar />
       <Section id="home-page">
-        <Navbar />
         <Carousel />
         <Aboutpage />
         <Services />

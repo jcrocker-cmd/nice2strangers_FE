@@ -1,0 +1,43 @@
+@media (max-width: 1150px) {
+  .services-container {
+    flex-direction: row;
+  }
+  .services-container .row-1,
+  .services-container .row-2 {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* Make sure the icon has transform origin set */
+.pendulum-icon {
+  display: block;
+  transform-origin: top center;
+}
+
+/* Apply animation when hovering the whole card */
+.services-card:hover .pendulum-icon {
+  animation: swing 1s ease-in-out infinite;
+}
+
+/* Define the keyframes */
+@keyframes swing {
+  0% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(15deg);
+  }
+  40% {
+    transform: rotate(-10deg);
+  }
+  60% {
+    transform: rotate(7deg);
+  }
+  80% {
+    transform: rotate(-4deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}

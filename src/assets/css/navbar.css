@@ -11,12 +11,13 @@
 .navbar {
   /* background-color: #f5c518; */
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  padding: 20px 40px;
+  padding-top: 40px;
+  padding-bottom: 40px;
   position: relative;
   height: 80px;
-  gap: 130px;
+  gap: 220px;
   font-family: "Kalam";
   font-weight: 400;
   font-style: normal;
@@ -83,11 +84,6 @@
   width: 100%;
 }
 
-.shop-button::before {
-  content: "🛒";
-  font-size: 16px;
-}
-
 .logo {
   position: absolute;
   top: 40%;
@@ -146,11 +142,6 @@
     height: 55px;
   }
   .logo {
-    /* position: relative;
-    top: auto;
-    left: auto;
-    transform: none;
-    width: 80px; */
     display: none;
   }
 
