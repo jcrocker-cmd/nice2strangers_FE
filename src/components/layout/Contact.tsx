@@ -5,8 +5,26 @@ import icon from "../../assets/img/icon.png";
 import Section from "../common/Section";
 import Wrapper from "../common/Wrapper";
 import "../../assets/css/main.css";
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import type { RootState, AppDispatch } from "../state/store";
+import { useDispatch } from "react-redux";
+import { setIsSubmitting } from "../state/submission/submissionSlice";
+import Swal from "sweetalert2";
+
+interface FormInputs {
+  name: string;
+  subject: string;
+  message: string;
+  email: string;
+}
 
 const ContactForm: React.FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const isSubmitting = useSelector(
+    (state: RootState) => state.submission.isSubmitting
+  );
   useEffect(() => {
     ScrollReveal().reveal(".contact-container", {
       delay: 400,
@@ -15,6 +33,37 @@ const ContactForm: React.FC = () => {
       origin: "bottom",
     });
   }, []);
+
+  // Initialize React Hook Form
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<FormInputs>();
+
+  // onSubmit handler
+  const onSubmit = (formData: FormInputs) => {
+    dispatch(setIsSubmitting(true));
+    axios
+      .post(
+        "https://nice2strangers-be-main-pryzu3.laravel.cloud/api/send-mail",
+        formData
+      )
+      .then((response) => {
+        Swal.fire("Success!", "Email Sent Successfully", "success");
+        console.log(response.data);
+        reset();
+        dispatch(setIsSubmitting(false));
+      })
+      .catch((error) => {
+        Swal.fire("Error!", "Failed to send email", "error");
+        console.error(error);
+        reset();
+        dispatch(setIsSubmitting(false));
+      });
+  };
+
   return (
     <Wrapper
       id="contact-page"
@@ -31,16 +80,48 @@ const ContactForm: React.FC = () => {
             <img src={icon} alt="emoji" className="w-40 " />
           </div>
 
-          <form className="pt-10 space-y-5 w-[350px]">
+          <form
+            className="pt-10 space-y-5 w-[350px]"
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <div>
               <label className="block text-black ">
                 Name <span className="text-red-500">*</span>
               </label>
               <input
+                id="name"
                 type="text"
                 className="mt-1 w-full bg-white rounded-xl border-none px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                required
+                {...register("name", { required: "Name is required." })}
               />
+              {errors.name && (
+                <p className="text-red-500 text-sm">{errors.name.message}</p>
+              )}
+            </div>
+
+            <div>
+              <label className="block text-black ">
+                Email <span className="text-red-500">*</span>
+              </label>
+              <input
+                id="email"
+                type="text"
+                className="mt-1 w-full bg-white rounded-xl border-none px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                {...register("email", {
+                  required: "Email is required.",
+                  pattern: {
+                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                    message: "Please enter a valid email address.",
+                  },
+                  maxLength: {
+                    value: 50,
+                    message: "Email must be at most 50 characters long.",
+                  },
+                })}
+              />
+              {errors.email && (
+                <p className="text-red-500 text-sm">{errors.email.message}</p>
+              )}
             </div>
 
             <div>
@@ -48,10 +129,14 @@ const ContactForm: React.FC = () => {
                 Subject <span className="text-red-500">*</span>
               </label>
               <input
+                id="subject"
                 type="text"
                 className="mt-1 w-full bg-white rounded-xl border-none px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                required
+                {...register("subject", { required: "Subject is required." })}
               />
+              {errors.subject && (
+                <p className="text-red-500 text-sm">{errors.subject.message}</p>
+              )}
             </div>
 
             <div>
@@ -59,17 +144,22 @@ const ContactForm: React.FC = () => {
                 Message <span className="text-red-500">*</span>
               </label>
               <textarea
+                id="message"
                 rows={4}
                 className="mt-1 w-full bg-white rounded-xl border-none px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                required
+                {...register("message", { required: "Message is required." })}
               />
+              {errors.message && (
+                <p className="text-red-500 text-sm">{errors.message.message}</p>
+              )}
             </div>
 
             <button
               type="submit"
               className="w-full bg-[#e0a44d] cursor-pointer text-white  py-2 rounded-md transition-all duration-200"
+              disabled={isSubmitting}
             >
-              SUBMIT
+              {isSubmitting ? "Submitting..." : "Submit"}
             </button>
           </form>
         </div>

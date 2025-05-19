@@ -1,35 +1,5 @@
-// import Navbar from "../components/layout/Navbar";
-// import Footer from "../components/layout/Footer";
-// import Aboutpage from "./Aboutpage";
-// import ContactForm from "../components/layout/Contact";
-// import Carousel from "../components/layout/Carousel";
-// import Services from "../components/layout/Services";
-// import SmileyPreloader from "../components/common/Preloader";
-
-// const Homepage = () => {
-//   return (
-//     <>
-//       <Navbar></Navbar>
-//       <Carousel></Carousel>
-//       {/* <div className="bg-black w-full h-screen">Hompage</div> */}
-//       <Aboutpage></Aboutpage>
-//       <Services></Services>
-//       <ContactForm></ContactForm>
-//       <Footer />
-//       <SmileyPreloader />
-//     </>
-//   );
-// };
-
-// export default Homepage;
-
 import { useEffect, useState } from "react";
-import Navbar from "../components/layout/Navbar";
-import Footer from "../components/layout/Footer";
-import Aboutpage from "../components/layout/About";
-import ContactForm from "../components/layout/Contact";
-import Carousel from "../components/layout/Carousel";
-import Services from "../components/layout/Services";
+import Home from "../components/layout/Home";
 import SmileyPreloader from "../components/common/Preloader";
 
 const Homepage = () => {
@@ -44,12 +14,7 @@ const Homepage = () => {
 
   return (
     <>
-      <Navbar />
-      <Carousel />
-      <Aboutpage />
-      <Services />
-      <ContactForm />
-      <Footer />
+      <Home />
     </>
   );
 };

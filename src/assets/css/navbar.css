@@ -79,25 +79,18 @@
   cursor: pointer;
 }
 
+.navbar-links li.active::after {
+  width: 100%;
+}
+
 .shop-button::before {
   content: "🛒";
   font-size: 16px;
 }
 
-.logo-wrapper {
-  position: relative;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 0 0 auto; /* Prevent from stretching */
-  padding: 0 40px;
-  /* border: 1px solid #000; */
-}
-
 .logo {
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translateX(-50%);
   background: #fff;
@@ -109,4 +102,114 @@
 .logo img {
   max-width: 100%;
   max-height: 100%;
+}
+
+.navbar-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+.navbar-logo,
+.navbar-toggle {
+  display: none;
+}
+
+@media (max-width: 1060px) {
+  .navbar-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #333;
+    padding: 1rem 0;
+  }
+
+  .navbar-links.open {
+    display: flex;
+  }
+
+  .navbar-links li {
+    margin: 0.5rem 0;
+    text-align: center;
+  }
+
+  .navbar-toggle,
+  .navbar-logo {
+    display: block;
+  }
+  .navbar-logo img {
+    height: 55px;
+  }
+  .logo {
+    /* position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 80px; */
+    display: none;
+  }
+
+  .navbar {
+    /* background-color: #f5c518; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    height: 80px;
+    gap: 130px;
+  }
+}
+
+/* Mobile View NavBar */
+.fullscreen-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  color: white;
+}
+
+.fullscreen-menu ul {
+  list-style: none;
+  padding: 0;
+  text-align: center;
+}
+
+.fullscreen-menu li {
+  margin: 1.5rem 0;
+}
+
+.fullscreen-menu a {
+  color: white;
+  font-size: 1.5rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.fullscreen-menu a:hover {
+  color: #f39c12;
+}
+
+.close-button {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 1100; /* Ensure it's clickable above other elements */
 }
