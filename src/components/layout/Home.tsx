@@ -5,6 +5,7 @@ import ContactForm from "../../components/layout/Contact";
 import Carousel from "../../components/layout/Carousel";
 import Services from "../../components/layout/Services";
 import Section from "../common/Section";
+import NewsletterSignup from "./Newsletter";
 
 const Homepage = () => {
   return (
@@ -15,6 +16,7 @@ const Homepage = () => {
         <Aboutpage />
         <Services />
         <ContactForm />
+        <NewsletterSignup />
         <Footer />
       </Section>
     </>
