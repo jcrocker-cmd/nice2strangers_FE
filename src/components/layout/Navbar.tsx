@@ -57,7 +57,7 @@ function Navbar() {
         }
       },
       {
-        threshold: 0.3, // Try lowering to 0.4 or raising to 0.8 if needed
+        threshold: 0.4, // Try lowering to 0.4 or raising to 0.8 if needed
       }
     );
 
@@ -127,10 +127,10 @@ function Navbar() {
           </span>
         </ul>
         <button
-          className="navbar-toggle cursor-pointer"
+          className="navbar-toggle cursor-pointer text-black"
           onClick={() => dispatch(toggleMenu())}
         >
-          <RiMenuFill />
+          <RiMenuFill className="text-black" />
         </button>
 
         <div className="navbar-logo">

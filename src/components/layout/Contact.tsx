@@ -46,10 +46,7 @@ const ContactForm: React.FC = () => {
   const onSubmit = (formData: FormInputs) => {
     dispatch(setIsSubmitting(true));
     axios
-      .post(
-        "https://nice2strangers-be-main-pryzu3.laravel.cloud/api/send-mail",
-        formData
-      )
+      .post("http://localhost:8000/api/send-mail", formData)
       .then((response) => {
         Swal.fire("Success!", "Email Sent Successfully", "success");
         console.log(response.data);
