@@ -6,6 +6,7 @@ import Carousel from "../../components/layout/Carousel";
 import Services from "../../components/layout/Services";
 import Section from "../common/Section";
 import NewsletterSignup from "./Newsletter";
+import GlideCarousel from "./GlideCarousel";
 
 const Homepage = () => {
   return (
@@ -15,6 +16,7 @@ const Homepage = () => {
         <Carousel />
         <Aboutpage />
         <Services />
+        <GlideCarousel />
         <ContactForm />
         <NewsletterSignup />
         <Footer />
