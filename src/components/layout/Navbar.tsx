@@ -57,7 +57,7 @@ function Navbar() {
         }
       },
       {
-        threshold: 0.4, // Try lowering to 0.4 or raising to 0.8 if needed
+        threshold: 0.3, // Try lowering to 0.4 or raising to 0.8 if needed
       }
     );
 
@@ -105,7 +105,14 @@ function Navbar() {
         </div>
         {/* </div> */}
         <ul className="nav-right flex w-1/2 navbar-links">
-          <li className="nav-link ">Watch</li>
+          <li
+            className={`nav-link ${
+              activeSection === "watch-page" ? "active" : ""
+            }`}
+            onClick={() => scrollToSection("watch-page")}
+          >
+            Watch
+          </li>
           <li
             className={`nav-link ${
               activeSection === "contact-page" ? "active" : ""

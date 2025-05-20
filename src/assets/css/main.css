@@ -1,12 +1,7 @@
-.about-section {
-  font-family: "Space Grotesk", sans-serif;
-  font-optical-sizing: auto;
-}
-.services-section {
-  font-family: "Space Grotesk", sans-serif;
-  font-optical-sizing: auto;
-}
-.newsletter-section {
+.about-section,
+.services-section,
+.newsletter-section,
+.watch-section {
   font-family: "Space Grotesk", sans-serif;
   font-optical-sizing: auto;
 }
