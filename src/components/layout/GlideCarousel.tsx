@@ -55,7 +55,7 @@ const SplideCarousel: React.FC = () => {
             focus: "center",
             gap: "2rem",
             autoplay: true,
-            interval: 5000,
+            interval: 3000,
             pagination: false,
             arrows: true,
             breakpoints: {

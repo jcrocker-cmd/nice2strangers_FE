@@ -95,6 +95,10 @@
   width: 100px;
 }
 
+.navbar-toggle {
+  color: #000;
+}
+
 .logo img {
   max-width: 100%;
   max-height: 100%;
