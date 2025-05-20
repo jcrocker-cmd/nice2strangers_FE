@@ -96,12 +96,12 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2  justify-between items-center text-xs text-black/70 mt-6">
-          <div className="flex space-x-4">
+        <div className="flex flex-col md:flex-row justify-between items-center text-xs text-black/70 mt-6 gap-2 text-center">
+          <div className="space-x-4">
             Copyright &copy; nice2strangers 2025 All rights reserved.
           </div>
 
-          <div className="flex space-x-4 justify-end">
+          <div className="flex space-x-4">
             <a href="#">Cookies Policy</a>
             <a href="#">Legal Terms</a>
             <a href="#">Privacy Policy</a>

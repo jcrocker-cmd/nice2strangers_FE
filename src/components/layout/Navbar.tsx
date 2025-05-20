@@ -9,6 +9,9 @@ import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../state/store";
 import { toggleMenu, closeMenu } from "../state/navbar/navbarSlice";
 
+import { RiMenuFill } from "react-icons/ri";
+import { FaCartShopping } from "react-icons/fa6";
+
 function Navbar() {
   const dispatch = useDispatch<AppDispatch>();
   const isOpen = useSelector((state: RootState) => state.navbar.isOpen);
@@ -54,7 +57,7 @@ function Navbar() {
         }
       },
       {
-        threshold: 0.6, // Try lowering to 0.4 or raising to 0.8 if needed
+        threshold: 0.4, // Try lowering to 0.4 or raising to 0.8 if needed
       }
     );
 
@@ -68,19 +71,28 @@ function Navbar() {
 
   return (
     <Section className={`navbar-wrapper ${isSticky ? "sticky" : ""}`}>
-      <nav className="navbar mx-auto max-w-[1080px]">
+      <nav className="navbar mx-auto max-w-[1080px] px-10 ">
         <ul className="nav-left flex w-1/2 justify-end navbar-links">
-          <li className="nav-link" onClick={() => scrollToSection("home-page")}>
+          <li
+            className={`nav-link ${
+              activeSection === "carousel-page" ? "active" : ""
+            }`}
+            onClick={() => scrollToSection("home-page")}
+          >
             Home
           </li>
           <li
-            className="nav-link"
+            className={`nav-link ${
+              activeSection === "about-page" ? "active" : ""
+            }`}
             onClick={() => scrollToSection("about-page")}
           >
             About
           </li>
           <li
-            className="nav-link"
+            className={`nav-link ${
+              activeSection === "services-page" ? "active" : ""
+            }`}
             onClick={() => scrollToSection("services-page")}
           >
             Services
@@ -102,13 +114,16 @@ function Navbar() {
           >
             Contact
           </li>
-          <span className="shop-button">Shop</span>
+          <span className="shop-button">
+            <FaCartShopping />
+            Shop
+          </span>
         </ul>
         <button
-          className="navbar-toggle"
+          className="navbar-toggle cursor-pointer"
           onClick={() => dispatch(toggleMenu())}
         >
-          ☰
+          <RiMenuFill />
         </button>
 
         <div className="navbar-logo">

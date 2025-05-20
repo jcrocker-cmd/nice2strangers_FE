@@ -23,7 +23,7 @@ const Aboutpage = () => {
   return (
     <>
       <Wrapper id="about-page" className="bg-[#F7F0D7] w-full">
-        <Section className="about-section mx-auto max-w-[1080px] relative flex py-40">
+        <Section className="about-section mx-auto max-w-[1080px] relative flex py-40 px-10">
           <div className="about-left w-1/2">
             <div className="heading justify-end flex flex-row items-center gap-8">
               <span className="h-[3px] bg-black w-1/3"></span>
@@ -50,7 +50,11 @@ const Aboutpage = () => {
             </div>
           </div>
           <div className="about-right w-1/2 flex justify-center items-center">
-            <img src={icon} alt="" className="w-[340px]" />
+            <img
+              src={icon}
+              alt=""
+              className="h-[30vh] sm:h-[35vh] md:h-[40vh] lg:h-[45vh]"
+            />
           </div>
         </Section>
       </Wrapper>
