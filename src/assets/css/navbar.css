@@ -93,10 +93,7 @@
   border-radius: 50%;
   padding: 5px;
   width: 100px;
-}
-
-.navbar-toggle {
-  color: #000;
+  z-index: 9999;
 }
 
 .logo img {

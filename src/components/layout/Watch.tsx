@@ -23,7 +23,7 @@ const SplideCarousel: React.FC = () => {
   return (
     <Wrapper
       id="watch-page"
-      className="bg-gradient-to-tr from-black to-gray-600"
+      className="bg-gradient-to-tr from-black to-gray-600 h-auto"
     >
       <Section className="watch-section max-w-6xl mx-auto px-4 py-20">
         <h1 className="text-white text-4xl font-bold text-center">

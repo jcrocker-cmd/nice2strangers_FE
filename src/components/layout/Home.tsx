@@ -6,7 +6,7 @@ import Carousel from "../../components/layout/Carousel";
 import Services from "../../components/layout/Services";
 import Section from "../common/Section";
 import NewsletterSignup from "./Newsletter";
-import GlideCarousel from "./GlideCarousel";
+import GlideCarousel from "./Watch";
 
 const Homepage = () => {
   return (
