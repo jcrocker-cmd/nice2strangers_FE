@@ -1,5 +1,6 @@
 import AboutUs from "./components/layout/About";
-import Homepage from "./pages/Homepage";
+import Home_Page from "./pages/Home_Page";
+import Shop_Page from "./pages/Shop_Page";
 
 export const appRoutes = [
   {
@@ -8,6 +9,10 @@ export const appRoutes = [
   },
   {
     path: "/",
-    element: <Homepage />,
+    element: <Home_Page />,
+  },
+    {
+    path: "/shop-page",
+    element: <Shop_Page />,
   },
 ];

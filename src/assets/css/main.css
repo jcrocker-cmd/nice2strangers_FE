@@ -1,7 +1,9 @@
 .about-section,
 .services-section,
 .newsletter-section,
-.watch-section {
+.watch-section,
+.shop-body
+{
   font-family: "Space Grotesk", sans-serif;
   font-optical-sizing: auto;
 }
@@ -30,6 +32,13 @@
 
   filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#F5E3A1", endColorstr="#D3989B", GradientType=1 );
 }
+
+.shop-section {
+  font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  background: hsla(47, 81%, 80%, 1);
+}
+
 .contact-section {
   font-family: "Space Grotesk", sans-serif;
   font-optical-sizing: auto;

@@ -1,5 +1,5 @@
-import Navbar from "../../components/layout/Navbar";
-import Footer from "../../components/layout/Footer";
+import Navbar from "../common/Navbar";
+import Footer from "../common/Footer";
 import Aboutpage from "../../components/layout/About";
 import ContactForm from "../../components/layout/Contact";
 import Carousel from "../../components/layout/Carousel";
