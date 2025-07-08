@@ -1,4 +1,3 @@
-import React from 'react'
 import ProductCard from '../common/shop/ProductCard'
 import Section from '../common/Section';
 import Wrapper from '../common/Wrapper';
@@ -29,9 +28,9 @@ const Shop_Content = () => {
     console.log("Added to cart:", name);
   };
 
-  const handleBuyNow = (name: string) => {
-    console.log("Buying:", name);
-  };
+  // const handleBuyNow = (name: string) => {
+  //   console.log("Buying:", name);
+  // };
 
     const handleCheckout = async (product: Product) => {
     try {
