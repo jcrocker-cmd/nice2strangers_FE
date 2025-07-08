@@ -1,9 +1,9 @@
 import "../../assets/css/navbar.css";
 import logo from "../../assets/img/logo.png";
 import { useState, useEffect } from "react";
-// import { Link, useLocation } from "react-router-dom";
-import Section from "../common/Section";
-import NavbarMobile from "../common/NavbarMobile";
+import { Link } from 'react-router-dom';
+import Section from "./Section";
+import NavbarMobile from "./NavbarMobile";
 // State
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../state/store";
@@ -121,10 +121,12 @@ function Navbar() {
           >
             Contact
           </li>
-          <span className="shop-button">
+          
+          <Link to="/shop-page" className="shop-button flex items-center gap-1">
             <FaCartShopping />
             Shop
-          </span>
+          </Link>
+
         </ul>
         <button
           className="navbar-toggle cursor-pointer text-black"
