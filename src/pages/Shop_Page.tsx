@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Shop_Header from "../components/layout/Shop_Header";
 import SmileyPreloader from "../components/common/Preloader";
 import Shop_Content from "../components/layout/Shop_Content";
-import Navbar from "../components/common/Navbar";
 
 const Homepage = () => {
   const [loading, setLoading] = useState(true);
