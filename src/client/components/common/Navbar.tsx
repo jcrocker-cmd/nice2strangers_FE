@@ -1,13 +1,13 @@
-import "../../assets/css/navbar.css";
-import logo from "../../assets/img/logo.png";
+import "../../../assets/css/navbar.css";
+import logo from "../../../assets/img/logo.png";
 import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import Section from "./Section";
 import NavbarMobile from "./NavbarMobile";
 // State
 import { useDispatch, useSelector } from "react-redux";
-import type { AppDispatch, RootState } from "../state/store";
-import { toggleMenu, closeMenu } from "../state/navbar/navbarSlice";
+import type { AppDispatch, RootState } from "../../../state/store";
+import { toggleMenu, closeMenu } from "../../../state/navbar/navbarSlice";
 
 import { RiMenuFill } from "react-icons/ri";
 import { FaCartShopping } from "react-icons/fa6";

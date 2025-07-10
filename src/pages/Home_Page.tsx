@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import Home from "../components/layout/Home";
-import SmileyPreloader from "../components/common/Preloader";
+import Home from "../client/components/layout/Home";
+import SmileyPreloader from "../client/components/common/Preloader";
 
 const Homepage = () => {
   const [loading, setLoading] = useState(true);

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ScrollReveal from "scrollreveal";
 import Wrapper from "../common/Wrapper";
 import Section from "../common/Section";
-import "../../assets/css/main.css";
+import "../../../assets/css/main.css";
 
 const categories = ["All Products", "Shoes", "Caps", "Women", "T-shirts", "Men"];
 

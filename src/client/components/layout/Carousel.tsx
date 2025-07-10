@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Section from "../common/Section";
-import Slide_1 from "../../assets/img/image1.png";
-import Slide_2 from "../../assets/img/image2.png";
-import Slide_3 from "../../assets/img/image3.png";
+import Slide_1 from "../../../assets/img/image1.png";
+import Slide_2 from "../../../assets/img/image2.png";
+import Slide_3 from "../../../assets/img/image3.png";
 
 interface Slide {
   id: number;

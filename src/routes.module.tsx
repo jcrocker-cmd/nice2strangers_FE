@@ -1,6 +1,7 @@
-import AboutUs from "./components/layout/About";
+import AboutUs from "./client/components/layout/About";
 import Home_Page from "./pages/Home_Page";
 import Shop_Page from "./pages/Shop_Page";
+import DashboardLayout from "./dashboard/dashboard";
 
 export const appRoutes = [
   {
@@ -11,8 +12,12 @@ export const appRoutes = [
     path: "/",
     element: <Home_Page />,
   },
-    {
+  {
     path: "/shop-page",
     element: <Shop_Page />,
+  },
+    {
+    path: "/dashboard",
+    element: <DashboardLayout />,
   },
 ];

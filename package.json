@@ -10,12 +10,28 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
     "@glidejs/glide": "^3.7.1",
+    "@mui/icons-material": "^7.2.0",
+    "@mui/material": "^7.2.0",
+    "@mui/x-data-grid": "^8.7.0",
     "@reduxjs/toolkit": "^2.8.1",
     "@splidejs/react-splide": "^0.7.12",
     "@splidejs/splide": "^4.1.4",
     "@stripe/stripe-js": "^7.4.0",
     "axios": "^1.9.0",
+    "datatables.net": "^2.3.2",
+    "datatables.net-buttons": "^3.2.4",
+    "datatables.net-buttons-dt": "^3.2.4",
+    "datatables.net-dt": "^2.3.2",
+    "jquery": "^3.7.1",
+    "jspdf": "^3.0.1",
+    "jspdf-autotable": "^5.0.2",
+    "jszip": "^3.10.1",
+    "pdfmake": "^0.2.20",
+    "primeicons": "^7.0.0",
+    "primereact": "^10.9.6",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-hook-form": "^7.56.3",
@@ -26,7 +42,8 @@
     "sass": "^1.89.0",
     "scrollreveal": "^4.0.9",
     "sweetalert2": "^11.21.2",
-    "swiper": "^11.2.6"
+    "swiper": "^11.2.6",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
