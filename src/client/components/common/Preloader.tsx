@@ -23,8 +23,8 @@
 // export default SmileyPreloader;
 
 import React, { useState, useEffect } from "react";
-import smileyLogo from "../../assets/img/logo.png"; // adjust path if needed
-import "../../assets/css/main.css";
+import smileyLogo from "../../../assets/img/logo.png"; // adjust path if needed
+import "../../../assets/css/main.css";
 
 const SmileyPreloader: React.FC = () => {
   const [fadeOut, setFadeOut] = useState(false);

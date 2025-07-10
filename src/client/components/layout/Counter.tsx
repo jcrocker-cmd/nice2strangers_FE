@@ -1,11 +1,11 @@
-import type { AppDispatch, RootState } from "../../components/state/store";
+import type { AppDispatch, RootState } from "../../../state/store";
 import { useDispatch, useSelector } from "react-redux";
 import {
   decrement,
   increment,
   incrementByAmount,
   decrementByAmount,
-} from "../state/counter/counterSlice";
+} from "../../../state/counter/counterSlice";
 
 const CounterComponent = () => {
   const count = useSelector((state: RootState) => state.counter.value);

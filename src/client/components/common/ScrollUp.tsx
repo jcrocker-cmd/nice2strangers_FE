@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { IoIosArrowUp } from "react-icons/io";
-import "../../assets/css/main.css";
+import "../../../assets/css/main.css";
 
 const ScrollUp = () => {
   const [showScroll, setShowScroll] = useState(false);

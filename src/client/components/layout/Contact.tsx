@@ -1,16 +1,16 @@
 import { useEffect } from "react";
 import ScrollReveal from "scrollreveal";
 import React from "react";
-import icon from "../../assets/img/icon.png";
+import icon from "../../../assets/img/icon.png";
 import Section from "../common/Section";
 import Wrapper from "../common/Wrapper";
-import "../../assets/css/main.css";
+import "../../../assets/css/main.css";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import type { RootState, AppDispatch } from "../state/store";
+import type { RootState, AppDispatch } from "../../../state/store";
 import { useDispatch } from "react-redux";
-import { setIsSubmitting } from "../state/submission/submissionSlice";
+import { setIsSubmitting } from "../../../state/submission/submissionSlice";
 import Swal from "sweetalert2";
 
 interface FormInputs {

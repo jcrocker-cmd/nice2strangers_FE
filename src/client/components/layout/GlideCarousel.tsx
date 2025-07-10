@@ -5,10 +5,10 @@ import { Splide, SplideSlide } from "@splidejs/react-splide";
 import Wrapper from "../common/Wrapper";
 import Section from "../common/Section";
 import { SocialIcon } from "react-social-icons";
-import img1 from "../../assets/img/w_1.png";
-import img2 from "../../assets/img/w_2.png";
-import img3 from "../../assets/img/w_3.png";
-import "../../assets/css/main.css";
+import img1 from "../../../assets/img/w_1.png";
+import img2 from "../../../assets/img/w_2.png";
+import img3 from "../../../assets/img/w_3.png";
+import "../../../assets/css/main.css";
 
 const dummyImages = [img1, img2, img3, img1, img2, img3];
 

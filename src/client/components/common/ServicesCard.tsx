@@ -1,4 +1,4 @@
-import "../../assets/css/main.css";
+import "../../../assets/css/main.css";
 
 interface ServicesCardProps extends React.HTMLAttributes<HTMLElement> {
   icon: string;

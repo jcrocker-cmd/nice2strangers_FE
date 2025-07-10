@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { appRoutes } from "./routes.module.tsx";
 
 // ScrollUp Component
-import ScrollUp from "./components/common/ScrollUp";
+import ScrollUp from "./client/components/common/ScrollUp.tsx";
 
 function App() {
   return (

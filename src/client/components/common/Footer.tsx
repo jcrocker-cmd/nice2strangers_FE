@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import ScrollReveal from "scrollreveal";
 import Wrapper from "./Wrapper";
 import Section from "./Section";
-import logo from "../../assets/img/logo.png";
-import "../../assets/css/main.css";
+import logo from "../../../assets/img/logo.png";
+import "../../../assets/css/main.css";
 import {
   FaFacebookF,
   FaXTwitter,

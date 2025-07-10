@@ -3,9 +3,9 @@ import Section from '../common/Section';
 import Wrapper from '../common/Wrapper';
 import axios from 'axios';
 import type { Stripe } from '@stripe/stripe-js';
-import "../../assets/css/main.css";
-import { stripePromise } from '../../lib/stripe';
-import { ApiRoutes } from '../api/api';
+import "../../../assets/css/main.css";
+import { stripePromise } from '../../../lib/stripe';
+import { ApiRoutes } from '../../../api/api';
 
 
 interface Product {
@@ -28,11 +28,7 @@ const Shop_Content = () => {
     console.log("Added to cart:", name);
   };
 
-  // const handleBuyNow = (name: string) => {
-  //   console.log("Buying:", name);
-  // };
-
-    const handleCheckout = async (product: Product) => {
+  const handleCheckout = async (product: Product) => {
     try {
       const { data } = await axios.post(ApiRoutes.createCheckout, [product]);
 

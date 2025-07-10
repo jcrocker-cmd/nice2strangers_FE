@@ -1,6 +1,6 @@
 import Wrapper from "../common/Wrapper";
 import Section from "../common/Section";
-import "../../assets/css/main.css";
+import "../../../assets/css/main.css";
 
 const NewsletterSignup = () => {
   return (

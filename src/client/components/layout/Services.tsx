@@ -2,12 +2,12 @@ import { useEffect } from "react";
 import ScrollReveal from "scrollreveal";
 import Wrapper from "../common/Wrapper";
 import Section from "../common/Section";
-import "../../assets/css/main.css";
+import "../../../assets/css/main.css";
 // import "../../assets/css/mediaquery.css";
-import card1 from "../../assets/img/s-icon-1.png";
-import card2 from "../../assets/img/s-icon-2.png";
-import card3 from "../../assets/img/s-icon-3.png";
-import card4 from "../../assets/img/s-icon-4.png";
+import card1 from "../../../assets/img/s-icon-1.png";
+import card2 from "../../../assets/img/s-icon-2.png";
+import card3 from "../../../assets/img/s-icon-3.png";
+import card4 from "../../../assets/img/s-icon-4.png";
 import ServiceCard from "../common/ServicesCard";
 
 const Services = () => {

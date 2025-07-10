@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import ScrollReveal from "scrollreveal";
 import Section from "../common/Section";
 import Wrapper from "../common/Wrapper";
-import "../../assets/css/main.css";
-import icon from "../../assets/img/icon.png";
+import "../../../assets/css/main.css";
+import icon from "../../../assets/img/icon.png";
 
 const Aboutpage = () => {
   useEffect(() => {
