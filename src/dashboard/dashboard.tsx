@@ -3,8 +3,8 @@ import 'primereact/resources/themes/lara-light-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 
-import Sidenav from './components/sidenav';
-import Navbar from './components/navbar';
+import Sidenav from './components/Sidenav';
+import Navbar from './components/Navbar';
 
 export default function DashboardLayout() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
