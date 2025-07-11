@@ -12,7 +12,6 @@ const ExpandedMenu = ({
 
   return (
     <>
-      <li>
         <div
           className={`rounded-lg cursor-pointer transition-colors
         ${
@@ -50,7 +49,6 @@ const ExpandedMenu = ({
             {children}
           </ul>
         </div>
-      </li>
     </>
   );
 };
