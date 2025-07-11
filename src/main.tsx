@@ -1,6 +1,7 @@
 import { Provider } from "react-redux";
 import { store } from "./state/store.ts";
-import { StrictMode } from "react";
+import { StrictMode, Suspense } from "react";
+import SmileyPreloader from "./client/components/common/Preloader.tsx";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.tsx";
@@ -8,7 +9,9 @@ import App from "./App.tsx";
 createRoot(document.getElementById("root")!).render(
   <Provider store={store}>
     <StrictMode>
-      <App />
+      <Suspense fallback={<SmileyPreloader />}>
+        <App />
+      </Suspense>
     </StrictMode>
   </Provider>
 );

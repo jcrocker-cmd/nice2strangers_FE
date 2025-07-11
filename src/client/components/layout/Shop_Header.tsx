@@ -12,7 +12,7 @@ const Footer = () => {
   useEffect(() => {
     ScrollReveal().reveal(".shop-section", {
       delay: 400,
-      duration: 2000,
+      duration: 1000,
       distance: "50px",
       origin: "bottom",
     });

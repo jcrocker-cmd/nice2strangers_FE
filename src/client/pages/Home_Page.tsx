@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import Home from "../client/components/layout/Home";
-import SmileyPreloader from "../client/components/common/Preloader";
+import Home from "../components/layout/Home";
+import SmileyPreloader from "../components/common/Preloader";
 
 const Homepage = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 3000); // Show preloader for 3 seconds
+    const timer = setTimeout(() => setLoading(false), 2000); // Show preloader for 3 seconds
     return () => clearTimeout(timer); // Cleanup timer
   }, []);
 

@@ -14,7 +14,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ name, priceInCents, onAddToCa
         <img
           src="https://res.cloudinary.com/dnh4lkqlw/image/upload/v1751951597/images_vftshi.jpg"
           alt={name}
-          className="object-cover w-full h-70 rounded-t-xl h-90"
+          className="object-cover w-full rounded-t-xl h-90"
         />
       </div>
       <div className="p-6">

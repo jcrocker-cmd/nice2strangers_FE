@@ -46,7 +46,7 @@ const SmileyPreloader: React.FC = () => {
     >
       <div className="relative w-36 h-36">
         {/* Spinning ring */}
-        <div className="absolute inset-4 border-4 border-t-yellow-400 border-white/10 rounded-full animate-spin"></div>
+        <div className="absolute inset-5 border-4 border-t-yellow-400 border-white/10 rounded-full animate-spin"></div>
 
         {/* Center logo */}
         <img
