@@ -1,14 +1,23 @@
-import type { MenuItemProps } from "../../types/menu"
+import type { MenuItemProps } from "../../types/menu";
 
-const NormalMenu = ({MenuName, Icon}: MenuItemProps) => {
+const NormalMenu = ({ MenuName, Icon, isActive, onClick }: MenuItemProps) => {
   return (
     <>
-        <li className="flex items-center gap-2 hover:bg-gray-100 p-2 rounded cursor-pointer">
-            <i className={Icon}></i>
-            <span>{MenuName}</span>
-        </li>
+      <li
+        className={`flex items-center gap-2 py-4 px-5 rounded-lg cursor-pointer transition-colors
+        ${
+          isActive
+            ? "bg-gradient-to-r from-purple-600 to-blue-500 text-white border border-[#5a5a5a]"
+            : "hover:bg-gradient-to-r from-purple-600 to-blue-500 text-white/80 border-[#5a5a5a] bg-[#23232c] border"
+        }
+      `}
+        onClick={onClick}
+      >
+        <i className={Icon}></i>
+        <span>{MenuName}</span>
+      </li>
     </>
-  )
-}
+  );
+};
 
-export default NormalMenu
+export default NormalMenu;

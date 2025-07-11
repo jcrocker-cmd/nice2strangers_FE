@@ -3,9 +3,12 @@ import type { MenuItemProps } from "../../types/menu"
 const ExpandedSubMenu = ({MenuName, Icon}: MenuItemProps) => {
   return (
     <>
-        <li className="flex items-center gap-2 hover:bg-gray-100 p-2 rounded cursor-pointer">
-            <i className={Icon}></i>
-            <span>{MenuName}</span>
+        <li className="flex justify-between items-center text-white p-2 rounded cursor-pointer">
+            <div className="flex gap-2">
+              <i className={Icon}></i>
+              <span>{MenuName}</span>
+            </div>
+            <span className="min-w-[20px] h-[20px] px-2 flex items-center rounded-full bg-[#b39426] text-white text-xs">9+</span>
         </li>
     </>
   )
