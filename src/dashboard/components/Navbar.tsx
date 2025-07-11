@@ -2,12 +2,13 @@ import { Button } from 'primereact/button';
 
 interface NavbarProps {
     setSidebarOpen: (open: boolean) => void;
+    isOpen: boolean;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ setSidebarOpen }) => {
+const Navbar: React.FC<NavbarProps> = ({ setSidebarOpen, isOpen }) => {
     return (
-        <div className="h-16 bg-white border-b px-6 flex items-center justify-between shadow-sm fixed top-0 left-0 right-0">
-            <button onClick={() => setSidebarOpen(true)} className="text-gray-700 cursor-pointer">
+        <div className="h-16 bg-white border-b px-6 flex items-center justify-between shadow-sm">
+            <button onClick={() => setSidebarOpen(true)} className={`text-gray-700 cursor-pointer ${isOpen ? 'hidden' : 'block'} `}>
                 <i className="pi pi-bars text-xl"></i>
             </button>
             <h1 className="text-xl font-semibold">Dashboard</h1>
