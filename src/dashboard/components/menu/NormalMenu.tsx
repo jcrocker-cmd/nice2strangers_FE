@@ -4,7 +4,7 @@ const NormalMenu = ({ MenuName, Icon, isActive, onClick }: MenuItemProps) => {
   return (
     <>
       <li
-        className={`flex items-center gap-2 py-4 px-5 rounded-lg cursor-pointer transition-colors
+        className={`flex items-center gap-2 py-4 px-5 rounded-lg cursor-pointer transition-colors text-sm
         ${
           isActive
             ? "bg-gradient-to-r from-purple-600 to-blue-500 text-white border border-[#5a5a5a]"

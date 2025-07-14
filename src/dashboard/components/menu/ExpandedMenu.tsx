@@ -13,7 +13,7 @@ const ExpandedMenu = ({
   return (
     <>
         <div
-          className={`rounded-lg cursor-pointer transition-colors
+          className={`rounded-lg cursor-pointer transition-colors text-sm
         ${
           isActive
             ? "bg-gradient-to-r from-purple-600 to-blue-500 text-white border border-[#5a5a5a]"
