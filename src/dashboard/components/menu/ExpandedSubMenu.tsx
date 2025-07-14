@@ -5,7 +5,7 @@ const ExpandedSubMenu = ({ MenuName, Icon, onClick }: MenuItemProps) => {
     <>
       <li
         onClick={onClick}
-        className="flex justify-between items-center text-white p-2 rounded cursor-pointer"
+        className="flex justify-between items-center text-white p-2 rounded cursor-pointer text-sm"
       >
         <div className="flex gap-2">
           <i className={Icon}></i>

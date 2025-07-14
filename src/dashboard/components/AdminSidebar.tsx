@@ -1,11 +1,9 @@
 import { Avatar } from "primereact/avatar";
-import React from "react";
 import "../../index.css";
 import logo from "../../assets/img/logo.png";
 import NormalMenu from "./menu/NormalMenu";
 import ExpandedMenu from "./menu/ExpandedMenu";
 import ExpandedSubMenu from "./menu/ExpandedSubMenu";
-import { useState } from "react";
 
 interface SidenavProps {
   isOpen: boolean;
@@ -27,7 +25,7 @@ const Sidenav = ({
   `}
     >
       <div
-        className={`transform transition-transform duration-300 ease-in-out ${
+        className={`transform transition-transform duration-300 ease-in-out font-primary ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } w-72 flex flex-col h-full`}
       >
@@ -62,7 +60,7 @@ const Sidenav = ({
             />
             <ExpandedSubMenu
               MenuName="Items"
-              Icon="pi pi-calendar"
+              Icon="pi pi-th-large"
               onClick={() => setActiveMenu("Items")}
             />
             <ExpandedSubMenu
@@ -73,11 +71,35 @@ const Sidenav = ({
           </ExpandedMenu>
 
           <NormalMenu
-            MenuName="Team"
-            Icon="pi pi-users"
-            isActive={activeMenu === "Team"}
-            onClick={() => setActiveMenu("Team")}
+            MenuName="Transactions"
+            Icon="pi pi-home"
+            isActive={activeMenu === "Transactions"}
+            onClick={() => setActiveMenu("Transactions")}
           />
+
+          <NormalMenu
+            MenuName="Calendar"
+            Icon="pi pi-calendar"
+            isActive={activeMenu === "Calendar"}
+            onClick={() => setActiveMenu("Calendar")}
+          />
+
+          <NormalMenu
+            MenuName="Inquiry"
+            Icon="pi pi-question-circle"
+            isActive={activeMenu === "Inquiry"}
+            onClick={() => setActiveMenu("Inquiry")}
+          />
+
+          <NormalMenu
+            MenuName="NewsLetter"
+            Icon="pi pi-envelope"
+            isActive={activeMenu === "NewsLetter"}
+            onClick={() => setActiveMenu("NewsLetter")}
+          />
+
+          <h2 className="pt-3">General</h2>
+
           <NormalMenu
             MenuName="Account"
             Icon="pi pi-user"
@@ -89,6 +111,13 @@ const Sidenav = ({
             Icon="pi pi-cog"
             isActive={activeMenu === "Settings"}
             onClick={() => setActiveMenu("Settings")}
+          />
+
+          <NormalMenu
+            MenuName="Log Out"
+            Icon="pi pi-sign-out"
+            isActive={activeMenu === "Log Out"}
+            onClick={() => setActiveMenu("Log Out")}
           />
         </div>
 

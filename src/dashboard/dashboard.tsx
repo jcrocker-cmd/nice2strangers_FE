@@ -2,12 +2,12 @@ import "primereact/resources/themes/lara-light-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 
-import { renderContent } from "./components/pages/Contents";
+import { renderContent } from "./components/content/index";
 
 import { useState } from "react";
 
-import Sidenav from "./components/Sidenav";
-import Navbar from "./components/Navbar";
+import Sidenav from "./components/AdminSidebar";
+import Navbar from "./components/AdminNavbar";
 
 export default function DashboardLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -24,13 +24,15 @@ export default function DashboardLayout() {
       />
 
       {/* Right side: navbar + main stacked vertically */}
-      <div className="flex flex-col flex-1">
+      <div className="flex flex-col flex-1 min-w-0">
         {/* Navbar (top row) */}
-        <Navbar setSidebarOpen={setSidebarOpen} isOpen={sidebarOpen} />
+        <nav className="p-4">
+            <Navbar setSidebarOpen={setSidebarOpen} isOpen={sidebarOpen} />
+        </nav>
 
         {/* Main content (bottom row) */}
-        <main className="flex-1 overflow-y-auto bg-gray-100 p-6">
-          <div className="p-4 bg-white shadow rounded">
+        <main className="overflow-y-auto bg-white p-4">
+          <div className="p-6 bg-[#f7f7f7] shadow rounded">
             {renderContent(activeMenu)}
           </div>
         </main>
