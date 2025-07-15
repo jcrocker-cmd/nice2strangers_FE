@@ -1,9 +1,16 @@
 import DashboardContent from "./DashboardContent";
+import TransactionContent from "./TransactionContent";
 
 export const renderContent = (activeMenu: string | null) => {
   switch (activeMenu) {
     case "Dashboard":
-      return <DashboardContent></DashboardContent>;
+      return (
+        <>
+          <DashboardContent />
+        </>
+      );
+    case "Transactions":
+      return <TransactionContent />;
     case "Team":
       return <div>This is Team</div>;
     case "My Shop":
