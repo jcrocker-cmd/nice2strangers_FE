@@ -1,5 +1,6 @@
 import DashboardContent from "./DashboardContent";
 import TransactionContent from "./TransactionContent";
+import CustomTable from "./OrdersContent";
 
 export const renderContent = (activeMenu: string | null) => {
   switch (activeMenu) {
@@ -20,7 +21,7 @@ export const renderContent = (activeMenu: string | null) => {
     case "Settings":
       return <div>This is Settings</div>;
     case "Orders":
-      return <div>This is Orders</div>;
+      return <CustomTable />;
     case "Items":
       return <div>This is Items</div>;
     case "Chart":

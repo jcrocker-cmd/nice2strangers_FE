@@ -1,81 +1,134 @@
-import { useState } from 'react';
-import { DataGrid } from '@mui/x-data-grid';
-import type { GridColDef } from '@mui/x-data-grid';
-import Paper from '@mui/material/Paper';
-import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
+import { useState, useEffect, useMemo } from "react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TablePagination,
+  TableRow,
+  Paper,
+  TextField,
+  Box,
+} from "@mui/material";
+import axios from "axios";
 
-const columns: GridColDef[] = [
-  { field: 'id', headerName: 'ID', width: 70 },
-  { field: 'firstName', headerName: 'First name', width: 130 },
-  { field: 'lastName', headerName: 'Last name', width: 130 },
-  {
-    field: 'age',
-    headerName: 'Age',
-    type: 'number',
-    width: 90,
-  },
-  {
-    field: 'fullName',
-    headerName: 'Full name',
-    width: 160,
-    valueGetter: (value, row) =>
-      `${row.firstName || ''} ${row.lastName || ''}`,
-  },
+interface Employee {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  salary: number;
+  createdDate: string;
+  departmentId: number;
+}
+
+const columns = [
+  { id: "id", label: "ID", minWidth: 170 },
+  { id: "name", label: "Name", minWidth: 100 },
+  { id: "email", label: "Email", minWidth: 170 },
+  { id: "phone", label: "Phone", minWidth: 100 },
+  { id: "salary", label: "Salary", minWidth: 100 },
+  { id: "createdDate", label: "Created Date", minWidth: 170 },
+  { id: "departmentId", label: "Department ID", minWidth: 100 },
 ];
 
-const rows = [
-  { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-  { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-  { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-  { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-  { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-  { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-  { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-  { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-  { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-];
+export default function CustomTable() {
+  const [rows, setRows] = useState<Employee[]>([]);
+  const [searchText, setSearchText] = useState("");
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
-export default function DataTable() {
-  const [searchText, setSearchText] = useState('');
-  const [filteredRows, setFilteredRows] = useState(rows);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get<Employee[]>(
+          "https://localhost:7095/api/Employees/employees"
+        );
+        setRows(res.data);
+      } catch (err) {
+        console.error("Fetch error:", err);
+      }
+    };
+    fetchData();
+  }, []);
 
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setSearchText(value);
-    const filtered = rows.filter((row) =>
-      Object.values(row).some(
-        (field) =>
-          field &&
-          field.toString().toLowerCase().includes(value.toLowerCase())
+  const filteredRows = useMemo(() => {
+    if (!searchText) return rows;
+    return rows.filter((row) =>
+      Object.values(row).some((field) =>
+        field?.toString().toLowerCase().includes(searchText.toLowerCase())
       )
     );
-    setFilteredRows(filtered);
+  }, [rows, searchText]);
+
+  const handleChangePage = (_event: unknown, newPage: number) =>
+    setPage(newPage);
+
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
   };
 
   return (
-    <Paper sx={{ width: '100%', maxHeight: 500, p: 2 }}>
+    <Paper sx={{ width: "100%", overflow: "hidden", p: 4 }}>
+      <h2 className="pb-6 font-semibold text-3xl">Transactions</h2>
       <Box mb={2}>
         <TextField
-          fullWidth
+          sx={{ width: "50%" }}
           size="small"
           variant="outlined"
           label="Search"
           value={searchText}
-          onChange={handleSearch}
+          onChange={(e) => setSearchText(e.target.value)}
         />
       </Box>
-      <DataGrid
-        rows={filteredRows}
-        columns={columns}
-        pageSizeOptions={[5, 10]}
-        checkboxSelection
-        sx={{
-          border: 0,
-          '.MuiDataGrid-virtualScroller': {
-            maxHeight: '300px',
-          },
-        }}
+      <TableContainer sx={{ maxHeight: 500 }}>
+        <Table stickyHeader>
+          <TableHead>
+            <TableRow>
+              {columns.map((column) => (
+                <TableCell
+                  key={column.id}
+                  style={{
+                    minWidth: column.minWidth,
+                    color: "white",
+                    backgroundColor: "#1e293b",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {column.label}
+                </TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {filteredRows
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((row) => (
+                <TableRow key={row.id}>
+                  <TableCell>{row.id}</TableCell>
+                  <TableCell>{row.name}</TableCell>
+                  <TableCell>{row.email}</TableCell>
+                  <TableCell>{row.phone}</TableCell>
+                  <TableCell>{row.salary}</TableCell>
+                  <TableCell>{row.createdDate}</TableCell>
+                  <TableCell>{row.departmentId}</TableCell>
+                </TableRow>
+              ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[5, 10, 25]}
+        component="div"
+        count={filteredRows.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </Paper>
   );
