@@ -31,7 +31,7 @@ export default function DashboardLayout() {
         </nav>
 
         {/* Main content (bottom row) */}
-        <main className="overflow-y-auto bg-white p-4">
+        <main className="overflow-y-auto bg-white p-4 main-scroll">
           <div className="p-6 bg-[#f7f7f7] shadow rounded">
             {renderContent(activeMenu)}
           </div>
