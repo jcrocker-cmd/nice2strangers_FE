@@ -1,30 +1,54 @@
 import DashboardCards from "../common/DashboardCards";
 import DashboardChart from "../chart/chart";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+interface DashboardStats  {
+  emp: number;
+  dept: number;
+}
+
 
 const DashboardContent = () => {
-  return (
+  const [stats, setStats] = useState<DashboardStats | null>(null)
+
+  useEffect(() => {
+    const fetchCount = async() => {
+      try {
+        const res = await axios.get<DashboardStats >("https://localhost:7095/api/Employees/count")
+        setStats(res.data)
+      } catch (error) {
+        console.error("Error fetching employee count", error)
+      }
+    };
+      fetchCount();
+  }, []);
+
+
+  console.log("Dashboard is mounted")
+   return (
     <>
       <div className="flex flex-col">
         <div className="flex gap-6 justify-between mb-4">
           <DashboardCards
-            data={45}
+            data={stats?.emp ?? 0} 
             cardName="Sales"
-            className="bg-[#5b6eff]"
+            className="bg-primary"
           ></DashboardCards>
           <DashboardCards
-            data={13}
+            data={stats?.dept ?? 0}
             cardName="Orders"
-            className="bg-[#1abe50]"
+            className="bg-success"
           ></DashboardCards>
           <DashboardCards
             data={32}
             cardName="Products"
-            className="bg-[#ffc85b]"
+            className="bg-warning"
           ></DashboardCards>
           <DashboardCards
-            data={23}
+            data={2376}
             cardName="Stocks"
-            className="bg-[#ff5b5b]"
+            className="bg-danger"
           ></DashboardCards>
         </div>
         <div className="w-full flex gap-2">
@@ -32,14 +56,14 @@ const DashboardContent = () => {
             w="w-1/2"
             h="h-[500px]"
             defaultType="bar"
-            label="Sales"
+            dataLabel="Sales"
             chartName="Graphical Reports"
           />
           <DashboardChart
             w="w-1/2"
             h="h-[500px]"
             defaultType="line"
-            label="Total Sales"
+            dataLabel="Total Sales"
             chartName="Sales Reports"
           />
         </div>

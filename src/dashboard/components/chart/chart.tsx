@@ -24,22 +24,24 @@ ChartJS.register(
   Legend
 );
 
+type chartType =  "bar" | "line";
+
 interface ChartProps{
     h: string;
     w: string;
-    chartName: string;
-    defaultType: "bar" | "line";
-    label?: string;
+    chartName?: string;
+    defaultType: chartType;
+    dataLabel?: string;
 }
 
-const Chart = ({h, w, chartName, defaultType, label}: ChartProps) => {
-  const [chartType, setchartType] = useState<"bar" | "line">(defaultType);
+const Chart = ({h, w, chartName, defaultType, dataLabel}: ChartProps) => {
+  const [chartType, setchartType] = useState<chartType>(defaultType);
 
     const data = {
     labels: ["January", "February", "March", "April"],
     datasets: [
       {
-        label: label,
+        label: dataLabel,
         data: [65, 59, 80, 81],
         backgroundColor: "#5b6eff",
         borderColor: "#5b6eff",
@@ -52,17 +54,17 @@ const Chart = ({h, w, chartName, defaultType, label}: ChartProps) => {
     maintainAspectRatio: false,
     plugins: {
       legend: { position: "top" as const },
-      title: { display: true, text: "Sales" },
+      title: { display: true, text: chartName },
     },
   };
   return (
     <>
       <div className={`flex flex-col bg-white rounded-lg p-6 ${w}`}>
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <h5 className="text-xl font-semibold text-gray-800">
             {chartName}
           </h5>
-        </div>
+        </div> */}
         <div className={`relative w-full ${h}`}>
             {chartType === "bar" ? (
               <Bar options={options} data={data} />
@@ -81,7 +83,8 @@ const Chart = ({h, w, chartName, defaultType, label}: ChartProps) => {
           </select>
           <select
             className="border border-gray-300 rounded px-4 py-2 text-sm"
-            onChange={(e) => setchartType(e.target.value as "bar" | "line")}
+            value={chartType}
+            onChange={(e) => setchartType(e.target.value as chartType)}
           >
             <option value="bar">Bar Chart</option>
             <option value="line">Line Chart</option>
