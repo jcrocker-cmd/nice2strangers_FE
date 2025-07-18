@@ -18,6 +18,9 @@ module.exports = {
         warning: "#ffc85b", //yellow
         danger: "#ff5b5b", //red
       },
+      screens: {
+        'lg-custom': '1110px', 
+      },
     },
   },
   plugins: [],
