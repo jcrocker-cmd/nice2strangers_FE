@@ -5,7 +5,7 @@ import axios from 'axios';
 import type { Stripe } from '@stripe/stripe-js';
 import "../../../assets/css/main.css";
 import { stripePromise } from '../../../lib/stripe';
-import { ApiRoutes } from '../../../api/api';
+import { ApiRoutes } from '../../../constants/constants';
 
 
 interface Product {
@@ -30,7 +30,7 @@ const Shop_Content = () => {
 
   const handleCheckout = async (product: Product) => {
     try {
-      const { data } = await axios.post(ApiRoutes.createCheckout, [product]);
+      const { data } = await axios.post(ApiRoutes.Payments.createCheckout, [product]);
 
       const stripe: Stripe | null = await stripePromise;
       if (stripe && data.sessionId) {
