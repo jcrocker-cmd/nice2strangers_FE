@@ -1,5 +1,6 @@
 import DashboardContent from "./DashboardContent";
 import TransactionContent from "./TransactionContent";
+import InquiryContent from "./InquiryContent";
 import CustomTable from "./OrdersContent";
 
 export const renderContent = (activeMenu: string | null) => {
@@ -22,8 +23,8 @@ export const renderContent = (activeMenu: string | null) => {
       return <div>This is Settings</div>;
     case "Orders":
       return <CustomTable />;
-    case "Items":
-      return <div>This is Items</div>;
+    case "Inquiry":
+      return <InquiryContent />;
     case "Chart":
       return <div>This is Chart</div>;
     default:

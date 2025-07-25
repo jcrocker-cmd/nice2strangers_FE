@@ -11,7 +11,7 @@ import Navbar from "./components/AdminNavbar";
 
 export default function DashboardLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [activeMenu, setActiveMenu] = useState("Dashboard");
+  const [activeMenu, setActiveMenu] = useState("Transactions");
 
   return (
     <div className="flex h-screen w-full">
