@@ -11,7 +11,7 @@ import Navbar from "./components/AdminNavbar";
 
 export default function DashboardLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [activeMenu, setActiveMenu] = useState("Transactions");
+  const [activeMenu, setActiveMenu] = useState("Dashboard");
 
   return (
     <div className="flex h-screen w-full">
@@ -27,7 +27,7 @@ export default function DashboardLayout() {
       <div className="flex flex-col flex-1 min-w-0">
         {/* Navbar (top row) */}
         <nav className="p-4">
-            <Navbar setSidebarOpen={setSidebarOpen} isOpen={sidebarOpen} />
+          <Navbar setSidebarOpen={setSidebarOpen} isOpen={sidebarOpen} />
         </nav>
 
         {/* Main content (bottom row) */}

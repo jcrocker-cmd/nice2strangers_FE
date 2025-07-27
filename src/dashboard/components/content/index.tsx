@@ -2,6 +2,7 @@ import DashboardContent from "./DashboardContent";
 import TransactionContent from "./TransactionContent";
 import InquiryContent from "./InquiryContent";
 import CustomTable from "./OrdersContent";
+import Emp from "./ProductsContent";
 
 export const renderContent = (activeMenu: string | null) => {
   switch (activeMenu) {
@@ -15,8 +16,8 @@ export const renderContent = (activeMenu: string | null) => {
       return <TransactionContent />;
     case "Team":
       return <div>This is Team</div>;
-    case "My Shop":
-      return <div>This is Shop</div>;
+    case "Items":
+      return <Emp />;
     case "Account":
       return <div>This is Account</div>;
     case "Settings":
