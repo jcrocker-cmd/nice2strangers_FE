@@ -6,7 +6,11 @@ interface DashboardCardsProps {
   data: number;
 }
 
-const TransactionCards = ({ className, cardName, data }: DashboardCardsProps) => {
+const TransactionCards = ({
+  className,
+  cardName,
+  data,
+}: DashboardCardsProps) => {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -29,14 +33,12 @@ const TransactionCards = ({ className, cardName, data }: DashboardCardsProps) =>
     return () => cancelAnimationFrame(frameId); // cleanup
   }, [data]);
   return (
-    <div 
-      className={`group rounded-lg font-primary p-6 text-tertiary flex flex-1 justify-between cursor-pointer border-1 border-tertiary ${className}`}
+    <div
+      className={`group rounded-lg font-primary py-3 px-6 text-tertiary flex flex-1 justify-between cursor-pointer border-1 border-tertiary ${className}`}
     >
       <div>
         <p className="text-lg pb-2">{cardName}</p>
-        <h2 className="font-semibold text-2xl py-2">
-          {count.toLocaleString()}
-        </h2>
+        <h2 className="font-semibold text-2xl">{count.toLocaleString()}</h2>
       </div>
       {/* <div className="bg-white rounded-full h-fit self-start p-2 flex items-center justify-center group-hover:scale-115 transition-transform duration-300">
         <i className="pi pi-arrow-up-right text-black"></i>

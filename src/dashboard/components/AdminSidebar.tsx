@@ -41,7 +41,7 @@ const Sidenav = ({
         </div>
 
         {/* Menu Items */}
-        <div className="flex-1 overflow-y-auto px-4 space-y-3 text-white">
+        <div className="flex-1 overflow-y-auto px-4 space-y-3 text-white sidebar-scroll">
           <NormalMenu
             MenuName="Dashboard"
             Icon="pi pi-home"

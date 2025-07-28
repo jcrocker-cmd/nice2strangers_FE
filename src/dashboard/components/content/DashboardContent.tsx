@@ -3,27 +3,30 @@ import DashboardChart from "../chart/chart";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Helmet } from "react-helmet";
-
-interface DashboardStats {
-  emp: number;
-  dept: number;
+import { ApiRoutes } from "../../../constants/constants";
+interface StripeBalance {
+  available: number;
+  pending: number;
+  currency: string;
 }
 
 const DashboardContent = () => {
-  const [stats, setStats] = useState<DashboardStats | null>(null);
+  const [stripeBalance, setStripeBalance] = useState<StripeBalance | null>(
+    null
+  );
 
   useEffect(() => {
-    const fetchCount = async () => {
+    const fetchStripeBalance = async () => {
       try {
-        const res = await axios.get<DashboardStats>(
-          "https://localhost:7095/api/Employees/count"
+        const res = await axios.get<StripeBalance>(
+          ApiRoutes.Payments.getStripeBalance
         );
-        setStats(res.data);
+        setStripeBalance(res.data);
       } catch (error) {
-        console.error("Error fetching employee count", error);
+        console.error("Error fetching Stripe balance", error);
       }
     };
-    fetchCount();
+    fetchStripeBalance();
   }, []);
 
   console.log("Dashboard is mounted");
@@ -45,17 +48,19 @@ const DashboardContent = () => {
       <div className="flex flex-col">
         <div className="flex gap-6 justify-between mb-4 flex-col lg-custom:flex-row w-full">
           <DashboardCards
-            data={stats?.emp ?? 0}
-            cardName="Sales"
+            prefix="$"
+            data={stripeBalance?.available ?? 0}
+            cardName="Available"
             className="bg-primary"
           ></DashboardCards>
           <DashboardCards
-            data={stats?.dept ?? 0}
-            cardName="Orders"
+            prefix="$"
+            data={stripeBalance?.pending ?? 0}
+            cardName="Pending"
             className="bg-success"
           ></DashboardCards>
           <DashboardCards
-            data={32}
+            data={0}
             cardName="Products"
             className="bg-warning"
           ></DashboardCards>

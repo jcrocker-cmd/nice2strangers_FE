@@ -4,9 +4,15 @@ interface DashboardCardsProps {
   className?: string;
   cardName: string;
   data: number;
+  prefix?: string;
 }
 
-const DashboardCards = ({ className, cardName, data }: DashboardCardsProps) => {
+const DashboardCards = ({
+  className,
+  cardName,
+  data,
+  prefix,
+}: DashboardCardsProps) => {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -35,7 +41,7 @@ const DashboardCards = ({ className, cardName, data }: DashboardCardsProps) => {
       <div>
         <p className="text-2xl pb-2">{cardName}</p>
         <h2 className="font-semibold text-4xl py-2">
-          {count.toLocaleString()}
+          {prefix} {count.toLocaleString()}
         </h2>
         <p className="text-xs"> Increased from the last month</p>
       </div>
