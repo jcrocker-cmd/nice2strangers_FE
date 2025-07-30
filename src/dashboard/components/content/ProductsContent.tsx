@@ -1,5 +1,7 @@
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import Swal from "sweetalert2";
+import { SWAL } from "../../../constants/constants";
 
 type FormData = {
   productName: string;
@@ -18,11 +20,11 @@ const ProductsContent = () => {
   const onSubmit = async (data: FormData) => {
     try {
       const formData = new FormData();
-      formData.append("productName", data.productName);
-      formData.append("priceInCents", data.priceInCents.toString());
-      formData.append("image", data.image[0]);
+      formData.append("ProductName", data.productName);
+      formData.append("PriceInCents", data.priceInCents.toString());
+      formData.append("Image", data.image[0]);
 
-      const response = await axios.post(
+      await axios.post(
         "https://localhost:7095/api/Product/addProduct",
         formData,
         {
@@ -32,10 +34,18 @@ const ProductsContent = () => {
         }
       );
 
-      console.log("Product created:", response.data);
+      Swal.fire({
+        icon: SWAL.ICON.success,
+        title: "Created!",
+        text: "The product has been successfully created.",
+      });
       reset(); // clear form after success
-    } catch (error) {
-      console.error("Error creating product:", error);
+    } catch (error: any) {
+      Swal.fire({
+        icon: SWAL.ICON.error,
+        title: "Creation failed",
+        text: "An error occurred.",
+      });
     }
   };
 
@@ -64,7 +74,7 @@ const ProductsContent = () => {
             {...register("priceInCents", {
               required: "Price is required",
             })}
-            className="input"
+            className="number"
           />
           {errors.priceInCents && (
             <p className="text-red-500 text-sm">
@@ -79,6 +89,7 @@ const ProductsContent = () => {
             {...register("image", { required: "Images are required" })}
             className="file-input"
             type="file"
+            accept="image/*"
           />
           {errors.image && (
             <p className="text-red-500 text-sm">{errors.image.message}</p>

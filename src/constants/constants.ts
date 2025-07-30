@@ -1,15 +1,16 @@
 export class ApiRoutes {
-  private static readonly baseUrl = "https://localhost:7095/api";
+  static readonly baseUrlApi = "https://localhost:7095/api";
+  static readonly baseUrl = "https://localhost:7095";
 
   static readonly Payments = {
-    createCheckout: `${this.baseUrl}/Payments/create-checkout`,
+    createCheckout: `${this.baseUrlApi}/Payments/create-checkout`,
 
-    getTransactions: `${this.baseUrl}/Payments/transactions`,
-    getProducts: `${this.baseUrl}/Payments/products`,
-    getTransactionStats: `${this.baseUrl}/Payments/transactions/summary`,
-    getStripeBalance: `${this.baseUrl}/Payments/balance`,
+    getTransactions: `${this.baseUrlApi}/Payments/transactions`,
+    getProducts: `${this.baseUrlApi}/Payments/products`,
+    getTransactionStats: `${this.baseUrlApi}/Payments/transactions/summary`,
+    getStripeBalance: `${this.baseUrlApi}/Payments/balance`,
 
-    postRefund: `${this.baseUrl}/Payments/refund`,
+    postRefund: `${this.baseUrlApi}/Payments/refund`,
   };
 }
 
