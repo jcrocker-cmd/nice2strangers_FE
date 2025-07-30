@@ -64,6 +64,7 @@
 /* Main Scroll Bar */
 .main-scroll::-webkit-scrollbar {
   width: 4px;
+  height: 4px;
 }
 
 .main-scroll::-webkit-scrollbar-track {
