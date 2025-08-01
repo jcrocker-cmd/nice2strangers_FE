@@ -9,11 +9,16 @@ import { useState } from "react";
 import Sidenav from "./components/AdminSidebar";
 import Navbar from "./components/AdminNavbar";
 
+import { BaseSpinner } from "./components/common/ProgressSpinner";
+
 export default function DashboardLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [activeMenu, setActiveMenu] = useState("Dashboard");
+  const [isGlobalLoading, setIsGlobalLoading] = useState(false);
 
   return (
+    <>
+     {isGlobalLoading && <BaseSpinner />}
     <div className="flex h-screen w-full">
       {/* Sidebar (fixed width) */}
       <Sidenav
@@ -33,10 +38,11 @@ export default function DashboardLayout() {
         {/* Main content (bottom row) */}
         <main className="overflow-y-auto bg-white p-4 main-scroll">
           <div className="p-6 bg-[#f7f7f7] shadow rounded">
-            {renderContent(activeMenu)}
+            {renderContent(activeMenu, setIsGlobalLoading)}
           </div>
         </main>
       </div>
     </div>
+    </>
   );
 }

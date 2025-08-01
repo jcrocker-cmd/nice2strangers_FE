@@ -17,7 +17,7 @@ import Swal from "sweetalert2";
 import StatusBadge from "../common/StatusBadge";
 import ActionButton from "../common/ActionButton";
 import { ApiRoutes, CardBrands, SWAL } from "../../../constants/constants";
-import Spinner from "../common/ProgressSpinner";
+import { Spinner } from "../common/ProgressSpinner";
 import TransactionCards from "../common/TransactionCards";
 import "../../../index.css";
 
@@ -45,6 +45,10 @@ interface TransactionStats {
   uncaptured: number;
 }
 
+interface TransactionProps {
+  setIsGlobalLoading: (value: boolean) => void;
+}
+
 const columns = [
   { id: "id", label: "ID", minWidth: 170 },
   { id: "customerInfo", label: "Customer", minWidth: 200 },
@@ -58,7 +62,7 @@ const columns = [
   { id: "action", label: "Action", minWidth: 170 },
 ];
 
-export default function CustomTable() {
+export default function CustomTable({ setIsGlobalLoading }: TransactionProps) {
   const [rows, setRows] = useState<Transaction[]>([]);
   const [searchText, setSearchText] = useState("");
   const [page, setPage] = useState(0);
@@ -111,6 +115,7 @@ export default function CustomTable() {
     });
 
     if (!result.isConfirmed) return;
+    setIsGlobalLoading(true);
 
     try {
       await axios.post(ApiRoutes.Payments.postRefund, {
@@ -129,6 +134,8 @@ export default function CustomTable() {
         title: "Refund failed",
         text: "An error occurred.",
       });
+    } finally {
+      setIsGlobalLoading(false);
     }
   };
 
@@ -160,11 +167,23 @@ export default function CustomTable() {
           <div className="flex flex-col">
             <div className="flex gap-2 justify-between mb-4 flex-col lg-custom:flex-row w-full">
               <TransactionCards cardName="All" data={stats?.all ?? 0} />
-              <TransactionCards cardName="Succeeded" data={stats?.succeeded ?? 0} />
-              <TransactionCards cardName="Refunded" data={stats?.refunded ?? 0} />
-              <TransactionCards cardName="Disputed" data={stats?.disputed ?? 0} />
+              <TransactionCards
+                cardName="Succeeded"
+                data={stats?.succeeded ?? 0}
+              />
+              <TransactionCards
+                cardName="Refunded"
+                data={stats?.refunded ?? 0}
+              />
+              <TransactionCards
+                cardName="Disputed"
+                data={stats?.disputed ?? 0}
+              />
               <TransactionCards cardName="Failed" data={stats?.failed ?? 0} />
-              <TransactionCards cardName="Uncaptured" data={stats?.uncaptured ?? 0} />
+              <TransactionCards
+                cardName="Uncaptured"
+                data={stats?.uncaptured ?? 0}
+              />
             </div>
           </div>
           <Paper sx={{ width: "100%", overflow: "hidden", p: 4 }}>
@@ -230,7 +249,7 @@ export default function CustomTable() {
                         </TableCell>
                         <TableCell style={{ fontSize: "13px" }}>
                           {row.currency.toUpperCase()}{" "}
-                          {(row.amount / 100).toFixed(2)}
+                          {(row.amount / 100).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                         </TableCell>
                         <TableCell style={{ fontSize: "13px" }}>
                           <div
@@ -283,7 +302,8 @@ export default function CustomTable() {
                           {row.declineReason ?? "--"}
                         </TableCell>
                         <TableCell style={{ fontSize: "12px" }}>
-                          {row.refunded === "No"  && row.status === "succeeded" ? (
+                          {row.refunded === "No" &&
+                          row.status === "succeeded" ? (
                             <ActionButton
                               sx="bg-danger cursor-pointer text-white"
                               Icon="pi pi-undo"
@@ -291,7 +311,8 @@ export default function CustomTable() {
                             >
                               Refund
                             </ActionButton>
-                          ) : row.refunded === "Yes" && row.status === "succeeded" ? (
+                          ) : row.refunded === "Yes" &&
+                            row.status === "succeeded" ? (
                             <ActionButton
                               sx="bg-success cursor-not-allowed text-white"
                               Icon="pi pi-check"

@@ -4,7 +4,7 @@ import InquiryContent from "./InquiryContent";
 import CustomTable from "./OrdersContent";
 import Emp from "./ProductsContent";
 
-export const renderContent = (activeMenu: string | null) => {
+export const renderContent = (activeMenu: string | null, setIsGlobalLoading: (value: boolean) => void) => {
   switch (activeMenu) {
     case "Dashboard":
       return (
@@ -13,7 +13,7 @@ export const renderContent = (activeMenu: string | null) => {
         </>
       );
     case "Transactions":
-      return <TransactionContent />;
+      return <TransactionContent setIsGlobalLoading={setIsGlobalLoading}/>;
     case "Team":
       return <div>This is Team</div>;
     case "Items":
