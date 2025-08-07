@@ -11,7 +11,13 @@ export class ApiRoutes {
     getStripeBalance: `${this.baseUrlApi}/Payments/balance`,
 
     postRefund: `${this.baseUrlApi}/Payments/refund`,
+    
   };
+
+  static readonly Product = {
+    getProducts: `${this.baseUrlApi}/Product/products`,
+    addProduct: `${this.baseUrlApi}/Product/addProduct`,
+  }
 }
 
 export class CardBrands {

@@ -14,7 +14,7 @@ import { setIsSubmitting } from "../../../state/submission/submissionSlice";
 import Swal from "sweetalert2";
 
 interface FormInputs {
-  name: string;
+  // name: string;
   subject: string;
   message: string;
   email: string;
@@ -46,7 +46,11 @@ const ContactForm: React.FC = () => {
   const onSubmit = (formData: FormInputs) => {
     dispatch(setIsSubmitting(true));
     axios
-      .post("http://localhost:8000/api/send-mail", formData)
+      .post("http://localhost:8081/api/Email/send-email", {
+        toEmail: formData.email,
+        subject: formData.subject,
+        body: formData.message,
+      })
       .then((response) => {
         Swal.fire("Success!", "Email Sent Successfully", "success");
         console.log(response.data);
@@ -81,7 +85,7 @@ const ContactForm: React.FC = () => {
             className="pt-10 space-y-5 w-[350px]"
             onSubmit={handleSubmit(onSubmit)}
           >
-            <div>
+            {/* <div>
               <label className="block text-black ">
                 Name <span className="text-red-500">*</span>
               </label>
@@ -94,7 +98,7 @@ const ContactForm: React.FC = () => {
               {errors.name && (
                 <p className="text-red-500 text-sm">{errors.name.message}</p>
               )}
-            </div>
+            </div> */}
 
             <div>
               <label className="block text-black ">

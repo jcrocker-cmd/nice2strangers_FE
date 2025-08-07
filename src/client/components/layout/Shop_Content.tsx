@@ -27,7 +27,7 @@ const Shop_Content = () => {
     const fetchCount = async () => {
       try {
         const res = await axios.get<Product[]>(
-          "https://localhost:7095/api/Product/products"
+          ApiRoutes.Product.getProducts
         );
         setProducts(res.data);
       } catch (error) {
