@@ -92,10 +92,10 @@ const Sidenav = ({
           />
 
           <NormalMenu
-            MenuName="NewsLetter"
+            MenuName="Newsletter"
             Icon="pi pi-envelope"
-            isActive={activeMenu === "NewsLetter"}
-            onClick={() => setActiveMenu("NewsLetter")}
+            isActive={activeMenu === "Newsletter"}
+            onClick={() => setActiveMenu("Newsletter")}
           />
 
           <h2 className="pt-3">General</h2>

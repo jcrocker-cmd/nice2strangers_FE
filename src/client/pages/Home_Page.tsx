@@ -1,9 +1,13 @@
 import Home from "../components/layout/Home";
+import { useState } from "react";
+import { BaseSpinner } from "../components/common/ProgressSpinner";
 
 const Homepage = () => {
+  const [isGlobalLoading, setIsGlobalLoading] = useState(false);
   return (
     <>
-      <Home />
+    {isGlobalLoading && <BaseSpinner />}
+      <Home setIsGlobalLoading={setIsGlobalLoading}/>
     </>
   );
 };

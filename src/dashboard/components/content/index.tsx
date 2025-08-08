@@ -1,10 +1,15 @@
 import DashboardContent from "./DashboardContent";
 import TransactionContent from "./TransactionContent";
-import InquiryContent from "./InquiryContent";
+import InquiryContent from "./EmployeesContent";
 import CustomTable from "./OrdersContent";
 import ProductsContent from "./ProductsContent";
+import Newsletter from "./NewsletterContent";
+import ContactUs from "./ContactUsContent copy";
 
-export const renderContent = (activeMenu: string | null, setIsGlobalLoading: (value: boolean) => void) => {
+export const renderContent = (
+  activeMenu: string | null,
+  setIsGlobalLoading: (value: boolean) => void
+) => {
   switch (activeMenu) {
     case "Dashboard":
       return (
@@ -13,11 +18,11 @@ export const renderContent = (activeMenu: string | null, setIsGlobalLoading: (va
         </>
       );
     case "Transactions":
-      return <TransactionContent setIsGlobalLoading={setIsGlobalLoading}/>;
+      return <TransactionContent setIsGlobalLoading={setIsGlobalLoading} />;
     case "Team":
       return <div>This is Team</div>;
     case "Items":
-      return <ProductsContent setIsGlobalLoading={setIsGlobalLoading}/>;
+      return <ProductsContent setIsGlobalLoading={setIsGlobalLoading} />;
     case "Account":
       return <div>This is Account</div>;
     case "Settings":
@@ -25,9 +30,11 @@ export const renderContent = (activeMenu: string | null, setIsGlobalLoading: (va
     case "Orders":
       return <CustomTable />;
     case "Inquiry":
-      return <InquiryContent />;
+      return <ContactUs setIsGlobalLoading={setIsGlobalLoading}/>;
     case "Chart":
       return <div>This is Chart</div>;
+    case "Newsletter":
+      return <Newsletter setIsGlobalLoading={setIsGlobalLoading}/>;
     default:
       return <div className="p-4">Select a menu item</div>;
   }

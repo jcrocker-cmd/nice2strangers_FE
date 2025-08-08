@@ -18,6 +18,16 @@ export class ApiRoutes {
     getProducts: `${this.baseUrlApi}/Product/products`,
     addProduct: `${this.baseUrlApi}/Product/addProduct`,
   }
+
+  static readonly Newsletter = {
+    postNewsletter: `${this.baseUrlApi}/Email/post-newsletter`,
+    getNewsletter: `${this.baseUrlApi}/Email/get-newsletter`,
+  }
+
+  static readonly ContactUs = {
+    postNewsletter: `${this.baseUrlApi}/Email/post-newsletter`,
+    getContactUs: `${this.baseUrlApi}/Email/get-contact-us`,
+  }
 }
 
 export class CardBrands {

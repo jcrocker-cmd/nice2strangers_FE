@@ -8,7 +8,13 @@ import Section from "../common/Section";
 import NewsletterSignup from "./Newsletter";
 import GlideCarousel from "./GlideCarousel";
 
-const Homepage = () => {
+interface HomepageProps{
+  setIsGlobalLoading: (value: boolean) => void;
+}
+
+const Homepage = ({setIsGlobalLoading}: HomepageProps) => {
+  
+  
   return (
     <>
       <Navbar />
@@ -17,8 +23,8 @@ const Homepage = () => {
         <Aboutpage />
         <Services />
         <GlideCarousel />
-        <ContactForm />
-        <NewsletterSignup />
+        <ContactForm setIsGlobalLoading={setIsGlobalLoading}/>
+        <NewsletterSignup  setIsGlobalLoading={setIsGlobalLoading}/>
         <Footer />
       </Section>
     </>

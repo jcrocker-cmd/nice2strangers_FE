@@ -2,8 +2,6 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { ApiRoutes, SWAL } from "../../../constants/constants";
-import { useState } from "react";
-import 'react-quill/dist/quill.snow.css';
 
 type FormData = {
   productName: string;
@@ -20,7 +18,6 @@ interface ProductsContentProps {
 }
 
 const ProductsContent = ({ handleRefresh, setIsOpen}: ProductsContentProps) => {
-  const [value, setValue] = useState('')
   const {
     register,
     handleSubmit,

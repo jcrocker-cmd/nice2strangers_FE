@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import ScrollReveal from "scrollreveal";
-import React from "react";
 import icon from "../../../assets/img/icon.png";
 import Section from "../common/Section";
 import Wrapper from "../common/Wrapper";
@@ -14,13 +13,17 @@ import { setIsSubmitting } from "../../../state/submission/submissionSlice";
 import Swal from "sweetalert2";
 
 interface FormInputs {
-  // name: string;
+  name: string;
   subject: string;
   message: string;
   email: string;
 }
 
-const ContactForm: React.FC = () => {
+interface HomepageProps {
+  setIsGlobalLoading: (value: boolean) => void;
+}
+
+const ContactForm = ({ setIsGlobalLoading }: HomepageProps) => {
   const dispatch = useDispatch<AppDispatch>();
   const isSubmitting = useSelector(
     (state: RootState) => state.submission.isSubmitting
@@ -45,23 +48,27 @@ const ContactForm: React.FC = () => {
   // onSubmit handler
   const onSubmit = (formData: FormInputs) => {
     dispatch(setIsSubmitting(true));
+    setIsGlobalLoading(true);
     axios
-      .post("http://localhost:8081/api/Email/send-email", {
+      .post("https://localhost:8081/api/Email/post-contact-us", {
         toEmail: formData.email,
         subject: formData.subject,
         body: formData.message,
+        name: formData.name,
       })
       .then((response) => {
         Swal.fire("Success!", "Email Sent Successfully", "success");
         console.log(response.data);
         reset();
-        dispatch(setIsSubmitting(false));
       })
       .catch((error) => {
         Swal.fire("Error!", "Failed to send email", "error");
         console.error(error);
         reset();
+      })
+      .finally(() => {
         dispatch(setIsSubmitting(false));
+        setIsGlobalLoading(false);
       });
   };
 
@@ -85,7 +92,7 @@ const ContactForm: React.FC = () => {
             className="pt-10 space-y-5 w-[350px]"
             onSubmit={handleSubmit(onSubmit)}
           >
-            {/* <div>
+            <div>
               <label className="block text-black ">
                 Name <span className="text-red-500">*</span>
               </label>
@@ -98,7 +105,7 @@ const ContactForm: React.FC = () => {
               {errors.name && (
                 <p className="text-red-500 text-sm">{errors.name.message}</p>
               )}
-            </div> */}
+            </div>
 
             <div>
               <label className="block text-black ">
