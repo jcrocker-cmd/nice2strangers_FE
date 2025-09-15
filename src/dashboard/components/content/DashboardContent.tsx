@@ -4,14 +4,20 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Helmet } from "react-helmet";
 import { ApiRoutes } from "../../../constants/constants";
+import type { ProductCounts } from "../../types/productCount";
+
 interface StripeBalance {
   available: number;
   pending: number;
   currency: string;
 }
 
+
 const DashboardContent = () => {
   const [stripeBalance, setStripeBalance] = useState<StripeBalance | null>(
+    null
+  );
+    const [productCount, setProductCount] = useState<ProductCounts | null>(
     null
   );
 
@@ -27,6 +33,21 @@ const DashboardContent = () => {
       }
     };
     fetchStripeBalance();
+  }, []);
+
+
+    useEffect(() => {
+    const fetchProductsCount = async () => {
+      try {
+        const res = await axios.get<ProductCounts>(
+          ApiRoutes.Product.countActiveProducts
+        );
+        setProductCount(res.data);
+      } catch (error) {
+        console.error("Error fetching Products", error);
+      }
+    };
+    fetchProductsCount();
   }, []);
 
   console.log("Dashboard is mounted");
@@ -60,7 +81,7 @@ const DashboardContent = () => {
             className="bg-success"
           ></DashboardCards>
           <DashboardCards
-            data={0}
+            data={productCount?.active ?? 0}
             cardName="Products"
             className="bg-warning"
           ></DashboardCards>

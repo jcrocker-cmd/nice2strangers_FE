@@ -1,6 +1,6 @@
 export class ApiRoutes {
-  static readonly baseUrlApi = "https://localhost:8081/api";
-  static readonly baseUrl = "https://localhost:8081";
+  static readonly baseUrlApi = "https://localhost:7095/api";
+  static readonly baseUrl = "https://localhost:7095";
 
   static readonly Payments = {
     createCheckout: `${this.baseUrlApi}/Payments/create-checkout`,
@@ -17,6 +17,11 @@ export class ApiRoutes {
   static readonly Product = {
     getProducts: `${this.baseUrlApi}/Product/products`,
     addProduct: `${this.baseUrlApi}/Product/addProduct`,
+    updateProduct: `${this.baseUrlApi}/Product/updateProduct`,
+    getProduct: `${this.baseUrlApi}/Product/updateProduct`,
+    softDelete: `${this.baseUrlApi}/Product/softDeleteProduct`,
+    recoverProduct: `${this.baseUrlApi}/Product/recoverProduct`,
+    countActiveProducts: `${this.baseUrlApi}/Product/countActiveProducts`,
   }
 
   static readonly Newsletter = {
