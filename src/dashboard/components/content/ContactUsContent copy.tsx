@@ -158,7 +158,7 @@ export default function ContactUs({ setIsGlobalLoading }: ContactUsProps) {
           </div>
           <Paper sx={{ width: "100%", overflow: "hidden", p: 4 }}>
             <div className="flex items-center py-3 justify-between">
-              <h2 className="font-semibold text-xl">Contacts</h2>
+              <h2 className="font-semibold text-xl">Inquiry</h2>
               <div className="flex items-center gap-2">
                 <ActionButton
                   sx="bg-disabled text-gray-800 text-sm"

@@ -50,7 +50,7 @@ const ContactForm = ({ setIsGlobalLoading }: HomepageProps) => {
     dispatch(setIsSubmitting(true));
     setIsGlobalLoading(true);
     axios
-      .post("https://localhost:8081/api/Email/post-contact-us", {
+      .post("https://localhost:7095/api/Email/post-contact-us", {
         toEmail: formData.email,
         subject: formData.subject,
         body: formData.message,

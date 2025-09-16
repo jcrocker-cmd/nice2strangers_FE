@@ -51,13 +51,8 @@ const Sidenav = ({
           <ExpandedMenu
             MenuName="My Shop"
             Icon="pi pi-shop"
-            isActive={["Orders", "Items", "Chart"].includes(activeMenu)}
+            isActive={[ "Items", "Chart"].includes(activeMenu)}
           >
-            <ExpandedSubMenu
-              MenuName="Orders"
-              Icon="pi pi-bookmark"
-              onClick={() => setActiveMenu("Orders")}
-            />
             <ExpandedSubMenu
               MenuName="Items"
               Icon="pi pi-th-large"
