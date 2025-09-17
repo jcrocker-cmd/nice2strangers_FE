@@ -1,9 +1,7 @@
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { ApiRoutes, SWAL } from "../../../constants/constants";
-import CustomButton from "../common/CustomModalButton";
+import { ApiRoutes, SWAL } from "../../../../constants/constants";
 
 type FormData = {
   productName: string;
@@ -17,32 +15,18 @@ type FormData = {
 interface ProductsContentProps {
   handleRefresh: () => void;
   setIsOpen: (boolean: any) => void;
-  product?: any;
 }
 
-const ProductsContent = ({ handleRefresh, setIsOpen, product }: ProductsContentProps) => {
+const ProductsContent = ({
+  handleRefresh,
+  setIsOpen,
+}: ProductsContentProps) => {
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
   } = useForm<FormData>();
-
-  const [isEditable, setIsEditable] = useState(false);
-
-  // Pre-fill form when product changes
-  useEffect(() => {
-    if (product) {
-      reset({
-        productName: product.productName,
-        category: product.category,
-        description: product.description,
-        stocks: product.stocks,
-        priceInCents: product.priceInCents / 100, // backend stores in cents
-      });
-      setIsEditable(false); // lock fields by default
-    }
-  }, [product, reset]);
 
   const onSubmit = async (data: FormData) => {
     try {
@@ -52,32 +36,26 @@ const ProductsContent = ({ handleRefresh, setIsOpen, product }: ProductsContentP
       formData.append("Description", data.description);
       formData.append("Stocks", data.stocks.toString());
       formData.append("PriceInCents", data.priceInCents.toString());
-      if (data.image && data.image.length > 0) {
-        formData.append("Image", data.image[0]);
-      }
+      formData.append("Image", data.image[0]);
 
-
-      await axios.put(
-        `${ApiRoutes.Product.updateProduct}/${product.id}`,
-        formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        }
-      );
+      await axios.post(ApiRoutes.Product.addProduct, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       Swal.fire({
         icon: SWAL.ICON.success,
-        title: "Updated!",
-        text: "The product has been successfully updated.",
+        title: "Created!",
+        text: "The product has been successfully created.",
       });
-
-      reset();
+      reset(); // clear form after success
       setIsOpen(false);
       handleRefresh();
     } catch (error: any) {
       Swal.fire({
         icon: SWAL.ICON.error,
-        title: "Update failed",
+        title: "Creation failed",
         text: "An error occurred.",
       });
     }
@@ -86,7 +64,7 @@ const ProductsContent = ({ handleRefresh, setIsOpen, product }: ProductsContentP
   return (
     <div className="max-w-lg mx-auto mt-8 p-6 bg-white rounded-2xl shadow-md">
       <h2 className="text-2xl font-semibold mb-6 text-gray-800 text-center">
-        Edit Product
+        Add New Product
       </h2>
 
       <form
@@ -101,12 +79,13 @@ const ProductsContent = ({ handleRefresh, setIsOpen, product }: ProductsContentP
           </label>
           <input
             {...register("productName", { required: "Name is required" })}
-            disabled={!isEditable}
-            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm disabled:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             placeholder="Enter product name"
           />
           {errors.productName && (
-            <p className="mt-1 text-xs text-red-500">{errors.productName.message}</p>
+            <p className="mt-1 text-xs text-red-500">
+              {errors.productName.message}
+            </p>
           )}
         </div>
 
@@ -117,12 +96,13 @@ const ProductsContent = ({ handleRefresh, setIsOpen, product }: ProductsContentP
           </label>
           <input
             {...register("category", { required: "Category is required" })}
-            disabled={!isEditable}
-            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm disabled:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             placeholder="Enter category"
           />
           {errors.category && (
-            <p className="mt-1 text-xs text-red-500">{errors.category.message}</p>
+            <p className="mt-1 text-xs text-red-500">
+              {errors.category.message}
+            </p>
           )}
         </div>
 
@@ -132,18 +112,21 @@ const ProductsContent = ({ handleRefresh, setIsOpen, product }: ProductsContentP
             Description
           </label>
           <textarea
-            {...register("description", { required: "Description is required" })}
-            disabled={!isEditable}
-            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm disabled:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            {...register("description", {
+              required: "Description is required",
+            })}
+            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             placeholder="Enter description"
             rows={3}
           />
           {errors.description && (
-            <p className="mt-1 text-xs text-red-500">{errors.description.message}</p>
+            <p className="mt-1 text-xs text-red-500">
+              {errors.description.message}
+            </p>
           )}
         </div>
 
-        {/* Stocks & Price */}
+        {/* Stocks & Price in two columns */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="block mb-1 text-sm font-medium text-gray-700">
@@ -152,12 +135,13 @@ const ProductsContent = ({ handleRefresh, setIsOpen, product }: ProductsContentP
             <input
               type="number"
               {...register("stocks", { required: "Stocks is required" })}
-              disabled={!isEditable}
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm disabled:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               placeholder="0"
             />
             {errors.stocks && (
-              <p className="mt-1 text-xs text-red-500">{errors.stocks.message}</p>
+              <p className="mt-1 text-xs text-red-500">
+                {errors.stocks.message}
+              </p>
             )}
           </div>
 
@@ -169,8 +153,7 @@ const ProductsContent = ({ handleRefresh, setIsOpen, product }: ProductsContentP
               type="number"
               step="0.01"
               {...register("priceInCents", { required: "Price is required" })}
-              disabled={!isEditable}
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm disabled:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               placeholder="0.00"
             />
             {errors.priceInCents && (
@@ -181,7 +164,7 @@ const ProductsContent = ({ handleRefresh, setIsOpen, product }: ProductsContentP
           </div>
         </div>
 
-        {/* Image */}
+        {/* Image Upload */}
         <div>
           <label className="block mb-1 text-sm font-medium text-gray-700">
             Product Image
@@ -189,40 +172,22 @@ const ProductsContent = ({ handleRefresh, setIsOpen, product }: ProductsContentP
           <input
             type="file"
             accept="image/*"
-            {...register("image", { required: "Price is required" })}
-            disabled={!isEditable}
-            className="block w-full text-sm text-gray-600 disabled:bg-gray-100 file:mr-3 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+            {...register("image", { required: "Image is required" })}
+            className="block w-full text-sm text-gray-600 file:mr-3 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
           />
           {errors.image && (
             <p className="mt-1 text-xs text-red-500">{errors.image.message}</p>
           )}
         </div>
 
-        {/* Buttons */}
-        <div className="flex gap-3">
-          {/* Cancel */}
-          <CustomButton variant="danger" onClick={() => setIsOpen(false)}>
-            Cancel
-          </CustomButton>
-
-          {/* Edit */}
-          <CustomButton
-            variant="secondary"
-            disabled={isEditable}
-            onClick={() => setIsEditable(true)}
-          >
-            Edit
-          </CustomButton>
-
-          {/* Submit */}
-          <CustomButton
-            type="submit"
-            variant="primary"
-            disabled={!isEditable || isSubmitting}
-          >
-            {isSubmitting ? "Submitting..." : "Submit"}
-          </CustomButton>
-        </div>
+        {/* Submit Button */}
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 text-white py-2 px-4 rounded-md transition-colors"
+        >
+          {isSubmitting ? "Submitting..." : "Submit"}
+        </button>
       </form>
     </div>
   );
