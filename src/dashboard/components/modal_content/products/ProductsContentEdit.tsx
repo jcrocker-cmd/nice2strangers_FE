@@ -87,7 +87,7 @@ const ProductsContent = ({
   };
 
   return (
-    <div className="max-w-lg mx-auto mt-8 p-6 bg-white rounded-2xl shadow-md">
+    <div className="max-w-full mx-auto mt-4 p-6 bg-white rounded-2xl shadow-md">
       <h2 className="text-2xl font-semibold mb-6 text-gray-800 text-center">
         Edit Product
       </h2>

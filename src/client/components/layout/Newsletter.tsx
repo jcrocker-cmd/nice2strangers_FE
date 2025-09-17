@@ -29,14 +29,14 @@ const NewsletterSignup = ({ setIsGlobalLoading }: HomepageProps) => {
       await axios.post(ApiRoutes.Newsletter.postNewsletter, data);
       Swal.fire({
         icon: SWAL.ICON.success,
-        title: "Created!",
-        text: "The product has been successfully created.",
+        title: "Subscribed!",
+        text: "You have succesfully subscribed.",
       });
       reset();
     } catch (err) {
       Swal.fire({
         icon: SWAL.ICON.error,
-        title: "Creation failed",
+        title: "Subscription failed",
         text: "An error occurred.",
       });
     } finally {

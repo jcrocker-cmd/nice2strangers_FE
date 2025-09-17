@@ -24,14 +24,15 @@ export class ApiRoutes {
   };
 
   static readonly Newsletter = {
-    postNewsletter: `${this.baseUrlApi}/Email/post-newsletter`,
-    getNewsletter: `${this.baseUrlApi}/Email/get-newsletter`,
-    sendNewsletter: `${this.baseUrlApi}/Email/sendNewsLetter`,
+    postNewsletter: `${this.baseUrlApi}/Newsletter/post-newsletter`,
+    getNewsletter: `${this.baseUrlApi}/Newsletter/get-newsletter`,
+    sendNewsletter: `${this.baseUrlApi}/Newsletter/sendNewsLetter`,
   };
 
   static readonly ContactUs = {
-    postNewsletter: `${this.baseUrlApi}/Email/post-newsletter`,
-    getContactUs: `${this.baseUrlApi}/Email/get-contact-us`,
+    postContact: `${this.baseUrlApi}/Inquiry/post-contact-us`,
+    getContactUs: `${this.baseUrlApi}/Inquiry/get-contact-us`,
+    sendReply: `${this.baseUrlApi}/Inquiry/send-reply`,
   };
 }
 

@@ -54,7 +54,6 @@ export default function Newsletter({ setIsGlobalLoading }: NewsletterProps) {
   const [searchText, setSearchText] = useState("");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [stats, setStats] = useState<TransactionStats | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
@@ -168,7 +167,11 @@ export default function Newsletter({ setIsGlobalLoading }: NewsletterProps) {
                   Refresh
                 </ActionButton>
                 <ActionButton
-                  onClick={() => setIsOpen(true)}
+                  onClick={() => {
+                    setModalMode("send");
+                    setSelectedItem(null);
+                    setModalOpen(true);
+                  }}
                   Icon="pi pi-plus-circle"
                   sx="p-2 text-white bg-success text-sm"
                 >
@@ -257,7 +260,7 @@ export default function Newsletter({ setIsGlobalLoading }: NewsletterProps) {
           </Paper>
         </>
       )}
-      <CustomModal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+      <CustomModal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
         {modalMode === "send" && (
           <NewletterSend
             handleRefresh={handleRefresh}

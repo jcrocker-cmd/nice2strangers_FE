@@ -11,11 +11,13 @@ type FormData = {
 interface ProductsContentProps {
   handleRefresh: () => void;
   setIsOpen: (boolean: any) => void;
+  recipientEmail: string; 
 }
 
-const ProductsContent = ({
+const InquiryReply = ({
   handleRefresh,
   setIsOpen,
+  recipientEmail 
 }: ProductsContentProps) => {
   const {
     register,
@@ -24,17 +26,18 @@ const ProductsContent = ({
     formState: { errors, isSubmitting },
   } = useForm<FormData>();
 
-  const onSubmit = async (data: FormData) => {
+const onSubmit = async (data: FormData) => {
     try {
-      await axios.post(ApiRoutes.Newsletter.sendNewsletter, {
+      await axios.post(ApiRoutes.ContactUs.sendReply, {
+        email: recipientEmail,
         subject: data.subject,
-        body: data.content, // backend expects "Body"
+        body: data.content,
       });
 
       Swal.fire({
         icon: SWAL.ICON.success,
         title: "Sent!",
-        text: "The newsletter has been successfully sent.",
+        text: `Reply has been sent to ${recipientEmail}.`,
       });
 
       reset();
@@ -44,7 +47,7 @@ const ProductsContent = ({
       Swal.fire({
         icon: SWAL.ICON.error,
         title: "Send failed",
-        text: "An error occurred while sending the newsletter.",
+        text: "An error occurred while sending the reply.",
       });
     }
   };
@@ -52,7 +55,7 @@ const ProductsContent = ({
   return (
     <div className="max-w-full mx-auto mt-4 p-6 bg-white rounded-2xl shadow-md">
       <h2 className="text-2xl font-semibold mb-6 text-gray-800 text-center">
-        Send Newsletter
+        Reply to {recipientEmail}
       </h2>
 
       <form
@@ -82,8 +85,8 @@ const ProductsContent = ({
           {...register("content", {
             required: "Content is required",
             minLength: {
-              value: 150,
-              message: "Content must be at least 150 characters long",
+              value: 50,
+              message: "Content must be at least 50 characters long",
             },
           })}
           className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
@@ -100,11 +103,11 @@ const ProductsContent = ({
           disabled={isSubmitting}
           className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 text-white py-2 px-4 rounded-md transition-colors"
         >
-          {isSubmitting ? "Submitting..." : "Submit"}
+          {isSubmitting ? "Sending..." : "Send Reply"}
         </button>
       </form>
     </div>
   );
 };
 
-export default ProductsContent;
+export default InquiryReply;
