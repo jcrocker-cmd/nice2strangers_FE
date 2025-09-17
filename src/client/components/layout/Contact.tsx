@@ -11,6 +11,7 @@ import type { RootState, AppDispatch } from "../../../state/store";
 import { useDispatch } from "react-redux";
 import { setIsSubmitting } from "../../../state/submission/submissionSlice";
 import Swal from "sweetalert2";
+import { ApiRoutes } from "../../../constants/constants";
 
 interface FormInputs {
   name: string;
@@ -50,7 +51,7 @@ const ContactForm = ({ setIsGlobalLoading }: HomepageProps) => {
     dispatch(setIsSubmitting(true));
     setIsGlobalLoading(true);
     axios
-      .post("https://localhost:7095/api/Email/post-contact-us", {
+      .post(ApiRoutes.ContactUs.postContact, {
         toEmail: formData.email,
         subject: formData.subject,
         body: formData.message,

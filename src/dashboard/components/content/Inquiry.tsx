@@ -20,7 +20,8 @@ import { ApiRoutes, CardBrands, SWAL } from "../../../constants/constants";
 import { Spinner } from "../common/ProgressSpinner";
 import TransactionCards from "../common/TransactionCards";
 import "../../../index.css";
-import ProductsContent from "../modal_content/products/ProductsContent";
+import InquiryReply from "../modal_content/inquiry/InquiryReply";
+import InquiryView from "../modal_content/inquiry/InquiryView";
 
 interface ContactUs {
   id: string;
@@ -57,9 +58,11 @@ export default function ContactUs({ setIsGlobalLoading }: ContactUsProps) {
   const [searchText, setSearchText] = useState("");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [stats, setStats] = useState<TransactionStats | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalMode, setModalMode] = useState<"send" | "edit" | "view">("send");
+  const [selectedItem, setSelectedItem] = useState<ContactUs | null>(null);
 
   const fetchCount = async () => {
     try {
@@ -226,12 +229,30 @@ export default function ContactUs({ setIsGlobalLoading }: ContactUsProps) {
                           {row.createdDate}
                         </TableCell>
                         <TableCell style={{ fontSize: "12px" }}>
-                          <ActionButton
-                            sx="bg-disabled cursor-not-allowed text-gray-500"
-                            disabled={true}
-                          >
-                            Unavailable
-                          </ActionButton>
+                          <Box display="flex" alignItems="center" gap={1}>
+                            <ActionButton
+                              Icon="pi pi-eye"
+                              sx="bg-primary text-white cursor-pointer"
+                              onClick={() => {
+                                setSelectedItem(row);
+                                setModalMode("view");
+                                setModalOpen(true);
+                              }}
+                            >
+                              View
+                            </ActionButton>
+                            <ActionButton
+                              Icon="pi pi-pencil"
+                              sx="bg-success text-white cursor-pointer"
+                              onClick={() => {
+                                setModalMode("send");
+                                setSelectedItem(row);
+                                setModalOpen(true);
+                              }}
+                            >
+                              Reply
+                            </ActionButton>
+                          </Box>
                         </TableCell>
                       </TableRow>
                     ))}
@@ -251,8 +272,17 @@ export default function ContactUs({ setIsGlobalLoading }: ContactUsProps) {
           </Paper>
         </>
       )}
-      <CustomModal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        <ProductsContent handleRefresh={handleRefresh} setIsOpen={setIsOpen} />
+      <CustomModal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
+        {modalMode === "send" && (
+          <InquiryReply
+            handleRefresh={handleRefresh}
+            setIsOpen={setModalOpen}
+            recipientEmail={selectedItem?.email || ""}
+          />
+        )}
+        {modalMode === "view" && selectedItem && (
+          <InquiryView setIsOpen={setModalOpen} item={selectedItem} />
+        )}
       </CustomModal>
     </>
   );
