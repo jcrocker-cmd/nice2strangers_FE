@@ -20,7 +20,8 @@ import { ApiRoutes, CardBrands, SWAL } from "../../../constants/constants";
 import { Spinner } from "../common/ProgressSpinner";
 import TransactionCards from "../common/TransactionCards";
 import "../../../index.css";
-import ProductsContent from "../modal_content/ProductsContent";
+import NewletterSend from "../modal_content/newsletter/NewsletterSend";
+import NewletterContent from "../modal_content/newsletter/NewsletterContentView";
 
 interface Newsletter {
   id: string;
@@ -48,7 +49,7 @@ const columns = [
   { id: "action", label: "Action", minWidth: 150 },
 ];
 
-export default function Newsletter({setIsGlobalLoading}: NewsletterProps) {
+export default function Newsletter({ setIsGlobalLoading }: NewsletterProps) {
   const [rows, setRows] = useState<Newsletter[]>([]);
   const [searchText, setSearchText] = useState("");
   const [page, setPage] = useState(0);
@@ -56,6 +57,9 @@ export default function Newsletter({setIsGlobalLoading}: NewsletterProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [stats, setStats] = useState<TransactionStats | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalMode, setModalMode] = useState<"send" | "edit" | "view">("send");
+  const [selectedItem, setSelectedItem] = useState<Newsletter | null>(null);
 
   const fetchCount = async () => {
     try {
@@ -71,7 +75,9 @@ export default function Newsletter({setIsGlobalLoading}: NewsletterProps) {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const res = await axios.get<Newsletter[]>(ApiRoutes.Newsletter.getNewsletter);
+      const res = await axios.get<Newsletter[]>(
+        ApiRoutes.Newsletter.getNewsletter
+      );
       setRows(res.data);
     } catch (err) {
       console.error("Fetch error:", err);
@@ -222,10 +228,15 @@ export default function Newsletter({setIsGlobalLoading}: NewsletterProps) {
                         </TableCell>
                         <TableCell style={{ fontSize: "12px" }}>
                           <ActionButton
-                            sx="bg-disabled cursor-not-allowed text-gray-500"
-                            disabled={true}
+                            Icon="pi pi-eye"
+                            sx="bg-primary text-white cursor-pointer"
+                            onClick={() => {
+                              setSelectedItem(row);
+                              setModalMode("view");
+                              setModalOpen(true);
+                            }}
                           >
-                            Unavailable
+                            View
                           </ActionButton>
                         </TableCell>
                       </TableRow>
@@ -247,7 +258,15 @@ export default function Newsletter({setIsGlobalLoading}: NewsletterProps) {
         </>
       )}
       <CustomModal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        <ProductsContent handleRefresh={handleRefresh} setIsOpen={setIsOpen} />
+        {modalMode === "send" && (
+          <NewletterSend
+            handleRefresh={handleRefresh}
+            setIsOpen={setModalOpen}
+          />
+        )}
+        {modalMode === "view" && selectedItem && (
+          <NewletterContent setIsOpen={setModalOpen} item={selectedItem} />
+        )}
       </CustomModal>
     </>
   );

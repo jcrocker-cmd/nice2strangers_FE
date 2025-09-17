@@ -1,5 +1,5 @@
-import CustomButton from "../common/CustomModalButton";
-import { ApiRoutes } from "../../../constants/constants";
+import CustomButton from "../../common/CustomModalButton";
+import { ApiRoutes } from "../../../../constants/constants";
 
 interface Product {
   id: string;
@@ -17,7 +17,10 @@ interface ProductsContentViewProps {
   setIsOpen: (open: boolean) => void;
 }
 
-const ProductsContentView = ({ product, setIsOpen }: ProductsContentViewProps) => {
+const ProductsContentView = ({
+  product,
+  setIsOpen,
+}: ProductsContentViewProps) => {
   return (
     <div className="max-w-md mx-auto mt-8 p-6 bg-white rounded-3xl shadow-xl border border-gray-100">
       <h2 className="text-2xl font-semibold mb-6 text-gray-800 text-center">
@@ -46,7 +49,9 @@ const ProductsContentView = ({ product, setIsOpen }: ProductsContentViewProps) =
         {/* Price */}
         <div className="bg-gray-50 px-4 py-3 rounded-lg shadow-sm flex justify-between">
           <span className="font-semibold text-gray-600">Price:</span>
-          <span className="text-gray-800">${(product.priceInCents / 100).toFixed(2)}</span>
+          <span className="text-gray-800">
+            ${(product.priceInCents / 100).toFixed(2)}
+          </span>
         </div>
 
         {/* Created Date */}

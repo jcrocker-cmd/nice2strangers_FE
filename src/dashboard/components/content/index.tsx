@@ -1,10 +1,9 @@
 import DashboardContent from "./DashboardContent";
 import TransactionContent from "./TransactionContent";
-import InquiryContent from "./EmployeesContent";
 import CustomTable from "./OrdersContent";
 import ProductsContent from "./ProductsContent";
 import Newsletter from "./NewsletterContent";
-import ContactUs from "./ContactUsContent copy";
+import InquiryContent from "./Inquiry";
 
 export const renderContent = (
   activeMenu: string | null,
@@ -30,11 +29,11 @@ export const renderContent = (
     case "Orders":
       return <CustomTable />;
     case "Inquiry":
-      return <ContactUs setIsGlobalLoading={setIsGlobalLoading}/>;
+      return <InquiryContent setIsGlobalLoading={setIsGlobalLoading} />;
     case "Chart":
       return <div>This is Chart</div>;
     case "Newsletter":
-      return <Newsletter setIsGlobalLoading={setIsGlobalLoading}/>;
+      return <Newsletter setIsGlobalLoading={setIsGlobalLoading} />;
     default:
       return <div className="p-4">Select a menu item</div>;
   }

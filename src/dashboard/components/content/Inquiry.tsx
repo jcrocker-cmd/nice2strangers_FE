@@ -20,7 +20,7 @@ import { ApiRoutes, CardBrands, SWAL } from "../../../constants/constants";
 import { Spinner } from "../common/ProgressSpinner";
 import TransactionCards from "../common/TransactionCards";
 import "../../../index.css";
-import ProductsContent from "../modal_content/ProductsContent";
+import ProductsContent from "../modal_content/products/ProductsContent";
 
 interface ContactUs {
   id: string;
@@ -166,13 +166,6 @@ export default function ContactUs({ setIsGlobalLoading }: ContactUsProps) {
                   onClick={handleRefresh}
                 >
                   Refresh
-                </ActionButton>
-                <ActionButton
-                  onClick={() => setIsOpen(true)}
-                  Icon="pi pi-plus-circle"
-                  sx="p-2 text-white bg-success text-sm"
-                >
-                  Send Newsletter
                 </ActionButton>
               </div>
             </div>

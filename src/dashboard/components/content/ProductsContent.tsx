@@ -20,12 +20,11 @@ import { ApiRoutes, CardBrands, SWAL } from "../../../constants/constants";
 import { Spinner } from "../common/ProgressSpinner";
 import TransactionCards from "../common/TransactionCards";
 import "../../../index.css";
-import ProductsContent from "../modal_content/ProductsContent";
-import ProductsContentEdit from "../modal_content/ProductsContentEdit";
-import ProductsContentView from "../modal_content/ProductsContentView";
+import ProductsContent from "../modal_content/products/ProductsContent";
+import ProductsContentEdit from "../modal_content/products/ProductsContentEdit";
+import ProductsContentView from "../modal_content/products/ProductsContentView";
 import type { ProductCounts } from "../../types/productCount";
 import type { Products } from "../../types/product";
-
 
 interface ProductsProps {
   setIsGlobalLoading: (value: boolean) => void;
@@ -52,10 +51,7 @@ export default function CustomTable({ setIsGlobalLoading }: ProductsProps) {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState<"add" | "edit" | "view">("add");
   const [selectedProduct, setSelectedProduct] = useState<Products | null>(null);
-      const [productCount, setProductCount] = useState<ProductCounts | null>(
-      null
-    );
-
+  const [productCount, setProductCount] = useState<ProductCounts | null>(null);
 
   const fetchData = async () => {
     setLoading(true);
@@ -103,53 +99,49 @@ export default function CustomTable({ setIsGlobalLoading }: ProductsProps) {
     }
   };
 
+  const handleSoftDelete = async (id: string) => {
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You are about to soft delete this product.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "Cancel",
+      reverseButtons: true,
+    });
 
-const handleSoftDelete = async (id: string) => {
-  const result = await Swal.fire({
-    title: "Are you sure?",
-    text: "You are about to soft delete this product.",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonText: "Yes, delete it!",
-    cancelButtonText: "Cancel",
-    reverseButtons: true,
-  });
-
-  if (result.isConfirmed) {
-    try {
-      await axios.put(`${ApiRoutes.Product.softDelete}/${id}`);
-      Swal.fire("Deleted!", "Product has been soft deleted.", "success");
-      handleRefresh();
-    } catch (error) {
-      Swal.fire("Error!", "Failed to delete product.", "error");
+    if (result.isConfirmed) {
+      try {
+        await axios.put(`${ApiRoutes.Product.softDelete}/${id}`);
+        Swal.fire("Deleted!", "Product has been soft deleted.", "success");
+        handleRefresh();
+      } catch (error) {
+        Swal.fire("Error!", "Failed to delete product.", "error");
+      }
     }
-  }
-};
+  };
 
+  const handleRecover = async (id: string) => {
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You are about to recover this product.",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Yes, recover it!",
+      cancelButtonText: "Cancel",
+      reverseButtons: true,
+    });
 
-const handleRecover = async (id: string) => {
-  const result = await Swal.fire({
-    title: "Are you sure?",
-    text: "You are about to recover this product.",
-    icon: "question",
-    showCancelButton: true,
-    confirmButtonText: "Yes, recover it!",
-    cancelButtonText: "Cancel",
-    reverseButtons: true,
-  });
-
-  if (result.isConfirmed) {
-    try {
-      await axios.put(`${ApiRoutes.Product.recoverProduct}/${id}`);
-      Swal.fire("Recovered!", "Product has been restored.", "success");
-      handleRefresh();
-    } catch (error) {
-      Swal.fire("Error!", "Failed to recover product.", "error");
+    if (result.isConfirmed) {
+      try {
+        await axios.put(`${ApiRoutes.Product.recoverProduct}/${id}`);
+        Swal.fire("Recovered!", "Product has been restored.", "success");
+        handleRefresh();
+      } catch (error) {
+        Swal.fire("Error!", "Failed to recover product.", "error");
+      }
     }
-  }
-};
-
-
+  };
 
   const filteredRows = useMemo(() => {
     if (!searchText) return rows;
@@ -178,7 +170,10 @@ const handleRecover = async (id: string) => {
         <>
           <div className="flex flex-col">
             <div className="flex gap-2 justify-between mb-4 flex-col lg-custom:flex-row w-full">
-              <TransactionCards cardName="All" data={productCount?.total ?? 0} />
+              <TransactionCards
+                cardName="All"
+                data={productCount?.total ?? 0}
+              />
               <TransactionCards
                 cardName="Active"
                 data={productCount?.active ?? 0}
@@ -210,11 +205,11 @@ const handleRecover = async (id: string) => {
                   Refresh
                 </ActionButton>
                 <ActionButton
-                    onClick={() => {
-                      setModalMode("add");
-                      setSelectedProduct(null);
-                      setModalOpen(true);
-                    }}
+                  onClick={() => {
+                    setModalMode("add");
+                    setSelectedProduct(null);
+                    setModalOpen(true);
+                  }}
                   Icon="pi pi-plus-circle"
                   sx="p-2 text-white bg-success text-sm"
                 >
@@ -276,13 +271,17 @@ const handleRecover = async (id: string) => {
                           {row.stocks}
                         </TableCell>
                         <TableCell style={{ fontSize: "13px" }}>
-                         {
-                          row.isActive ? (
-                            <StatusBadge sx="border-success text-success" message="Active" />
+                          {row.isActive ? (
+                            <StatusBadge
+                              sx="border-success text-success"
+                              message="Active"
+                            />
                           ) : (
-                            <StatusBadge sx="border-danger text-danger" message="Deleted" />
-                          )
-                         }
+                            <StatusBadge
+                              sx="border-danger text-danger"
+                              message="Deleted"
+                            />
+                          )}
                         </TableCell>
                         <TableCell style={{ fontSize: "13px" }}>
                           ${" "}
@@ -317,7 +316,7 @@ const handleRecover = async (id: string) => {
                             <ActionButton
                               Icon="pi pi-pencil"
                               sx="bg-warning text-white cursor-pointer"
-                                onClick={() => {
+                              onClick={() => {
                                 setModalMode("edit");
                                 setSelectedProduct(row);
                                 setModalOpen(true);
@@ -342,7 +341,6 @@ const handleRecover = async (id: string) => {
                                 Recover
                               </ActionButton>
                             )}
-
                           </Box>
                         </TableCell>
                       </TableRow>
@@ -365,7 +363,10 @@ const handleRecover = async (id: string) => {
       )}
       <CustomModal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
         {modalMode === "add" && (
-          <ProductsContent handleRefresh={handleRefresh} setIsOpen={setModalOpen} />
+          <ProductsContent
+            handleRefresh={handleRefresh}
+            setIsOpen={setModalOpen}
+          />
         )}
         {modalMode === "edit" && selectedProduct && (
           <ProductsContentEdit

@@ -11,7 +11,6 @@ export class ApiRoutes {
     getStripeBalance: `${this.baseUrlApi}/Payments/balance`,
 
     postRefund: `${this.baseUrlApi}/Payments/refund`,
-    
   };
 
   static readonly Product = {
@@ -22,17 +21,18 @@ export class ApiRoutes {
     softDelete: `${this.baseUrlApi}/Product/softDeleteProduct`,
     recoverProduct: `${this.baseUrlApi}/Product/recoverProduct`,
     countActiveProducts: `${this.baseUrlApi}/Product/countActiveProducts`,
-  }
+  };
 
   static readonly Newsletter = {
     postNewsletter: `${this.baseUrlApi}/Email/post-newsletter`,
     getNewsletter: `${this.baseUrlApi}/Email/get-newsletter`,
-  }
+    sendNewsletter: `${this.baseUrlApi}/Email/sendNewsLetter`,
+  };
 
   static readonly ContactUs = {
     postNewsletter: `${this.baseUrlApi}/Email/post-newsletter`,
     getContactUs: `${this.baseUrlApi}/Email/get-contact-us`,
-  }
+  };
 }
 
 export class CardBrands {
