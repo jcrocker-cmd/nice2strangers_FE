@@ -6,8 +6,8 @@ interface ContactUs {
   id: string;
   name: string;
   subject: string;
-  message: string;
-  email: string;
+  body: string;
+  toEmail: string;
   createdDate: string;
 }
 
@@ -24,6 +24,7 @@ const InquiryView = ({ item, setIsOpen }: ProductsContentViewProps) => {
       </h2>
 
       <div className="space-y-4">
+
         <div className="bg-gray-50 px-4 py-3 rounded-lg shadow-sm flex justify-between">
           <span className="font-semibold text-gray-600">Name:</span>
           <span className="text-gray-800">{item.name}</span>
@@ -31,7 +32,7 @@ const InquiryView = ({ item, setIsOpen }: ProductsContentViewProps) => {
 
         <div className="bg-gray-50 px-4 py-3 rounded-lg shadow-sm flex justify-between">
           <span className="font-semibold text-gray-600">Email:</span>
-          <span className="text-gray-800">{item.email}</span>
+          <span className="text-gray-800">{item.toEmail}</span>
         </div>
 
         
@@ -42,7 +43,7 @@ const InquiryView = ({ item, setIsOpen }: ProductsContentViewProps) => {
 
         <div className="bg-gray-50 px-4 py-3 rounded-lg shadow-sm flex flex-col justify-between">
           <span className="font-semibold text-gray-600">Message:</span>
-          <span className="text-gray-800">{item.message}</span>
+          <span className="text-gray-800">{item.body}</span>
         </div>
       </div>
 

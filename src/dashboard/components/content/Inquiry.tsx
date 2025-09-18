@@ -27,8 +27,9 @@ interface ContactUs {
   id: string;
   name: string;
   subject: string;
-  message: string;
-  email: string;
+  body: string;
+  toEmail: string;
+  isReplied: boolean;
   createdDate: string;
 }
 interface TransactionStats {
@@ -217,13 +218,13 @@ export default function ContactUs({ setIsGlobalLoading }: ContactUsProps) {
                           </div>
                         </TableCell>
                         <TableCell style={{ fontSize: "13px" }}>
-                          {row.email}
+                          {row.toEmail}
                         </TableCell>
                         <TableCell style={{ fontSize: "13px" }}>
                           {row.subject}
                         </TableCell>
                         <TableCell style={{ fontSize: "13px" }}>
-                          {row.message}
+                          {row.body}
                         </TableCell>
                         <TableCell style={{ fontSize: "13px" }}>
                           {row.createdDate}
@@ -241,6 +242,27 @@ export default function ContactUs({ setIsGlobalLoading }: ContactUsProps) {
                             >
                               View
                             </ActionButton>
+                            {/* {row.isReplied ? (
+                            <ActionButton
+                              sx="bg-secondary cursor-not-allowed text-white"
+                              Icon="pi pi-check"
+                              disabled={true}
+                            >
+                              Replied
+                            </ActionButton>
+                            ) : (
+                            <ActionButton
+                              Icon="pi pi-pencil"
+                              sx="bg-success text-white cursor-pointer"
+                              onClick={() => {
+                                setModalMode("send");
+                                setSelectedItem(row);
+                                setModalOpen(true);
+                              }}
+                            >
+                              Reply
+                            </ActionButton>
+                            )} */}
                             <ActionButton
                               Icon="pi pi-pencil"
                               sx="bg-success text-white cursor-pointer"
@@ -277,7 +299,7 @@ export default function ContactUs({ setIsGlobalLoading }: ContactUsProps) {
           <InquiryReply
             handleRefresh={handleRefresh}
             setIsOpen={setModalOpen}
-            recipientEmail={selectedItem?.email || ""}
+            item={selectedItem!}  // force non-null with !
           />
         )}
         {modalMode === "view" && selectedItem && (

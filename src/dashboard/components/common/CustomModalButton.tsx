@@ -11,7 +11,7 @@ interface CustomButtonProps {
 }
 
 const baseClasses =
-  "flex-1 py-2 px-4 rounded-md text-white transition-colors cursor-pointer disabled:cursor-not-allowed disabled:opacity-60";
+  "flex-1 py-2 px-4 w-full rounded-md text-white transition-colors !cursor-pointer disabled:cursor-not-allowed disabled:opacity-60";
 
 const variantClasses: Record<Variant, string> = {
   primary: "bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300",

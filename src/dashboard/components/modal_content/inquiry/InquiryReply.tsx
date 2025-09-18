@@ -2,42 +2,50 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { ApiRoutes, SWAL } from "../../../../constants/constants";
+import CustomButton from "../../common/CustomModalButton";
 
-type FormData = {
+interface ContactUs {
+  id: string;
+  name: string;
   subject: string;
-  content: string;
-};
+  body: string;
+  toEmail: string;
+  isReplied: boolean;
+  createdDate: string;
+}
+
+interface ReplyForm {
+  subject: string;
+  body: string;
+}
 
 interface ProductsContentProps {
   handleRefresh: () => void;
-  setIsOpen: (boolean: any) => void;
-  recipientEmail: string; 
+  setIsOpen: (open: boolean) => void;
+  item: ContactUs;
 }
 
-const InquiryReply = ({
-  handleRefresh,
-  setIsOpen,
-  recipientEmail 
-}: ProductsContentProps) => {
+const InquiryReply = ({ handleRefresh, setIsOpen, item }: ProductsContentProps) => {
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm<FormData>();
+  } = useForm<ReplyForm>();
 
-const onSubmit = async (data: FormData) => {
+  const onSubmit = async (data: ReplyForm) => {
     try {
       await axios.post(ApiRoutes.ContactUs.sendReply, {
-        email: recipientEmail,
-        subject: data.subject,
-        body: data.content,
+        Id: item.id,        // PascalCase
+        Email: item.toEmail,
+        Subject: data.subject,
+        Body: data.body,
       });
 
       Swal.fire({
         icon: SWAL.ICON.success,
         title: "Sent!",
-        text: `Reply has been sent to ${recipientEmail}.`,
+        text: `Reply has been sent to ${item.toEmail}.`,
       });
 
       reset();
@@ -55,15 +63,16 @@ const onSubmit = async (data: FormData) => {
   return (
     <div className="max-w-full mx-auto mt-4 p-6 bg-white rounded-2xl shadow-md">
       <h2 className="text-2xl font-semibold mb-6 text-gray-800 text-center">
-        Reply to {recipientEmail}
+        Reply to {item.toEmail}
       </h2>
+      
 
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="space-y-5"
         encType="multipart/form-data"
       >
-        {/* Product Name */}
+        {/* Subject */}
         <div>
           <label className="block mb-1 text-sm font-medium text-gray-700">
             Subject
@@ -72,39 +81,39 @@ const onSubmit = async (data: FormData) => {
             {...register("subject", { required: "Subject is required" })}
             className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             placeholder="Enter subject"
+            value={`Re: ${item.subject}`}
+            readOnly
           />
           {errors.subject && (
-            <p className="mt-1 text-xs text-red-500">
-              {errors.subject.message}
-            </p>
+            <p className="mt-1 text-xs text-red-500">{errors.subject.message}</p>
           )}
         </div>
 
-        {/* Category */}
+        {/* Body */}
         <textarea
-          {...register("content", {
+          {...register("body", {
             required: "Content is required",
             minLength: {
-              value: 50,
-              message: "Content must be at least 50 characters long",
+              value: 150,
+              message: "Content must be at least 150 characters long",
             },
           })}
           className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           placeholder="Enter content (min 150 characters)"
           rows={6}
         />
-        {errors.content && (
-          <p className="mt-1 text-xs text-red-500">{errors.content.message}</p>
+        {errors.body && (
+          <p className="mt-1 text-xs text-red-500">{errors.body.message}</p>
         )}
 
         {/* Submit Button */}
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 text-white py-2 px-4 rounded-md transition-colors"
-        >
-          {isSubmitting ? "Sending..." : "Send Reply"}
-        </button>
+          <CustomButton
+            type="submit"
+            disabled={isSubmitting}
+            variant="primary"
+          >
+            {isSubmitting ? "Sending..." : "Send Reply"}
+          </CustomButton>
       </form>
     </div>
   );

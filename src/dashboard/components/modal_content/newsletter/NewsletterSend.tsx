@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { ApiRoutes, SWAL } from "../../../../constants/constants";
+import CustomButton from "../../common/CustomModalButton";
 
 type FormData = {
   subject: string;
@@ -95,13 +96,13 @@ const ProductsContent = ({
         )}
 
         {/* Submit Button */}
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 text-white py-2 px-4 rounded-md transition-colors"
-        >
-          {isSubmitting ? "Submitting..." : "Submit"}
-        </button>
+        <CustomButton
+            type="submit"
+            disabled={isSubmitting}
+            variant="primary"
+          >
+            {isSubmitting ? "Submitting..." : "Submit"}
+          </CustomButton>
       </form>
     </div>
   );
