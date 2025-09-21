@@ -18,6 +18,13 @@
   --color-custom-dark: #ff3737; /* Main stuff we wanna use */
 }
 
+@font-face {
+  font-family: "ChoretBubble";
+  src: url("/src/assets/fonts/ChoretFudyngBubbleRegular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 @layer utilities {
   .font-primary {
     font-family: var(--font-primary);

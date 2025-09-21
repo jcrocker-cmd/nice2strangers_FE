@@ -1,15 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       fontFamily: {
-        kalam: ['"Kalam"', 'cursive'],
-        grotesk: ['"Space Grotesk"', 'sans-serif'],
-        poppins: ['"Poppins"', 'sans-serif'],
+        kalam: ['"Kalam"', "cursive"],
+        grotesk: ['"Space Grotesk"', "sans-serif"],
+        poppins: ['"Poppins"', "sans-serif"],
+        bubble: ['"ChoretBubble"', "cursive"],
       },
       colors: {
         primary: "#5b6eff", //violet/blue
@@ -18,11 +16,10 @@ module.exports = {
         success: "#5bb75b", //green
         warning: "#ffc85b", //yellow
         danger: "#ff5b5b", //red
-        disabled: '#e5e7eb',
-
+        disabled: "#e5e7eb",
       },
       screens: {
-        'lg-custom': '1110px', 
+        "lg-custom": "1110px",
       },
     },
   },

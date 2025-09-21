@@ -35,9 +35,9 @@ const columns = [
   { id: "category", label: "Category", minWidth: 100 },
   { id: "description", label: "Description", minWidth: 400 },
   { id: "stocks", label: "Stocks", minWidth: 80 },
-  { id: "priceInCents", label: "Price", minWidth: 120 },
-  { id: "image", label: "Image", minWidth: 100 },
-  { id: "status", label: "Status", minWidth: 100 },
+  { id: "status", label: "Status", minWidth: 120 },
+  { id: "priceInCents", label: "Price", minWidth: 100 },
+  { id: "images", label: "Image", minWidth: 100 },
   { id: "createdDate", label: "Created Date", minWidth: 170 },
   { id: "action", label: "Action", minWidth: 150 },
 ];
