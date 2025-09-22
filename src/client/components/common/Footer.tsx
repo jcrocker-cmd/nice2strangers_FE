@@ -21,7 +21,7 @@ const Footer = () => {
     });
   }, []);
   return (
-    <Wrapper id="footer-page" className="w-full py-20 bg-[#F7F0D7] text-black">
+    <Wrapper id="footer-page" className="w-full py-20 bg-[#F7F0D7] text-black ">
       <Section className="footer-section max-w-[1080px] mx-auto px-10 py-10 rounded-4xl ">
         <img src={logo} alt="Logo" className="h-20 mb-12" />
 

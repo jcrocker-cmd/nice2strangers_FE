@@ -26,9 +26,7 @@ const Shop_Content = () => {
   useEffect(() => {
     const fetchCount = async () => {
       try {
-        const res = await axios.get<Product[]>(
-          ApiRoutes.Product.getProducts
-        );
+        const res = await axios.get<Product[]>(ApiRoutes.Product.getProducts);
         setProducts(res.data);
       } catch (error) {
         console.error("Error fetching transactions stats", error);
@@ -57,7 +55,7 @@ const Shop_Content = () => {
   return (
     <Wrapper id="shop-content" className="w-full py-5 text-black">
       <Section className="shop-body max-w-[1400px] mx-auto px-5 py-5">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 gap-y-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 gap-y-10">
           {products
             .filter((p) => p.isActive)
             .map((p) => (

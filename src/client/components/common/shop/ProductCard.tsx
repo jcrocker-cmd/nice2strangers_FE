@@ -18,12 +18,15 @@ const ProductCard: React.FC<ProductCardProps> = ({
   return (
     <div className="bg-white shadow-md rounded-xl w-full max-w-sm border border-gray-200 hover:shadow-lg transition">
       <div className="mb-4">
-        <img
-          src={imageUrl}
-          alt={name}
-          className="object-cover w-90 rounded-t-xl h-90"
-        />
+        <div className="aspect-[4/5] w-full overflow-hidden rounded-t-xl">
+          <img
+            src={imageUrl}
+            alt={name}
+            className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
+          />
+        </div>
       </div>
+
       <div className="p-6">
         <h2 className="text-xl font-semibold mb-2">{name}</h2>
         <p className="text-gray-700 text-lg mb-4">
