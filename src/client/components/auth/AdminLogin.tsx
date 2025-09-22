@@ -56,7 +56,7 @@ const Login: React.FC = () => {
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-6 font-grotesk">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
         {/* Header */}
-        <h2 className="text-2xl font-bold text-center text-gray-900">Welcome Back</h2>
+        <h2 className="text-2xl font-bold text-center text-gray-900">Admin</h2>
         <p className="text-sm text-gray-500 text-center mb-6">Login to your account</p>
 
         {/* Form */}

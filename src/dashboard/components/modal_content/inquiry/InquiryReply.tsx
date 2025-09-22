@@ -33,7 +33,6 @@ const InquiryReply = ({ handleRefresh, setIsOpen, item }: ProductsContentProps) 
     handleSubmit,
     reset,
     control,
-    setValue,
     formState: { errors, isSubmitting },
   } = useForm<ReplyForm>();
 
@@ -109,8 +108,8 @@ const InquiryReply = ({ handleRefresh, setIsOpen, item }: ProductsContentProps) 
             }}
             render={({ field }) => (
               <TinyEditor
-                value={field.value || ""}
-                onChange={(body) => setValue("body", body)}
+                value={field.value}
+                onChange={field.onChange}
               />
             )}
           />

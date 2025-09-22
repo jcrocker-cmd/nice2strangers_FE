@@ -24,7 +24,6 @@ const ProductsContent = ({
     handleSubmit,
     reset,
     control,
-    setValue,
     formState: { errors, isSubmitting },
   } = useForm<FormData>();
 
@@ -97,8 +96,8 @@ const ProductsContent = ({
             }}
             render={({ field }) => (
               <TinyEditor
-                value={field.value || ""}
-                onChange={(content) => setValue("content", content)}
+                value={field.value}
+                onChange={field.onChange}
               />
             )}
           />

@@ -1,10 +1,56 @@
 import { FcGoogle } from "react-icons/fc";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+import { ApiRoutes, SWAL } from "../../../constants/constants";
+import axios from "axios";
 
-const Signup = () => {
-  const [showPassword, setShowPassword] = useState(false);
+interface SignupFormInputs {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
+
+const Signup: React.FC = () => {
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<SignupFormInputs>();
+
+  const onSubmit = async (data: SignupFormInputs) => {
+    try {
+      await axios.post(ApiRoutes.Auth.SignUp, {
+        email: data.email,
+        password: data.password,
+      });
+      Swal.fire({
+        icon: SWAL.ICON.success,
+        title: "Created!",
+        text: `Account has been created`,
+      }).then(() => {
+        navigate("/login"); // redirect to login page
+      });
+    } catch (error: any) {
+      const messages = error.response?.data;
+      Swal.fire({
+        icon: SWAL.ICON.error,
+        title: "Failed",
+        text: Array.isArray(messages)
+          ? messages.join(", ")
+          : "An error occurred",
+      });
+      reset();
+    }
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-6">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-6 font-grotesk">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
         {/* Header */}
         <h2 className="text-2xl font-bold text-center text-gray-900">
@@ -14,17 +60,47 @@ const Signup = () => {
           Join us and start shopping!
         </p>
 
-        {/* Form */}
-        <form className="space-y-5">
+        <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Full Name
+              First Name
             </label>
             <input
               type="text"
-              placeholder="John Doe"
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-yellow-400 focus:outline-none"
+              placeholder="John"
+              {...register("firstName", { required: "First Name is required" })}
+              className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:outline-none ${
+                errors.firstName
+                  ? "border-red-500 focus:ring-red-400"
+                  : "border-gray-300 focus:ring-yellow-400"
+              }`}
             />
+            {errors.firstName && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.firstName.message}
+              </p>
+            )}
+          </div>
+
+                    <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Last Name
+            </label>
+            <input
+              type="text"
+              placeholder="Doe"
+              {...register("lastName", { required: "Last Name is required" })}
+              className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:outline-none ${
+                errors.lastName
+                  ? "border-red-500 focus:ring-red-400"
+                  : "border-gray-300 focus:ring-yellow-400"
+              }`}
+            />
+            {errors.lastName && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.lastName.message}
+              </p>
+            )}
           </div>
 
           <div>
@@ -34,8 +110,24 @@ const Signup = () => {
             <input
               type="email"
               placeholder="you@example.com"
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-yellow-400 focus:outline-none"
+              {...register("email", {
+                required: "Email is required",
+                pattern: {
+                  value: /\S+@\S+\.\S+/,
+                  message: "Invalid email address",
+                },
+              })}
+              className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:outline-none ${
+                errors.email
+                  ? "border-red-500 focus:ring-red-400"
+                  : "border-gray-300 focus:ring-yellow-400"
+              }`}
             />
+            {errors.email && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.email.message}
+              </p>
+            )}
           </div>
 
           <div>
@@ -45,9 +137,31 @@ const Signup = () => {
             <input
               type={showPassword ? "text" : "password"}
               placeholder="••••••••"
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-yellow-400 focus:outline-none"
+              {...register("password", {
+                required: "Password is required",
+                minLength: {
+                  value: 6,
+                  message: "Password must be at least 6 characters",
+                },
+                pattern: {
+                  value:
+                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])/,
+                  message:
+                    "Password must contain uppercase, lowercase, number, and special character",
+                },
+              })}
+              className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:outline-none ${
+                errors.password
+                  ? "border-red-500 focus:ring-red-400"
+                  : "border-gray-300 focus:ring-yellow-400"
+              }`}
             />
-            {/* Show password checkbox */}
+            {errors.password && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.password.message}
+              </p>
+            )}
+
             <div className="flex items-center gap-2 mt-2">
               <input
                 type="checkbox"
@@ -64,20 +178,20 @@ const Signup = () => {
 
           <button
             type="submit"
+            disabled={isSubmitting}
             className="w-full py-3 bg-black text-white rounded-xl font-semibold hover:bg-gray-900 transition"
           >
-            Sign Up
+            {isSubmitting ? "Signing Up..." : "Sign Up"}
           </button>
         </form>
 
-        {/* Divider */}
+        {/* Divider & Google Signup */}
         <div className="flex items-center gap-3 my-6">
           <div className="flex-1 h-px bg-gray-300" />
           <span className="text-gray-400 text-sm">OR</span>
           <div className="flex-1 h-px bg-gray-300" />
         </div>
 
-        {/* Google Signup */}
         <button className="w-full flex items-center justify-center gap-3 py-3 border border-gray-300 rounded-xl hover:bg-gray-50 transition">
           <FcGoogle className="text-xl" />
           <span className="font-medium">Sign up with Google</span>

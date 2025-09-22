@@ -4,6 +4,8 @@ import logo from "../../assets/img/logo.png";
 import NormalMenu from "./menu/NormalMenu";
 import ExpandedMenu from "./menu/ExpandedMenu";
 import ExpandedSubMenu from "./menu/ExpandedSubMenu";
+import { getUser } from "../../constants/user";
+
 
 interface SidenavProps {
   isOpen: boolean;
@@ -18,6 +20,8 @@ const Sidenav = ({
   activeMenu,
   setActiveMenu,
 }: SidenavProps) => {
+const { firstName, lastName } = getUser();
+
   return (
     <div
       className={`h-screen bg-[#191921] shadow-lg transition-all duration-300 ease-in-out overflow-hidden
@@ -107,12 +111,15 @@ const Sidenav = ({
             isActive={activeMenu === "Settings"}
             onClick={() => setActiveMenu("Settings")}
           />
-
           <NormalMenu
             MenuName="Log Out"
             Icon="pi pi-sign-out"
-            isActive={activeMenu === "Log Out"}
-            onClick={() => setActiveMenu("Log Out")}
+            onClick={() => {
+              localStorage.removeItem("token");
+              localStorage.removeItem("email");
+              localStorage.removeItem("role");
+              window.location.href = "/login"; 
+            }}
           />
         </div>
 
@@ -122,7 +129,7 @@ const Sidenav = ({
             image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png"
             shape="circle"
           />
-          <span className="text-white font-semibold">Brandon Granberg</span>
+          <span className="text-white font-semibold">{firstName} {lastName}</span>
         </div>
       </div>
     </div>
