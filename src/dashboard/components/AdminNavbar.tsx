@@ -1,4 +1,5 @@
 import { Avatar } from "primereact/avatar";
+import { getUser } from "../../constants/user";
 
 interface NavbarProps {
   setSidebarOpen: (open: boolean) => void;
@@ -6,6 +7,8 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ setSidebarOpen, isOpen }) => {
+const { email, firstName, lastName } = getUser();
+
   return (
     <div className="h-16 bg-[#f7f7f7] px-6 flex items-center justify-between shadow-sm rounded-lg">
       <button
@@ -23,8 +26,8 @@ const Navbar: React.FC<NavbarProps> = ({ setSidebarOpen, isOpen }) => {
           shape="circle"
         />
         <div className="flex flex-col">
-          <span className="text-gray-600 text-sm font-medium">Brandon Granberg</span>
-          <span className="text-gray-600 text-xs">narbjajc@gmail.com</span>
+          <span className="text-gray-600 text-sm font-medium">{firstName} {lastName}</span>
+          <span className="text-gray-600 text-xs">{email}</span>
         </div>
       </div>
     </div>

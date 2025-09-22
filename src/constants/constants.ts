@@ -34,6 +34,11 @@ export class ApiRoutes {
     getContactUs: `${this.baseUrlApi}/Inquiry/get-contact-us`,
     sendReply: `${this.baseUrlApi}/Inquiry/send-reply`,
   };
+
+    static readonly Auth = {
+    SignUp: `${this.baseUrlApi}/Auth/register`,
+    login: `${this.baseUrlApi}/Auth/login`,
+  };
 }
 
 export class CardBrands {
@@ -51,8 +56,10 @@ export class SWAL {
     error: "error" as const,
     warning: "warning" as const,
   };
-
-  // static readonly TITLE = {
-
-  // }
 }
+export class Roles {
+  static readonly ADMIN = "Admin";
+  static readonly USER = "User";
+}
+
+
