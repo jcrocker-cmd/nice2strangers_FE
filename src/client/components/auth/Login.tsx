@@ -19,13 +19,17 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<LoginFormInputs>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<LoginFormInputs>();
 
   const onSubmit = async (data: LoginFormInputs) => {
     try {
       const response = await axios.post(ApiRoutes.Auth.login, {
         email: data.email,
-        password: data.password
+        password: data.password,
       });
 
       const { token, email, role, firstName, lastName } = response.data;
@@ -56,35 +60,55 @@ const Login: React.FC = () => {
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-6 font-grotesk">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
         {/* Header */}
-        <h2 className="text-2xl font-bold text-center text-gray-900">Welcome Back</h2>
-        <p className="text-sm text-gray-500 text-center mb-6">Login to your account</p>
+        <h2 className="text-2xl font-bold text-center text-gray-900">
+          Welcome Back
+        </h2>
+        <p className="text-sm text-gray-500 text-center mb-6">
+          Login to your account
+        </p>
 
         {/* Form */}
         <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Email
+            </label>
             <input
               type="email"
               placeholder="you@example.com"
               {...register("email", { required: "Email is required" })}
               className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:outline-none ${
-                errors.email ? "border-red-500 focus:ring-red-400" : "border-gray-300 focus:ring-yellow-400"
+                errors.email
+                  ? "border-red-500 focus:ring-red-400"
+                  : "border-gray-300 focus:ring-yellow-400"
               }`}
             />
-            {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
+            {errors.email && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.email.message}
+              </p>
+            )}
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Password
+            </label>
             <input
               type={showPassword ? "text" : "password"}
               placeholder="••••••••"
               {...register("password", { required: "Password is required" })}
               className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:outline-none ${
-                errors.password ? "border-red-500 focus:ring-red-400" : "border-gray-300 focus:ring-yellow-400"
+                errors.password
+                  ? "border-red-500 focus:ring-red-400"
+                  : "border-gray-300 focus:ring-yellow-400"
               }`}
             />
-            {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
+            {errors.password && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.password.message}
+              </p>
+            )}
 
             {/* Show password & Forgot link */}
             <div className="flex items-center justify-between mt-3">
@@ -124,7 +148,13 @@ const Login: React.FC = () => {
         </div>
 
         {/* Google Login */}
-        <button className="w-full flex items-center justify-center gap-3 py-3 border border-gray-300 rounded-xl hover:bg-gray-50 transition">
+        <button
+          onClick={() =>
+            (window.location.href =
+              "https://localhost:7095/api/Auth/google-login")
+          }
+          className="w-full flex items-center justify-center gap-3 py-3 border border-gray-300 rounded-xl hover:bg-gray-50 transition"
+        >
           <FcGoogle className="text-xl" />
           <span className="font-medium">Sign in with Google</span>
         </button>

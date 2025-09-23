@@ -38,6 +38,9 @@ export class ApiRoutes {
     static readonly Auth = {
     SignUp: `${this.baseUrlApi}/Auth/register`,
     login: `${this.baseUrlApi}/Auth/login`,
+    forgotPassword: `${this.baseUrlApi}/Auth/forgot-password`,
+    resetPassword: `${this.baseUrlApi}/Auth/reset-password`,
+    googleLogin: `${this.baseUrlApi}/Auth/google-login`,
   };
 }
 
@@ -60,6 +63,10 @@ export class SWAL {
 export class Roles {
   static readonly ADMIN = "Admin";
   static readonly USER = "User";
+}
+
+export class Google {
+  static readonly clientId = "1013492537917-9f6aste276raiebf39vm5vmv61o16765.apps.googleusercontent.com";
 }
 
 

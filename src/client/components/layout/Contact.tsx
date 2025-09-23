@@ -14,10 +14,10 @@ import Swal from "sweetalert2";
 import { ApiRoutes } from "../../../constants/constants";
 
 interface FormInputs {
-  name: string;
-  subject: string;
-  message: string;
-  email: string;
+  Name: string;
+  Subject: string;
+  Message: string;
+  ToEmail: string;
 }
 
 interface HomepageProps {
@@ -51,12 +51,7 @@ const ContactForm = ({ setIsGlobalLoading }: HomepageProps) => {
     dispatch(setIsSubmitting(true));
     setIsGlobalLoading(true);
     axios
-      .post(ApiRoutes.ContactUs.postContact, {
-        toEmail: formData.email,
-        subject: formData.subject,
-        body: formData.message,
-        name: formData.name,
-      })
+      .post(ApiRoutes.ContactUs.postContact, formData)
       .then((response) => {
         Swal.fire("Success!", "Email Sent Successfully", "success");
         console.log(response.data);
@@ -98,13 +93,13 @@ const ContactForm = ({ setIsGlobalLoading }: HomepageProps) => {
                 Name <span className="text-red-500">*</span>
               </label>
               <input
-                id="name"
+                id="Name"
                 type="text"
                 className="mt-1 w-full bg-white rounded-xl border-none px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                {...register("name", { required: "Name is required." })}
+                {...register("Name", { required: "Name is required." })}
               />
-              {errors.name && (
-                <p className="text-red-500 text-sm">{errors.name.message}</p>
+              {errors.Name && (
+                <p className="text-red-500 text-sm">{errors.Name.message}</p>
               )}
             </div>
 
@@ -113,10 +108,10 @@ const ContactForm = ({ setIsGlobalLoading }: HomepageProps) => {
                 Email <span className="text-red-500">*</span>
               </label>
               <input
-                id="email"
+                id="ToEmail"
                 type="text"
                 className="mt-1 w-full bg-white rounded-xl border-none px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                {...register("email", {
+                {...register("ToEmail", {
                   required: "Email is required.",
                   pattern: {
                     value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
@@ -128,8 +123,8 @@ const ContactForm = ({ setIsGlobalLoading }: HomepageProps) => {
                   },
                 })}
               />
-              {errors.email && (
-                <p className="text-red-500 text-sm">{errors.email.message}</p>
+              {errors.ToEmail && (
+                <p className="text-red-500 text-sm">{errors.ToEmail.message}</p>
               )}
             </div>
 
@@ -141,10 +136,10 @@ const ContactForm = ({ setIsGlobalLoading }: HomepageProps) => {
                 id="subject"
                 type="text"
                 className="mt-1 w-full bg-white rounded-xl border-none px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                {...register("subject", { required: "Subject is required." })}
+                {...register("Subject", { required: "Subject is required." })}
               />
-              {errors.subject && (
-                <p className="text-red-500 text-sm">{errors.subject.message}</p>
+              {errors.Subject && (
+                <p className="text-red-500 text-sm">{errors.Subject.message}</p>
               )}
             </div>
 
@@ -156,10 +151,10 @@ const ContactForm = ({ setIsGlobalLoading }: HomepageProps) => {
                 id="message"
                 rows={4}
                 className="mt-1 w-full bg-white rounded-xl border-none px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                {...register("message", { required: "Message is required." })}
+                {...register("Message", { required: "Message is required." })}
               />
-              {errors.message && (
-                <p className="text-red-500 text-sm">{errors.message.message}</p>
+              {errors.Message && (
+                <p className="text-red-500 text-sm">{errors.Message.message}</p>
               )}
             </div>
 

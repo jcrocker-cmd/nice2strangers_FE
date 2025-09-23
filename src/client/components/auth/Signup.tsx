@@ -1,5 +1,5 @@
 import { FcGoogle } from "react-icons/fc";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
@@ -7,10 +7,10 @@ import { ApiRoutes, SWAL } from "../../../constants/constants";
 import axios from "axios";
 
 interface SignupFormInputs {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
+  FirstName: string;
+  LastName: string;
+  Email: string;
+  Password: string;
 }
 
 const Signup: React.FC = () => {
@@ -25,10 +25,7 @@ const Signup: React.FC = () => {
 
   const onSubmit = async (data: SignupFormInputs) => {
     try {
-      await axios.post(ApiRoutes.Auth.SignUp, {
-        email: data.email,
-        password: data.password,
-      });
+      await axios.post(ApiRoutes.Auth.SignUp, data);
       Swal.fire({
         icon: SWAL.ICON.success,
         title: "Created!",
@@ -49,6 +46,15 @@ const Signup: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("token");
+    if (token) {
+      localStorage.setItem("token", token);
+      navigate("/"); // redirect to home
+    }
+  }, []);
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-6 font-grotesk">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
@@ -68,37 +74,37 @@ const Signup: React.FC = () => {
             <input
               type="text"
               placeholder="John"
-              {...register("firstName", { required: "First Name is required" })}
+              {...register("FirstName", { required: "First Name is required" })}
               className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:outline-none ${
-                errors.firstName
+                errors.FirstName
                   ? "border-red-500 focus:ring-red-400"
                   : "border-gray-300 focus:ring-yellow-400"
               }`}
             />
-            {errors.firstName && (
+            {errors.FirstName && (
               <p className="text-red-500 text-sm mt-1">
-                {errors.firstName.message}
+                {errors.FirstName.message}
               </p>
             )}
           </div>
 
-                    <div>
+          <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Last Name
             </label>
             <input
               type="text"
               placeholder="Doe"
-              {...register("lastName", { required: "Last Name is required" })}
+              {...register("LastName", { required: "Last Name is required" })}
               className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:outline-none ${
-                errors.lastName
+                errors.LastName
                   ? "border-red-500 focus:ring-red-400"
                   : "border-gray-300 focus:ring-yellow-400"
               }`}
             />
-            {errors.lastName && (
+            {errors.LastName && (
               <p className="text-red-500 text-sm mt-1">
-                {errors.lastName.message}
+                {errors.LastName.message}
               </p>
             )}
           </div>
@@ -110,7 +116,7 @@ const Signup: React.FC = () => {
             <input
               type="email"
               placeholder="you@example.com"
-              {...register("email", {
+              {...register("Email", {
                 required: "Email is required",
                 pattern: {
                   value: /\S+@\S+\.\S+/,
@@ -118,14 +124,14 @@ const Signup: React.FC = () => {
                 },
               })}
               className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:outline-none ${
-                errors.email
+                errors.Email
                   ? "border-red-500 focus:ring-red-400"
                   : "border-gray-300 focus:ring-yellow-400"
               }`}
             />
-            {errors.email && (
+            {errors.Email && (
               <p className="text-red-500 text-sm mt-1">
-                {errors.email.message}
+                {errors.Email.message}
               </p>
             )}
           </div>
@@ -137,7 +143,7 @@ const Signup: React.FC = () => {
             <input
               type={showPassword ? "text" : "password"}
               placeholder="••••••••"
-              {...register("password", {
+              {...register("Password", {
                 required: "Password is required",
                 minLength: {
                   value: 6,
@@ -151,14 +157,14 @@ const Signup: React.FC = () => {
                 },
               })}
               className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:outline-none ${
-                errors.password
+                errors.Password
                   ? "border-red-500 focus:ring-red-400"
                   : "border-gray-300 focus:ring-yellow-400"
               }`}
             />
-            {errors.password && (
+            {errors.Password && (
               <p className="text-red-500 text-sm mt-1">
-                {errors.password.message}
+                {errors.Password.message}
               </p>
             )}
 
@@ -192,9 +198,15 @@ const Signup: React.FC = () => {
           <div className="flex-1 h-px bg-gray-300" />
         </div>
 
-        <button className="w-full flex items-center justify-center gap-3 py-3 border border-gray-300 rounded-xl hover:bg-gray-50 transition">
+        <button
+          onClick={() =>
+            (window.location.href =
+              "https://localhost:7095/api/Auth/google-login")
+          }
+          className="w-full flex items-center justify-center gap-3 py-3 border border-gray-300 rounded-xl hover:bg-gray-50 transition"
+        >
           <FcGoogle className="text-xl" />
-          <span className="font-medium">Sign up with Google</span>
+          <span className="font-medium">Sign in with Google</span>
         </button>
 
         {/* Footer */}
