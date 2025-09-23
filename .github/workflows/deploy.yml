@@ -20,7 +20,12 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
+            if [ ! -d "/srv/nice2strangers-frontend/.git" ]; then
+              git clone https://github.com/<your-username>/<repo>.git /srv/nice2strangers-frontend
+            else
+              cd /srv/nice2strangers-frontend
+              git pull origin main
+            fi
             cd /srv/nice2strangers-frontend
-            git pull origin main
             docker compose down
             docker compose up -d --build
