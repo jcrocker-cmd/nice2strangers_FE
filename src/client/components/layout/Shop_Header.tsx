@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import ScrollReveal from "scrollreveal";
 import Wrapper from "../common/Wrapper";
 import Section from "../common/Section";

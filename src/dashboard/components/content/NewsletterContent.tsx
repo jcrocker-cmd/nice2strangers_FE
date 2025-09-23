@@ -14,9 +14,8 @@ import {
 import axios from "axios";
 import CustomModal from "../common/CustomModal";
 import Swal from "sweetalert2";
-import StatusBadge from "../common/StatusBadge";
 import ActionButton from "../common/ActionButton";
-import { ApiRoutes, CardBrands, SWAL } from "../../../constants/constants";
+import { ApiRoutes, SWAL } from "../../../constants/constants";
 import { Spinner } from "../common/ProgressSpinner";
 import TransactionCards from "../common/TransactionCards";
 import "../../../index.css";
@@ -49,7 +48,7 @@ const columns = [
   { id: "action", label: "Action", minWidth: 150 },
 ];
 
-export default function Newsletter({ setIsGlobalLoading }: NewsletterProps) {
+export default function Newsletter({}: NewsletterProps) {
   const [rows, setRows] = useState<Newsletter[]>([]);
   const [searchText, setSearchText] = useState("");
   const [page, setPage] = useState(0);

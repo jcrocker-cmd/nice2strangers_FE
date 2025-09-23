@@ -1,6 +1,4 @@
 import CustomButton from "../../common/CustomModalButton";
-import { ApiRoutes } from "../../../../constants/constants";
-
 interface Newsletter {
   id: string;
   name: string;

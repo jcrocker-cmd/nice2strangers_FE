@@ -5,10 +5,10 @@ services:
     build:
       context: . # This tells Compose where your Dockerfile and app code are
       dockerfile: Dockerfile # Optional if your Dockerfile is named 'Dockerfile'
-    container_name: vite-dev
+    container_name: nice2strangers-frontend
     ports:
-      - "5173:5173" # Maps your local machine port 5173 to the container port
+      - "5173:80"
     volumes:
       - .:/app # Mounts your project folder into the container (for live edits)
-      - /app/node_modules # Avoids overwriting container's node_modules
-    command: npm run dev -- --host
+      # - /app/node_modules # Avoids overwriting container's node_modules
+    restart: unless-stopped
