@@ -1,12 +1,17 @@
 import { useState, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
+import { ApiRoutes } from "../../../constants/constants";
+import axios from "axios";
 
 const ResetPassword = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
   // token typically comes from the reset-link: /reset-password?token=XXXXX
-  const token = searchParams.get("token") || "";
+
+  const token = searchParams.get("token");
+  const email = searchParams.get("email");
+
 
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
@@ -43,7 +48,11 @@ const ResetPassword = () => {
     try {
       // TODO: Replace with your API call to actually reset the password.
       // Example (pseudo):
-      // await api.post('/auth/reset-password', { token, password });
+      await axios.post(ApiRoutes.Auth.resetPassword, {
+          email,
+          token,
+          newPassword: password
+      });
 
       // Simulate success:
       await new Promise((r) => setTimeout(r, 800));

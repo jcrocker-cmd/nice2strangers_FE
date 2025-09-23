@@ -7,8 +7,8 @@ import Swal from "sweetalert2";
 import { ApiRoutes, SWAL } from "../../../constants/constants";
 
 type FormData = {
-  name: string;
-  email: string;
+  Name: string;
+  Email: string;
 };
 
 interface HomepageProps {
@@ -57,14 +57,14 @@ const NewsletterSignup = ({ setIsGlobalLoading }: HomepageProps) => {
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
           <input
-            {...register("name", { required: "Name is required" })}
+            {...register("Name", { required: "Name is required" })}
             type="text"
             required
             placeholder="Enter your name"
             className="input px-4 py-2 w-full sm:w-1/3 rounded border-1 border-white text-white focus:outline-none"
           />
           <input
-            {...register("email", { required: "Email is required" })}
+            {...register("Email", { required: "Email is required" })}
             type="email"
             required
             placeholder="Enter your email"

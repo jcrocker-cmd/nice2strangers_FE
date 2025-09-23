@@ -1,4 +1,6 @@
 import { useState } from "react";
+import axios from "axios";
+import { ApiRoutes } from "../../../constants/constants";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -15,7 +17,7 @@ const ForgotPassword = () => {
     try {
       // TODO: Replace with your API call to request a password reset email.
       // Example (pseudo):
-      // await api.post('/auth/forgot-password', { email });
+       await axios.post(ApiRoutes.Auth.forgotPassword, { email });
 
       // For now, simulate success:
       await new Promise((r) => setTimeout(r, 700));

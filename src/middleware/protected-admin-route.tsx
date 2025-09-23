@@ -7,7 +7,7 @@ interface ProtectedRouteProps {
 }
 
 const AdminProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, role }) => {
-  const token = localStorage.getItem("token"); // check if JWT exists
+  const token = localStorage.getItem("token");
   const userRole = localStorage.getItem("role");
 
   if (!token) {
