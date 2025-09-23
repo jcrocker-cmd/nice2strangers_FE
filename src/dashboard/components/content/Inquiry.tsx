@@ -14,9 +14,8 @@ import {
 import axios from "axios";
 import CustomModal from "../common/CustomModal";
 import Swal from "sweetalert2";
-import StatusBadge from "../common/StatusBadge";
 import ActionButton from "../common/ActionButton";
-import { ApiRoutes, CardBrands, SWAL } from "../../../constants/constants";
+import { ApiRoutes, SWAL } from "../../../constants/constants";
 import { Spinner } from "../common/ProgressSpinner";
 import TransactionCards from "../common/TransactionCards";
 import "../../../index.css";
@@ -54,7 +53,7 @@ const columns = [
   { id: "action", label: "Action", minWidth: 130 },
 ];
 
-export default function ContactUs({ setIsGlobalLoading }: ContactUsProps) {
+export default function ContactUs({}: ContactUsProps) {
   const [rows, setRows] = useState<ContactUs[]>([]);
   const [searchText, setSearchText] = useState("");
   const [page, setPage] = useState(0);
@@ -299,7 +298,7 @@ export default function ContactUs({ setIsGlobalLoading }: ContactUsProps) {
           <InquiryReply
             handleRefresh={handleRefresh}
             setIsOpen={setModalOpen}
-            item={selectedItem!}  // force non-null with !
+            item={selectedItem!} // force non-null with !
           />
         )}
         {modalMode === "view" && selectedItem && (
