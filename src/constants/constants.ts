@@ -1,6 +1,6 @@
 export class ApiRoutes {
-  static readonly baseUrlApi = "https://localhost:7095/api";
-  static readonly baseUrl = "https://localhost:7095";
+  static readonly baseUrlApi = "http://31.97.146.86:8083/api";
+  static readonly baseUrl = "http://31.97.146.86:8083/";
 
   static readonly Payments = {
     createCheckout: `${this.baseUrlApi}/Payments/create-checkout`,
