@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile # Optional if your Dockerfile is named 'Dockerfile'
     container_name: nice2strangers-frontend
     ports:
-      - "5173:80"
+      - "80:80"
     volumes:
       - .:/app # Mounts your project folder into the container (for live edits)
       # - /app/node_modules # Avoids overwriting container's node_modules
