@@ -1,6 +1,6 @@
 export class ApiRoutes {
-  static readonly baseUrlApi = "http://31.97.146.86:8083/api";
-  static readonly baseUrl = "http://31.97.146.86:8083/";
+static readonly baseUrlApi = "https://api.nice2strangers.org/api";
+static readonly baseUrl = "https://api.nice2strangers.org/";
 
   static readonly Payments = {
     createCheckout: `${this.baseUrlApi}/Payments/create-checkout`,
