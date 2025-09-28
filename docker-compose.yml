@@ -1,11 +1,31 @@
 version: "3.8"
 
+# services:
+#   react-app:
+#     build:
+#       context: . # This tells Compose where your Dockerfile and app code are
+#       dockerfile: Dockerfile # Optional if your Dockerfile is named 'Dockerfile'
+#     container_name: nice2strangers-frontend
+#     ports:
+#       - "80:80"
+#     volumes:
+#       - .:/app # Mounts your project folder into the container (for live edits)
+#       # - /app/node_modules # Avoids overwriting container's node_modules
+#     restart: unless-stopped
+
+
 services:
   react-app:
     build:
       context: .
       dockerfile: Dockerfile
     container_name: nice2strangers-frontend
-    ports:
-      - "5173:80" # open at http://localhost:5173
+    volumes:
+      - .:/app
     restart: unless-stopped
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
