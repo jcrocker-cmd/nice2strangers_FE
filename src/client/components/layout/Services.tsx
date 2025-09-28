@@ -9,6 +9,7 @@ import card2 from "../../../assets/img/s-icon-2.png";
 import card3 from "../../../assets/img/s-icon-3.png";
 import card4 from "../../../assets/img/s-icon-4.png";
 import ServiceCard from "../common/ServicesCard";
+import DroneServiceCard from "../common/ServiceCardDrone";
 
 const Services = () => {
   useEffect(() => {
@@ -35,28 +36,37 @@ const Services = () => {
           Services
         </h1>
         <div className="services-container flex flex-col gap-5">
-          <div className="row-1 flex gap-5">
+          <div className="flex flex-col md:flex-row gap-5 md:gap-5 items-center">
             <ServiceCard
+              link="/social-media-consulting"
               className="bg-[#775A70] card"
               icon={card1}
               title={`Social\nMedia\nConsulting`}
               description={`Lorem ipsum\nDolor lorem `}
             ></ServiceCard>
             <ServiceCard
+              link="/social-media-creation"
               className="bg-[#699094] card"
               icon={card2}
               title={`Social\nMedia\nCreation`}
               description={`Lorem ipsum\nDolor lorem `}
             ></ServiceCard>
           </div>
-          <div className="row-2 flex gap-5">
+          {/* Drone Service Card alone */}
+          <div className="w-full flex justify-center items-center">
+            <DroneServiceCard />
+          </div>
+
+          <div className="flex flex-col md:flex-row gap-5 md:gap-5 items-center">
             <ServiceCard
+              link="/video-editing"
               className="bg-[#1D484D] card"
               icon={card3}
               title={`Social\nMedia\nEditing`}
               description={`Lorem ipsum\nDolor lorem `}
             ></ServiceCard>
             <ServiceCard
+              link="/software-creation"
               className="bg-[#CB7346] card"
               icon={card4}
               title={`Website/\nApp\nCreation`}

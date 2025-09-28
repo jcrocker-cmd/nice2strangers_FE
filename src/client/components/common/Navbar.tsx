@@ -1,7 +1,7 @@
 import "../../../assets/css/navbar.css";
 import logo from "../../../assets/img/logo.png";
 import { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import Section from "./Section";
 import NavbarMobile from "./NavbarMobile";
 // State
@@ -121,12 +121,11 @@ function Navbar() {
           >
             Contact
           </li>
-          
+
           <Link to="/shop-page" className="shop-button flex items-center gap-1">
             <FaCartShopping />
             Shop
           </Link>
-
         </ul>
         <button
           className="navbar-toggle cursor-pointer text-black"
