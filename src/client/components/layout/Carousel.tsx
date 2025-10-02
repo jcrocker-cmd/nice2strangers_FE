@@ -3,6 +3,7 @@ import Section from "../common/Section";
 import Slide_1 from "../../../assets/img/image4.png";
 import Slide_2 from "../../../assets/img/image5.png";
 import Slide_3 from "../../../assets/img/image6.png";
+import { Link } from "react-router-dom";
 
 interface Slide {
   id: number;
@@ -10,6 +11,7 @@ interface Slide {
   alt: string;
   heading: string;
   buttonText?: string;
+  link?: string;
 }
 
 const slides: Slide[] = [
@@ -18,21 +20,24 @@ const slides: Slide[] = [
     image: Slide_1,
     alt: "Slide 1",
     heading: "Capture stunning aerial views with our drones",
-    buttonText: "LEARN MORE",
+    buttonText: "GET A QOUTE",
+    link: "/drone-services",
   },
   {
     id: 2,
     image: Slide_2,
     alt: "Slide 2",
-    heading: "Professional drone footage for any project",
+    heading: "Turning creativity into impact across social platforms.",
     buttonText: "DISCOVER",
+    link: "/social-media-creation",
   },
   {
     id: 3,
     image: Slide_3,
     alt: "Slide 3",
-    heading: "High-quality aerial photography and video services",
+    heading: "Turning raw clips into stories that connect.",
     buttonText: "GET STARTED",
+    link: "/video-editing",
   },
 ];
 
@@ -78,9 +83,11 @@ const CustomCarousel: React.FC = () => {
                   {slide.heading}
                 </h2>
                 {slide.buttonText && (
-                  <button className="bg-[#E1A451] text-white font-bold text-lg sm:text-xl md:text-xl py-3 px-8 md:py-4 md:px-10 rounded hover:bg-[#c8954e]">
-                    {slide.buttonText}
-                  </button>
+                  <Link to={slide.link || "#"}>
+                    <button className="bg-[#E1A451] text-white font-bold text-lg sm:text-xl md:text-xl py-3 px-8 md:py-4 md:px-10 rounded hover:bg-[#c8954e]">
+                      {slide.buttonText}
+                    </button>
+                  </Link>
                 )}
               </div>
             </div>
@@ -92,7 +99,7 @@ const CustomCarousel: React.FC = () => {
           {slides.map((_, index) => (
             <button
               key={index}
-              className={`w-2 h-2 rounded-full ${
+              className={`w-2 h-2 rounded-full cursor-pointer ${
                 index === currentIndex ? "bg-gray-800" : "bg-gray-400"
               }`}
               onClick={() => goToSlide(index)}

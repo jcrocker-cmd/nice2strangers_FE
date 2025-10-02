@@ -16,7 +16,7 @@ import { ApiRoutes } from "../../../constants/constants";
 interface FormInputs {
   Name: string;
   Subject: string;
-  Message: string;
+  Body: string;
   ToEmail: string;
 }
 
@@ -47,11 +47,11 @@ const ContactForm = ({ setIsGlobalLoading }: HomepageProps) => {
   } = useForm<FormInputs>();
 
   // onSubmit handler
-  const onSubmit = (formData: FormInputs) => {
+  const onSubmit = (data: FormInputs) => {
     dispatch(setIsSubmitting(true));
     setIsGlobalLoading(true);
     axios
-      .post(ApiRoutes.ContactUs.postContact, formData)
+      .post(ApiRoutes.ContactUs.postContact, data)
       .then((response) => {
         Swal.fire("Success!", "Email Sent Successfully", "success");
         console.log(response.data);
@@ -67,6 +67,8 @@ const ContactForm = ({ setIsGlobalLoading }: HomepageProps) => {
         setIsGlobalLoading(false);
       });
   };
+
+  console.log(ApiRoutes.ContactUs.postContact);
 
   return (
     <Wrapper
@@ -148,13 +150,13 @@ const ContactForm = ({ setIsGlobalLoading }: HomepageProps) => {
                 Message <span className="text-red-500">*</span>
               </label>
               <textarea
-                id="message"
+                id="Body"
                 rows={4}
                 className="mt-1 w-full bg-white rounded-xl border-none px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                {...register("Message", { required: "Message is required." })}
+                {...register("Body", { required: "Message is required." })}
               />
-              {errors.Message && (
-                <p className="text-red-500 text-sm">{errors.Message.message}</p>
+              {errors.Body && (
+                <p className="text-red-500 text-sm">{errors.Body.message}</p>
               )}
             </div>
 
