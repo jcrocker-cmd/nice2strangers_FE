@@ -26,7 +26,10 @@ const NewsletterSignup = ({ setIsGlobalLoading }: HomepageProps) => {
   const onSubmit = async (data: FormData) => {
     setIsGlobalLoading(true);
     try {
-      await axios.post(ApiRoutes.Newsletter.postNewsletter, data);
+      await axios.post(ApiRoutes.Newsletter.postNewsletter, {
+        Name: data.Name,
+        Email: data.Email,
+      });
       Swal.fire({
         icon: SWAL.ICON.success,
         title: "Subscribed!",
@@ -41,6 +44,7 @@ const NewsletterSignup = ({ setIsGlobalLoading }: HomepageProps) => {
       });
     } finally {
       setIsGlobalLoading(false);
+      console.log("Sending:", data);
     }
   };
 

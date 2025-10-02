@@ -6,7 +6,6 @@ import ExpandedMenu from "./menu/ExpandedMenu";
 import ExpandedSubMenu from "./menu/ExpandedSubMenu";
 import { getUser } from "../../constants/user";
 
-
 interface SidenavProps {
   isOpen: boolean;
   onClose: () => void;
@@ -20,7 +19,7 @@ const Sidenav = ({
   activeMenu,
   setActiveMenu,
 }: SidenavProps) => {
-const { firstName, lastName } = getUser();
+  const { firstName, lastName } = getUser();
 
   return (
     <div
@@ -55,7 +54,7 @@ const { firstName, lastName } = getUser();
           <ExpandedMenu
             MenuName="My Shop"
             Icon="pi pi-shop"
-            isActive={[ "Items", "Chart"].includes(activeMenu)}
+            isActive={["Items", "Chart"].includes(activeMenu)}
           >
             <ExpandedSubMenu
               MenuName="Items"
@@ -82,6 +81,37 @@ const { firstName, lastName } = getUser();
             isActive={activeMenu === "Calendar"}
             onClick={() => setActiveMenu("Calendar")}
           />
+          <ExpandedMenu
+            MenuName="Services"
+            Icon="pi pi-briefcase"
+            isActive={["Items", "Chart"].includes(activeMenu)}
+          >
+            <ExpandedSubMenu
+              MenuName="Drone Services"
+              Icon="pi pi-send"
+              onClick={() => setActiveMenu("Items")}
+            />
+            <ExpandedSubMenu
+              MenuName="SM Creation"
+              Icon="pi pi-pencil"
+              onClick={() => setActiveMenu("Chart")}
+            />
+            <ExpandedSubMenu
+              MenuName="SM Consulting"
+              Icon="pi pi-comments"
+              onClick={() => setActiveMenu("Chart")}
+            />
+            <ExpandedSubMenu
+              MenuName="Video Editing"
+              Icon="pi pi-video"
+              onClick={() => setActiveMenu("Chart")}
+            />
+            <ExpandedSubMenu
+              MenuName="Software Creation"
+              Icon="pi pi-code"
+              onClick={() => setActiveMenu("Chart")}
+            />
+          </ExpandedMenu>
 
           <NormalMenu
             MenuName="Inquiry"
@@ -118,7 +148,7 @@ const { firstName, lastName } = getUser();
               localStorage.removeItem("token");
               localStorage.removeItem("email");
               localStorage.removeItem("role");
-              window.location.href = "/login"; 
+              window.location.href = "/login";
             }}
           />
         </div>
@@ -129,7 +159,9 @@ const { firstName, lastName } = getUser();
             image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png"
             shape="circle"
           />
-          <span className="text-white font-semibold">{firstName} {lastName}</span>
+          <span className="text-white font-semibold">
+            {firstName} {lastName}
+          </span>
         </div>
       </div>
     </div>
