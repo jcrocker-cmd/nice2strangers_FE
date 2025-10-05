@@ -7,7 +7,7 @@ interface WebAppFormInputs {
   Name: string;
   Email: string;
   ProjectType: string;
-  Platform: string;
+  Platform: string[];
   Budget: string;
   Timeline: string;
   Message: string;
@@ -23,7 +23,7 @@ const WebAppForm: React.FC = () => {
 
   const onSubmit = async (formData: WebAppFormInputs) => {
     try {
-      await axios.post(ApiRoutes.ContactUs.postContact, formData);
+      await axios.post(ApiRoutes.Services.postSSService, formData);
       Swal.fire("Success!", "Your request has been sent!", "success");
       reset();
     } catch (error) {
@@ -102,26 +102,30 @@ const WebAppForm: React.FC = () => {
           )}
         </div>
 
-        {/* Platform */}
         <div>
           <label className="block mb-1 text-sm font-medium text-gray-700">
-            Target Platform
+            Platforms You Need Help With
           </label>
-          <select
-            {...register("Platform", { required: "Platform is required" })}
-            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400"
-          >
-            <option value="">Select platform</option>
-            <option value="Web">Web</option>
-            <option value="iOS">iOS</option>
-            <option value="Android">Android</option>
-            <option value="Cross-Platform">Cross-Platform</option>
-          </select>
-          {errors.Platform && (
-            <p className="mt-1 text-xs text-red-500">
-              {errors.Platform.message}
-            </p>
-          )}
+          <div className="grid grid-cols-2 gap-2">
+            {[
+              "Facebook",
+              "Instagram",
+              "Twitter/X",
+              "LinkedIn",
+              "TikTok",
+              "YouTube",
+            ].map((platform) => (
+              <label key={platform} className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  value={platform}
+                  {...register("Platform")}
+                  className="w-4 h-4 accent-yellow-500 border-gray-300 rounded cursor-pointer focus:ring-2 focus:ring-yellow-400"
+                />
+                <span className="text-sm text-gray-700">{platform}</span>
+              </label>
+            ))}
+          </div>
         </div>
 
         {/* Budget */}

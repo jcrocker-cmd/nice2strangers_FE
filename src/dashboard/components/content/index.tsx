@@ -4,6 +4,11 @@ import CustomTable from "./OrdersContent";
 import ProductsContent from "./ProductsContent";
 import Newsletter from "./NewsletterContent";
 import InquiryContent from "./Inquiry";
+import DroneServiceInquiry from "./services/DroneServiceInquiry";
+import SMConsulting from "./services/SocialMediaConsulting";
+import SMCreation from "./services/SocialMediaCreation";
+import VideoEditing from "./services/VideoEditing";
+import Software from "./services/Software";
 
 export const renderContent = (
   activeMenu: string | null,
@@ -30,6 +35,16 @@ export const renderContent = (
       return <CustomTable />;
     case "Inquiry":
       return <InquiryContent setIsGlobalLoading={setIsGlobalLoading} />;
+    case "Drone Services":
+      return <DroneServiceInquiry setIsGlobalLoading={setIsGlobalLoading} />;
+    case "SM Consulting":
+      return <SMConsulting setIsGlobalLoading={setIsGlobalLoading} />;
+    case "SM Creation":
+      return <SMCreation setIsGlobalLoading={setIsGlobalLoading} />;
+    case "Video Editing":
+      return <VideoEditing setIsGlobalLoading={setIsGlobalLoading} />;
+    case "Software Creation":
+      return <Software setIsGlobalLoading={setIsGlobalLoading} />;
     case "Chart":
       return <div>This is Chart</div>;
     case "Newsletter":

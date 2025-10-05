@@ -24,7 +24,7 @@ const SocialMediaCreationForm: React.FC = () => {
 
   const onSubmit = async (formData: SocialMediaCreationFormInputs) => {
     try {
-      await axios.post(ApiRoutes.ContactUs.postContact, formData);
+      await axios.post(ApiRoutes.Services.postSMCCService, formData);
       Swal.fire(
         "Success!",
         "Your content creation request has been sent!",

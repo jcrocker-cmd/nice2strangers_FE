@@ -26,7 +26,7 @@ const VideoEditingForm: React.FC = () => {
 
   const onSubmit = async (formData: VideoEditingFormInputs) => {
     try {
-      await axios.post(ApiRoutes.ContactUs.postContact, formData);
+      await axios.post(ApiRoutes.Services.postVEService, formData);
       Swal.fire("Success!", "Your request has been sent!", "success");
       reset();
     } catch (error) {
@@ -37,7 +37,7 @@ const VideoEditingForm: React.FC = () => {
   return (
     <div className="w-full max-w-2xl mx-auto bg-white rounded-2xl shadow-md p-8">
       <h2 className="text-2xl font-bold text-center text-gray-900 mb-6">
-        Social Media Editing
+        Video Editing Service
       </h2>
 
       <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>

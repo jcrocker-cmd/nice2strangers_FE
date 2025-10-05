@@ -23,7 +23,7 @@ const SocialMediaConsultingForm: React.FC = () => {
 
   const onSubmit = async (formData: SocialMediaConsultingFormInputs) => {
     try {
-      await axios.post(ApiRoutes.ContactUs.postContact, formData);
+      await axios.post(ApiRoutes.Services.postSMCService, formData);
       Swal.fire(
         "Success!",
         "Your consulting request has been sent!",
