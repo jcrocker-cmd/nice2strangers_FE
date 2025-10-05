@@ -25,7 +25,7 @@ const DroneInquiryForm: React.FC = () => {
 
   const onSubmit = async (formData: DroneFormInputs) => {
     try {
-      await axios.post(ApiRoutes.ContactUs.postContact, formData);
+      await axios.post(ApiRoutes.Services.postDroneService, formData);
       Swal.fire(
         "Success!",
         "Your drone service request has been sent!",

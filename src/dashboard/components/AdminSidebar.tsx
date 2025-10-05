@@ -75,41 +75,47 @@ const Sidenav = ({
             onClick={() => setActiveMenu("Transactions")}
           />
 
-          <NormalMenu
+          {/* <NormalMenu
             MenuName="Calendar"
             Icon="pi pi-calendar"
             isActive={activeMenu === "Calendar"}
             onClick={() => setActiveMenu("Calendar")}
-          />
+          /> */}
           <ExpandedMenu
             MenuName="Services"
             Icon="pi pi-briefcase"
-            isActive={["Items", "Chart"].includes(activeMenu)}
+            isActive={[
+              "Drone Services",
+              "SM Creation",
+              "SM Consulting",
+              "Video Editing",
+              "Software Creation",
+            ].includes(activeMenu)}
           >
             <ExpandedSubMenu
               MenuName="Drone Services"
               Icon="pi pi-send"
-              onClick={() => setActiveMenu("Items")}
+              onClick={() => setActiveMenu("Drone Services")}
             />
             <ExpandedSubMenu
               MenuName="SM Creation"
               Icon="pi pi-pencil"
-              onClick={() => setActiveMenu("Chart")}
+              onClick={() => setActiveMenu("SM Creation")}
             />
             <ExpandedSubMenu
               MenuName="SM Consulting"
               Icon="pi pi-comments"
-              onClick={() => setActiveMenu("Chart")}
+              onClick={() => setActiveMenu("SM Consulting")}
             />
             <ExpandedSubMenu
               MenuName="Video Editing"
               Icon="pi pi-video"
-              onClick={() => setActiveMenu("Chart")}
+              onClick={() => setActiveMenu("Video Editing")}
             />
             <ExpandedSubMenu
               MenuName="Software Creation"
               Icon="pi pi-code"
-              onClick={() => setActiveMenu("Chart")}
+              onClick={() => setActiveMenu("Software Creation")}
             />
           </ExpandedMenu>
 
