@@ -17,20 +17,10 @@ import Swal from "sweetalert2";
 import ActionButton from "../../common/ActionButton";
 import { ApiRoutes, SWAL } from "../../../../constants/constants";
 import { Spinner } from "../../common/ProgressSpinner";
-import TransactionCards from "../../common/TransactionCards";
 import "../../../../index.css";
 import SoftwareReply from "../../modal_content/services/software/SoftwareReply";
 import SoftwareView from "../../modal_content/services/software/SoftwareView";
 import type { Software } from "../../../types/services/services";
-
-interface TransactionStats {
-  all: number;
-  succeeded: number;
-  refunded: number;
-  disputed: number;
-  failed: number;
-  uncaptured: number;
-}
 
 interface SMCreationProps {
   setIsGlobalLoading: (value: boolean) => void;
@@ -54,21 +44,9 @@ export default function VideoEditing({}: SMCreationProps) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [loading, setLoading] = useState(false);
-  const [stats, setStats] = useState<TransactionStats | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState<"send" | "edit" | "view">("send");
   const [selectedItem, setSelectedItem] = useState<Software | null>(null);
-
-  const fetchCount = async () => {
-    try {
-      const res = await axios.get<TransactionStats>(
-        ApiRoutes.Payments.getTransactionStats
-      );
-      setStats(res.data);
-    } catch (error) {
-      console.error("Error fetching transactions stats", error);
-    }
-  };
 
   const fetchData = async () => {
     setLoading(true);
@@ -86,7 +64,6 @@ export default function VideoEditing({}: SMCreationProps) {
 
   useEffect(() => {
     fetchData();
-    fetchCount();
   }, []);
 
   const handleRefresh = async () => {
@@ -94,8 +71,7 @@ export default function VideoEditing({}: SMCreationProps) {
     try {
       const delay = new Promise((resolve) => setTimeout(resolve, 1000)); // 2. Create a timer that waits 1 second
       const fetch = fetchData(); // 3. Start fetching data
-      const fetchStats = fetchCount(); // Fetch stats concurrently
-      await Promise.all([delay, fetch, fetchStats]); // 4. Wait until BOTH 1-second delay and data fetch are done
+      await Promise.all([delay, fetch]); // 4. Wait until BOTH 1-second delay and data fetch are done
     } catch (error) {
       Swal.fire({
         icon: SWAL.ICON.error,
@@ -132,32 +108,10 @@ export default function VideoEditing({}: SMCreationProps) {
         <Spinner />
       ) : (
         <>
-          <div className="flex flex-col">
-            <div className="flex gap-2 justify-between mb-4 flex-col lg-custom:flex-row w-full">
-              <TransactionCards cardName="All" data={stats?.all ?? 0} />
-              <TransactionCards
-                cardName="Succeeded"
-                data={stats?.succeeded ?? 0}
-              />
-              <TransactionCards
-                cardName="Refunded"
-                data={stats?.refunded ?? 0}
-              />
-              <TransactionCards
-                cardName="Disputed"
-                data={stats?.disputed ?? 0}
-              />
-              <TransactionCards cardName="Failed" data={stats?.failed ?? 0} />
-              <TransactionCards
-                cardName="Uncaptured"
-                data={stats?.uncaptured ?? 0}
-              />
-            </div>
-          </div>
           <Paper sx={{ width: "100%", overflow: "hidden", p: 4 }}>
             <div className="flex items-center py-3 justify-between">
               <h2 className="font-semibold text-xl">
-                Social Media Content Creation
+                Socftware Creation Service
               </h2>
               <div className="flex items-center gap-2">
                 <ActionButton

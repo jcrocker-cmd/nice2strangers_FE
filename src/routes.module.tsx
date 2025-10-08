@@ -26,6 +26,8 @@ const SoftwareCreation = lazy(
 const DroneServices = lazy(
   () => import("./client/pages/services/DroneServices")
 );
+const SuccessOrder = lazy(() => import("./client/components/order/SuccessOrder"));  
+const FailedOrder = lazy(() => import("./client/components/order/FailedOrder"));  
 
 export const appRoutes = [
   { path: "/", element: <Home_Page /> },
@@ -36,6 +38,8 @@ export const appRoutes = [
   { path: "/social-media-creation", element: <SocialMediaCreation /> },
   { path: "/software-creation", element: <SoftwareCreation /> },
   { path: "/drone-services", element: <DroneServices /> },
+  { path: "/success-order", element: <SuccessOrder /> },
+  { path: "/failed-order", element: <FailedOrder /> },
 
   // protected route
   {

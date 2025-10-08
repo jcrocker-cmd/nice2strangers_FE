@@ -7,3 +7,18 @@ export const getUser = () => {
     token: localStorage.getItem("token"),
   };
 };
+
+
+export const setUser = (user: {
+  email: string;
+  firstName: string;
+  lastName: string;
+  role: string;
+  token: string;
+}) => {
+  localStorage.setItem("email", user.email);
+  localStorage.setItem("firstName", user.firstName);
+  localStorage.setItem("lastName", user.lastName);
+  localStorage.setItem("role", user.role);
+  localStorage.setItem("token", user.token);
+};
