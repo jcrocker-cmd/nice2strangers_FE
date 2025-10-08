@@ -32,6 +32,7 @@
     "datatables.net-buttons-dt": "^3.2.4",
     "datatables.net-dt": "^2.3.2",
     "datatables.net-react": "^1.0.1",
+    "framer-motion": "^12.23.22",
     "jquery": "^3.7.1",
     "jspdf": "^3.0.1",
     "jspdf-autotable": "^5.0.2",
