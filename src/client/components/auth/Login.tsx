@@ -179,7 +179,7 @@ const Login: React.FC = () => {
         <button
           onClick={() =>
             (window.location.href =
-              "https://localhost:7095/api/Auth/google-login")
+              "https://api.nice2strangers.org/api/Auth/google-login")
           }
           className="w-full flex items-center cursor-pointer justify-center gap-3 py-3 border border-gray-300 rounded-xl hover:bg-gray-50 transition"
         >
