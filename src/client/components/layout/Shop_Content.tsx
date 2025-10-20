@@ -7,6 +7,8 @@ import type { Stripe } from "@stripe/stripe-js";
 import "../../../assets/css/main.css";
 import { stripePromise } from "../../../lib/stripe";
 import { ApiRoutes } from "../../../constants/constants";
+import { getUser } from "../../../constants/user";
+import Swal from "sweetalert2";
 
 interface Product {
   id: string;
@@ -18,28 +20,66 @@ interface Product {
 
 const Shop_Content = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [quantities, setQuantities] = useState<Record<string, number>>({});
 
-  const handleAddToCart = (name: string) => {
-    console.log("Added to cart:", name);
+  const handleAddToCart = async (productId: string) => {
+    try {
+      const userId = getUser()?.userId;
+      const payload = {
+        userId,
+        productId,
+        quantity: quantities[productId] || 1,
+      };
+
+      await axios.post(ApiRoutes.Cart.addToCart, payload);
+      Swal.fire("Success", "Added to cart!", "success");
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+    }
   };
 
   useEffect(() => {
-    const fetchCount = async () => {
+    const fetchProducts = async () => {
       try {
         const res = await axios.get<Product[]>(ApiRoutes.Product.getProducts);
         setProducts(res.data);
+
+        // Initialize quantity for each product = 1
+        const initialQuantities: Record<string, number> = {};
+        res.data.forEach((p) => (initialQuantities[p.id] = 1));
+        setQuantities(initialQuantities);
       } catch (error) {
-        console.error("Error fetching transactions stats", error);
+        console.error("Error fetching products", error);
       }
     };
-    fetchCount();
+    fetchProducts();
   }, []);
+
+  const handleQuantityChange = (productId: string, value: number) => {
+    setQuantities((prev) => ({
+      ...prev,
+      [productId]: Math.max(1, value), // enforce min = 1
+    }));
+  };
 
   const handleCheckout = async (product: Product) => {
     try {
-      const { data } = await axios.post(ApiRoutes.Payments.createCheckout, [
-        product,
-      ]);
+      const qty = quantities[product.id] || 1;
+      const userId = getUser()?.userId;
+      const payload = [
+        {
+          userId: userId,
+          productId: product.id,
+          productName: product.productName,
+          priceInCents: product.priceInCents,
+          quantity: qty,
+        },
+      ];
+
+      const { data } = await axios.post(
+        ApiRoutes.Payments.createCheckout,
+        payload
+      );
 
       const stripe: Stripe | null = await stripePromise;
       if (stripe && data.sessionId) {
@@ -64,6 +104,8 @@ const Shop_Content = () => {
                 name={p.productName}
                 imageUrl={`${ApiRoutes.baseUrl}${p.image}`}
                 priceInCents={p.priceInCents}
+                quantity={quantities[p.id] || 1}
+                onQuantityChange={(value) => handleQuantityChange(p.id, value)}
                 onAddToCart={() => handleAddToCart(p.id)}
                 onBuyNow={() => handleCheckout(p)}
               />

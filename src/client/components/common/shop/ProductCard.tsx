@@ -4,6 +4,8 @@ interface ProductCardProps {
   name: string;
   priceInCents: number;
   imageUrl: string;
+  quantity: number;
+  onQuantityChange: (value: number) => void;
   onAddToCart: () => void;
   onBuyNow: () => void;
 }
@@ -12,6 +14,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
   name,
   priceInCents,
   imageUrl,
+  quantity,
+  onQuantityChange,
   onAddToCart,
   onBuyNow,
 }) => {
@@ -36,6 +40,19 @@ const ProductCard: React.FC<ProductCardProps> = ({
             maximumFractionDigits: 2,
           })}
         </p>
+
+        {/* Quantity input */}
+        <div className="flex items-center gap-3 mb-4">
+          <label className="text-sm text-gray-600">Qty:</label>
+          <input
+            type="number"
+            min={1}
+            value={quantity}
+            onChange={(e) => onQuantityChange(Number(e.target.value))}
+            className="w-16 border rounded-md text-center p-1"
+          />
+        </div>
+
         <div className="flex gap-2">
           <button
             onClick={onAddToCart}

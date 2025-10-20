@@ -5,9 +5,9 @@ export const getUser = () => {
     lastName: localStorage.getItem("lastName"),
     role: localStorage.getItem("role"),
     token: localStorage.getItem("token"),
+    userId: localStorage.getItem("userId"),
   };
 };
-
 
 export const setUser = (user: {
   email: string;
@@ -15,10 +15,12 @@ export const setUser = (user: {
   lastName: string;
   role: string;
   token: string;
+  userId: string;
 }) => {
   localStorage.setItem("email", user.email);
   localStorage.setItem("firstName", user.firstName);
   localStorage.setItem("lastName", user.lastName);
   localStorage.setItem("role", user.role);
   localStorage.setItem("token", user.token);
+  localStorage.setItem("userId", user.userId);
 };

@@ -4,6 +4,10 @@ import ClientProtectedRoute from "./middleware/protected-client-route";
 import PublicRoute from "./middleware/publicroute";
 import SocialMediaCreation from "./client/pages/services/SocialMediaCreation";
 
+interface AppRoutesProps {
+  setIsGlobalLoading: (value: boolean) => void;
+}
+
 const Home_Page = lazy(() => import("./client/pages/Home_Page"));
 const AboutUs = lazy(() => import("./client/components/layout/About"));
 const Shop_Page = lazy(() => import("./client/pages/Shop_Page"));
@@ -13,7 +17,6 @@ const AdminLogin = lazy(() => import("./client/pages/Admin_Login_Page"));
 const Signup = lazy(() => import("./client/pages/Signup_Page"));
 const ResetPassword = lazy(() => import("./client/pages/ResetPassword_Page"));
 const ForgotPassword = lazy(() => import("./client/pages/ForgotPassword_Page"));
-const Sample = lazy(() => import("./client/pages/Sample"));
 const VideoEditingService = lazy(
   () => import("./client/pages/services/VideoEditingService")
 );
@@ -26,10 +29,16 @@ const SoftwareCreation = lazy(
 const DroneServices = lazy(
   () => import("./client/pages/services/DroneServices")
 );
-const SuccessOrder = lazy(() => import("./client/components/order/SuccessOrder"));  
-const FailedOrder = lazy(() => import("./client/components/order/FailedOrder"));  
+const SuccessOrder = lazy(
+  () => import("./client/components/order/SuccessOrder")
+);
+const FailedOrder = lazy(() => import("./client/components/order/FailedOrder"));
+const AboutPage = lazy(() => import("./client/pages/AboutPage"));
+const WatchPage = lazy(() => import("./client/pages/WatchPage"));
+const ContactPage = lazy(() => import("./client/pages/ContactPage"));
+const ClientDashboard = lazy(() => import("./client/dashboard/dashboard"));
 
-export const appRoutes = [
+export const appRoutes = ({ setIsGlobalLoading }: AppRoutesProps) => [
   { path: "/", element: <Home_Page /> },
   { path: "/about-us", element: <AboutUs /> },
   { path: "/shop-page", element: <Shop_Page /> },
@@ -52,10 +61,10 @@ export const appRoutes = [
   },
 
   {
-    path: "/client",
+    path: "/client-dashboard",
     element: (
       <ClientProtectedRoute role="User">
-        <Sample />
+        <ClientDashboard />
       </ClientProtectedRoute>
     ),
   },
@@ -87,4 +96,10 @@ export const appRoutes = [
   },
   { path: "/reset-password", element: <ResetPassword /> },
   { path: "/forgot-password", element: <ForgotPassword /> },
+  { path: "/about", element: <AboutPage /> },
+  { path: "/watch", element: <WatchPage /> },
+  {
+    path: "/contact",
+    element: <ContactPage setIsGlobalLoading={setIsGlobalLoading} />,
+  },
 ];

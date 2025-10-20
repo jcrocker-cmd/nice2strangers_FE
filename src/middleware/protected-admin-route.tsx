@@ -6,7 +6,10 @@ interface ProtectedRouteProps {
   role: string;
 }
 
-const AdminProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, role }) => {
+const AdminProtectedRoute: React.FC<ProtectedRouteProps> = ({
+  children,
+  role,
+}) => {
   const token = localStorage.getItem("token");
   const userRole = localStorage.getItem("role");
 
@@ -15,17 +18,15 @@ const AdminProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, role }) 
     return <Navigate to="/adminlogin" replace />;
   }
 
-    if (role && userRole !== role) {
-    return <Navigate to="/client" replace />;
+  if (role && userRole !== role) {
+    return <Navigate to="/client-dashboard" replace />;
   }
-  
+
   // logged in, render the protected component
   return <>{children}</>;
 };
 
 export default AdminProtectedRoute;
-
-
 
 // import * as jwtDecode from "jwt-decode";
 // import React from "react";
@@ -68,7 +69,6 @@ export default AdminProtectedRoute;
 // };
 
 // export default ProtectedRoute;
-
 
 // import React from "react";
 // import { Navigate } from "react-router-dom";

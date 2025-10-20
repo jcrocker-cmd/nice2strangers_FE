@@ -66,6 +66,20 @@ export class ApiRoutes {
     getSSServiceData: `${this.baseUrlApi}/Services/get-software-services-data`,
     sendReplySS: `${this.baseUrlApi}/Services/send-reply-software`,
   };
+
+  static readonly Cart = {
+    addToCart: `${this.baseUrlApi}/Cart/add`,
+    getCart: (userId: string) => `${this.baseUrlApi}/Cart/${userId}`,
+    removeItem: (id: string) => `${this.baseUrlApi}/Cart/${id}`,
+    updateItem: `${this.baseUrlApi}/Cart/update`,
+  };
+
+  static readonly Orders = {
+    getOrdersByUser: (userId: string) =>
+      `${this.baseUrlApi}/Cart/get-user-orders/${userId}`,
+    getCartCount: (userId: string) =>
+      `${this.baseUrlApi}/Cart/get-cart-count/${userId}`,
+  };
 }
 
 export class CardBrands {

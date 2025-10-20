@@ -162,7 +162,7 @@ const Sidenav = ({
         {/* Footer */}
         <div className="p-4 border-t border-gray-700 bg-[#1e1e2f] flex items-center gap-2">
           <Avatar
-            image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png"
+            image="https://res.cloudinary.com/dnh4lkqlw/image/upload/v1760962315/User-Avatar-Profile-PNG-Pic-Clip-Art-Background_o6yf5w.png"
             shape="circle"
           />
           <span className="text-white font-semibold">

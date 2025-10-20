@@ -4,10 +4,15 @@ import { FaUser } from "react-icons/fa6";
 import { HiOutlineShoppingCart } from "react-icons/hi2";
 import { RiMenuFill } from "react-icons/ri";
 import logo from "../../../../assets/img/logo.png";
+import { ApiRoutes } from "../../../../constants/constants";
+import axios from "axios";
 
 const Navbar = () => {
   const [isSticky, setIsSticky] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
+
+  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,6 +21,22 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    const fetchCartCount = async () => {
+      if (!userId) return; // no user, no cart
+      try {
+        const response = await axios.get(ApiRoutes.Orders.getCartCount(userId));
+        // Expected response payload: { cartCount: number } or { CartCount: number }
+        const count = response.data.cartCount ?? response.data.CartCount ?? 0;
+        setCartCount(count);
+      } catch (error) {
+        console.error("Failed to fetch cart count:", error);
+      }
+    };
+
+    fetchCartCount();
+  }, [userId]);
 
   return (
     <header className="sticky top-0 w-full z-[9999]">
@@ -75,12 +96,22 @@ const Navbar = () => {
                 <FaUser />
               </Link>
             </li>
-            <li>
+            <li className="relative">
               <Link
-                to="/shop-page"
-                className="hover:text-yellow-500 transition"
+                to="/client-dashboard"
+                className="hover:text-yellow-500 transition relative inline-block"
               >
-                <HiOutlineShoppingCart />
+                <HiOutlineShoppingCart className="text-2xl" />
+
+                {cartCount > 0 && (
+                  <span
+                    className="absolute -top-1.5 -right-2 bg-red-500 text-white 
+                    text-[10px] font-semibold rounded-full w-4 h-4 
+                    flex items-center justify-center leading-none"
+                  >
+                    {cartCount > 9 ? "9+" : cartCount}
+                  </span>
+                )}
               </Link>
             </li>
           </ul>
@@ -114,7 +145,7 @@ const Navbar = () => {
             </Link>
             <Link
               to="/shop-page"
-              className="block flex items-center gap-2 hover:text-yellow-500"
+              className="flex items-center gap-2 hover:text-yellow-500"
             >
               <HiOutlineShoppingCart /> Shop
             </Link>
