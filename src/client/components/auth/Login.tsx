@@ -1,12 +1,11 @@
 import { FcGoogle } from "react-icons/fc";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ApiRoutes, SWAL } from "../../../constants/constants";
 import { Roles } from "../../../constants/constants";
-import { setUser } from "../../../constants/user";
 
 interface LoginFormInputs {
   email: string;
@@ -16,8 +15,7 @@ interface LoginFormInputs {
   lastName: string;
 }
 
-const Login: React.FC = () => {
-  const location = useLocation();
+const Login = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
@@ -27,37 +25,6 @@ const Login: React.FC = () => {
     formState: { errors, isSubmitting },
   } = useForm<LoginFormInputs>();
 
-    useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const token = params.get("token");
-
-    if (token) {
-      try {
-        // Decode token payload (JWT base64)
-        const payload = JSON.parse(atob(token.split(".")[1]));
-
-        // Extract info from claims (based on your C# code)
-        const email = payload["email"] || payload["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"];
-        const role = payload["role"] || payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
-        const firstName = payload["firstName"] || payload["given_name"] || "";
-        const lastName = payload["lastName"] || payload["family_name"] || "";
-
-        // Save in localStorage
-        setUser({ email, firstName, lastName, role, token });
-
-        // Clean up URL
-        window.history.replaceState({}, document.title, "/");
-
-        // Redirect based on role
-        if (role === Roles.ADMIN) navigate("/dashboard");
-        else if (role === Roles.USER) navigate("/shop-page");
-        else navigate("/");
-      } catch (err) {
-        console.error("Failed to decode token:", err);
-      }
-    }
-  }, [location, navigate]);
-
   const onSubmit = async (data: LoginFormInputs) => {
     try {
       const response = await axios.post(ApiRoutes.Auth.login, {
@@ -65,9 +32,15 @@ const Login: React.FC = () => {
         password: data.password,
       });
 
-      const { token, email, role, firstName, lastName } = response.data;
-      setUser({ email, firstName, lastName, role, token });
+      const { token, email, role, firstName, lastName, userId } = response.data;
 
+      // Save token in localStorage (or cookies)
+      localStorage.setItem("token", token);
+      localStorage.setItem("email", email);
+      localStorage.setItem("role", role);
+      localStorage.setItem("firstName", firstName);
+      localStorage.setItem("lastName", lastName);
+      localStorage.setItem("userId", userId);
       if (role === Roles.ADMIN) {
         navigate("/dashboard");
       } else if (role === Roles.USER) {
@@ -85,7 +58,7 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-6 font-grotesk">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-6">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
         {/* Header */}
         <h2 className="text-2xl font-bold text-center text-gray-900">
@@ -162,7 +135,7 @@ const Login: React.FC = () => {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full py-3 bg-black text-white rounded-xl cursor-pointer font-semibold hover:bg-gray-900 transition"
+            className="w-full py-3 bg-black text-white rounded-xl font-semibold hover:bg-gray-900 transition"
           >
             {isSubmitting ? "Logging in..." : "Login"}
           </button>
@@ -177,10 +150,7 @@ const Login: React.FC = () => {
 
         {/* Google Login */}
         <button
-          onClick={() =>
-            (window.location.href =
-              "https://api.nice2strangers.org/api/Auth/google-login")
-          }
+          onClick={() => (window.location.href = ApiRoutes.Auth.googleLogin)}
           className="w-full flex items-center cursor-pointer justify-center gap-3 py-3 border border-gray-300 rounded-xl hover:bg-gray-50 transition"
         >
           <FcGoogle className="text-xl" />

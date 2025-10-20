@@ -1,0 +1,57 @@
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-toggle {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+}
+
+.arrow {
+  display: inline-block;
+  transition: transform 0.3s ease;
+  padding: 4px;
+  transform: rotate(0deg);
+}
+
+.dropdown:hover .arrow,
+.dropdown:focus-within .arrow {
+  transform: rotate(-180deg);
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%; /* Positions the menu directly below the toggle */
+  left: 0; /* Aligns the menu with the left edge of the dropdown */
+  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  text-align: left;
+  z-index: 1000;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-menu span {
+  padding: 5px 0px;
+}
+
+.dropdown-menu span a {
+  text-decoration: none;
+  color: #333;
+}
+
+.dropdown-menu span a:hover {
+  color: #007bff;
+}

@@ -2,15 +2,18 @@ import ServiceHeader from "../../components/common/ServiceHeader";
 import ContactForm from "../../components/layout/Inquiry/SocialMediaCreation";
 import VideoHeaderImg from "../../../assets/img/image4.png";
 import Footer from "../../components/common/Footer";
+import Navbar from "./Navbar";
 
 const VideoEditingPage = () => {
   return (
     <div className="font-grotesk">
-      {/* Header */}
-      <ServiceHeader
-        title="Social Media Content Creation"
-        image={VideoHeaderImg}
-      />
+      <Navbar />
+      <div className="mt-20 md:mt-16 sm:mt-12">
+        <ServiceHeader
+          title="Social Media Content Creation"
+          image={VideoHeaderImg}
+        />
+      </div>
 
       {/* Description */}
       <section className="max-w-[1080px] mx-auto px-6 py-16 text-center">

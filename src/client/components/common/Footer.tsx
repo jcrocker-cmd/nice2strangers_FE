@@ -27,32 +27,35 @@ const Footer = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 pb-16 border-b border-[#575252]/20">
           <div>
-            <h3 className="mb-6 font-semibold text-2xl">Company</h3>
+            <h3 className="mb-6 font-semibold text-2xl">General</h3>
 
             <ul className="space-y-2 text-base">
               <li>
-                <a href="#">Websites</a>
+                <a href="/">Home Page</a>
               </li>
               <li>
-                <a href="#">Collections</a>
-              </li>
-              <li>
-                <a href="#">Elements</a>
+                <a href="/shop-page">Shop Page</a>
               </li>
             </ul>
           </div>
 
           <div>
-            <h3 className="mb-6 font-semibold text-2xl">Company</h3>
+            <h3 className="mb-6 font-semibold text-2xl">Services</h3>
             <ul className="space-y-2 text-base">
               <li>
-                <a href="#">Academy</a>
+                <a href="/social-media-consulting">Social Media Consulting</a>
               </li>
               <li>
-                <a href="#">Jobs</a>
+                <a href="/social-media-creation">Social Media Creation</a>
               </li>
               <li>
-                <a href="#">Market</a>
+                <a href="/video-editing">Video Editing</a>
+              </li>
+              <li>
+                <a href="/drone-services">Drone Services</a>
+              </li>
+              <li>
+                <a href="/software-creation">Software Creation</a>
               </li>
             </ul>
           </div>
@@ -60,19 +63,19 @@ const Footer = () => {
           <div>
             <h3 className="mb-6 font-semibold text-2xl">Help</h3>
             <ul className="space-y-2 text-base">
-              <li>
+              {/* <li>
                 <a href="#">FAQs</a>
+              </li> */}
+              <li>
+                <a href="/about-us">About Us</a>
               </li>
               <li>
-                <a href="#">About Us</a>
-              </li>
-              <li>
-                <a href="#">Contact Us</a>
+                <a href="/contact">Contact Us</a>
               </li>
             </ul>
           </div>
 
-          <div className="flex flex-col justify-between">
+          <div className="flex flex-col">
             <div>
               <p className="uppercase text-sm tracking-widest">
                 Got something in mind?

@@ -7,7 +7,7 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ setSidebarOpen, isOpen }) => {
-const { email, firstName, lastName } = getUser();
+  const { email, firstName, lastName } = getUser();
 
   return (
     <div className="h-16 bg-[#f7f7f7] px-6 flex items-center justify-between shadow-sm rounded-lg">
@@ -22,11 +22,13 @@ const { email, firstName, lastName } = getUser();
       <h1 className="text-xl font-semibold">Dashboard</h1>
       <div className="flex items-center gap-2">
         <Avatar
-          image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png"
+          image="https://res.cloudinary.com/dnh4lkqlw/image/upload/v1760962315/User-Avatar-Profile-PNG-Pic-Clip-Art-Background_o6yf5w.png"
           shape="circle"
         />
         <div className="flex flex-col">
-          <span className="text-gray-600 text-sm font-medium">{firstName} {lastName}</span>
+          <span className="text-gray-600 text-sm font-medium">
+            {firstName} {lastName}
+          </span>
           <span className="text-gray-600 text-xs">{email}</span>
         </div>
       </div>

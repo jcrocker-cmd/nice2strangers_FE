@@ -1,13 +1,15 @@
 import ServiceHeader from "../../components/common/DroneHeader";
 import ContactForm from "../../components/layout/Inquiry/DroneServices";
 import Footer from "../../components/common/Footer";
-//import DroneVideo from "https://res.cloudinary.com/dnh4lkqlw/video/upload/v1759071332/Waterfall_drone_clip__zo1hp0.mp4";
-
+import Navbar from "./Navbar";
 const DroneServicesPage = () => {
   return (
     <div className="font-grotesk">
+      <Navbar />
       {/* No image, no video → gradient header will be used */}
-      <ServiceHeader title="Drone Services" />
+      <div className="mt-20 md:mt-16 sm:mt-12">
+        <ServiceHeader title="Drone Services" />
+      </div>
 
       <section className="max-w-[1080px] mx-auto px-6 py-16 text-center">
         <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-6">
