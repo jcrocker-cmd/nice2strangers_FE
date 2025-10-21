@@ -294,7 +294,7 @@ export default function CustomTable({}: ProductsProps) {
                           <img
                             src={`${ApiRoutes.baseUrl}${row.image}`}
                             alt={row.productName}
-                            className="object-cover w-100 rounded-lg h-20"
+                            className="object-cover w-20 rounded-lg h-25"
                           />
                         </TableCell>
                         <TableCell style={{ fontSize: "13px" }}>
