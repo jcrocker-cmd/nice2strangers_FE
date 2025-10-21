@@ -202,7 +202,7 @@ const ProductsContent = ({
           <input
             type="file"
             accept="image/*"
-            {...register("image", { required: "Price is required" })}
+            {...register("image", { required: "Image is required" })}
             disabled={!isEditable}
             className="block w-full text-sm text-gray-600 disabled:bg-gray-100 file:mr-3 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
           />
