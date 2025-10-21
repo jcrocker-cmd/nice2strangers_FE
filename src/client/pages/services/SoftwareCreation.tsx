@@ -1,6 +1,6 @@
 import ServiceHeader from "../../components/common/ServiceHeader";
 import ContactForm from "../../components/layout/Inquiry/SoftwareCreation";
-import VideoHeaderImg from "../../../assets/img/image5.png";
+import VideoHeaderImg from "../../../assets/img/image5.webp";
 import Footer from "../../components/common/Footer";
 import Navbar from "./Navbar";
 

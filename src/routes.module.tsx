@@ -41,7 +41,6 @@ const ClientDashboard = lazy(() => import("./client/dashboard/dashboard"));
 export const appRoutes = ({ setIsGlobalLoading }: AppRoutesProps) => [
   { path: "/", element: <Home_Page /> },
   { path: "/about-us", element: <AboutUs /> },
-  { path: "/shop-page", element: <Shop_Page /> },
   { path: "/video-editing", element: <VideoEditingService /> },
   { path: "/social-media-consulting", element: <SocialMediaConsulting /> },
   { path: "/social-media-creation", element: <SocialMediaCreation /> },
@@ -65,6 +64,15 @@ export const appRoutes = ({ setIsGlobalLoading }: AppRoutesProps) => [
     element: (
       <ClientProtectedRoute role="User">
         <ClientDashboard />
+      </ClientProtectedRoute>
+    ),
+  },
+
+    {
+    path: "/shop-page",
+    element: (
+      <ClientProtectedRoute role="User">
+        <Shop_Page />
       </ClientProtectedRoute>
     ),
   },
