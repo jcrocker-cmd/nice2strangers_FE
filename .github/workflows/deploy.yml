@@ -29,3 +29,9 @@ jobs:
             cd /srv/nice2strangers-frontend
             docker compose down
             docker compose up -d --build
+
+            # Test Nginx syntax inside container
+            docker exec nice2strangers-frontend nginx -t
+
+            # Reload Nginx inside container
+            docker exec nice2strangers-frontend nginx -s reload
