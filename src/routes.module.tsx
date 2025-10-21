@@ -48,6 +48,7 @@ export const appRoutes = ({ setIsGlobalLoading }: AppRoutesProps) => [
   { path: "/drone-services", element: <DroneServices /> },
   { path: "/success-order", element: <SuccessOrder /> },
   { path: "/failed-order", element: <FailedOrder /> },
+  { path: "/shop-page", element: <Shop_Page /> },
 
   // protected route
   {
@@ -64,15 +65,6 @@ export const appRoutes = ({ setIsGlobalLoading }: AppRoutesProps) => [
     element: (
       <ClientProtectedRoute role="User">
         <ClientDashboard />
-      </ClientProtectedRoute>
-    ),
-  },
-
-    {
-    path: "/shop-page",
-    element: (
-      <ClientProtectedRoute role="User">
-        <Shop_Page />
       </ClientProtectedRoute>
     ),
   },
