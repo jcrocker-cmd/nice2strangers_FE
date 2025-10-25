@@ -11,15 +11,16 @@ interface StripeBalance {
   pending: number;
   currency: string;
 }
-
+interface TotalStocks {
+  totalStocks: number;
+}
 
 const DashboardContent = () => {
   const [stripeBalance, setStripeBalance] = useState<StripeBalance | null>(
     null
   );
-    const [productCount, setProductCount] = useState<ProductCounts | null>(
-    null
-  );
+  const [productCount, setProductCount] = useState<ProductCounts | null>(null);
+  const [totalStocks, setTotalStocks] = useState<TotalStocks | null>(null);
 
   useEffect(() => {
     const fetchStripeBalance = async () => {
@@ -35,8 +36,7 @@ const DashboardContent = () => {
     fetchStripeBalance();
   }, []);
 
-
-    useEffect(() => {
+  useEffect(() => {
     const fetchProductsCount = async () => {
       try {
         const res = await axios.get<ProductCounts>(
@@ -48,6 +48,18 @@ const DashboardContent = () => {
       }
     };
     fetchProductsCount();
+  }, []);
+
+  useEffect(() => {
+    const fetchTotalStocks = async () => {
+      try {
+        const res = await axios.get<TotalStocks>(ApiRoutes.Product.totalStocks);
+        setTotalStocks(res.data);
+      } catch (error) {
+        console.error("Error fetching Products", error);
+      }
+    };
+    fetchTotalStocks();
   }, []);
 
   console.log("Dashboard is mounted");
@@ -86,7 +98,7 @@ const DashboardContent = () => {
             className="bg-warning"
           ></DashboardCards>
           <DashboardCards
-            data={2376}
+            data={totalStocks?.totalStocks ?? 0}
             cardName="Stocks"
             className="bg-danger"
           ></DashboardCards>
