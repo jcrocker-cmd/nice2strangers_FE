@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Section from "../common/Section";
-import Slide_1 from "../../../assets/img/image4.png";
-import Slide_2 from "../../../assets/img/image5.png";
-import Slide_3 from "../../../assets/img/image6.png";
+import Slide_1 from "../../../assets/img/image4.webp";
+import Slide_2 from "../../../assets/img/image5.webp";
+import Slide_3 from "../../../assets/img/image6.webp";
 import { Link } from "react-router-dom";
 
 interface Slide {

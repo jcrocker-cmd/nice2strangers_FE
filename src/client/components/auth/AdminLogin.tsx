@@ -138,30 +138,6 @@ const Login: React.FC = () => {
             {isSubmitting ? "Logging in..." : "Login"}
           </button>
         </form>
-
-        {/* Divider */}
-        <div className="flex items-center gap-3 my-6">
-          <div className="flex-1 h-px bg-gray-300" />
-          <span className="text-gray-400 text-sm">OR</span>
-          <div className="flex-1 h-px bg-gray-300" />
-        </div>
-
-        {/* Google Login */}
-        <button className="w-full flex items-center justify-center gap-3 py-3 border border-gray-300 rounded-xl hover:bg-gray-50 transition">
-          <FcGoogle className="text-xl" />
-          <span className="font-medium">Sign in with Google</span>
-        </button>
-
-        {/* Footer */}
-        <p className="text-sm text-center text-gray-600 mt-6">
-          Don’t have an account?{" "}
-          <a
-            href="/signup"
-            className="text-yellow-500 font-medium hover:underline"
-          >
-            Sign Up
-          </a>
-        </p>
       </div>
     </div>
   );

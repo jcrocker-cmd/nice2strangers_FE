@@ -42,7 +42,6 @@ const FAQsPage = lazy(() => import("./client/pages/services/FAQsPage"));
 export const appRoutes = ({ setIsGlobalLoading }: AppRoutesProps) => [
   { path: "/", element: <Home_Page /> },
   { path: "/about-us", element: <AboutUs /> },
-  { path: "/shop-page", element: <Shop_Page /> },
   { path: "/video-editing", element: <VideoEditingService /> },
   { path: "/social-media-consulting", element: <SocialMediaConsulting /> },
   { path: "/social-media-creation", element: <SocialMediaCreation /> },
@@ -51,6 +50,7 @@ export const appRoutes = ({ setIsGlobalLoading }: AppRoutesProps) => [
   { path: "/success-order", element: <SuccessOrder /> },
   { path: "/failed-order", element: <FailedOrder /> },
   { path: "/faqs", element: <FAQsPage /> },
+  { path: "/shop-page", element: <Shop_Page /> },
 
   // protected route
   {
