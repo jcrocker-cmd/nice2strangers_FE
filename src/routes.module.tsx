@@ -37,6 +37,7 @@ const AboutPage = lazy(() => import("./client/pages/AboutPage"));
 const WatchPage = lazy(() => import("./client/pages/WatchPage"));
 const ContactPage = lazy(() => import("./client/pages/ContactPage"));
 const ClientDashboard = lazy(() => import("./client/dashboard/dashboard"));
+const FAQsPage = lazy(() => import("./client/pages/services/FAQsPage"));
 
 export const appRoutes = ({ setIsGlobalLoading }: AppRoutesProps) => [
   { path: "/", element: <Home_Page /> },
@@ -49,6 +50,7 @@ export const appRoutes = ({ setIsGlobalLoading }: AppRoutesProps) => [
   { path: "/drone-services", element: <DroneServices /> },
   { path: "/success-order", element: <SuccessOrder /> },
   { path: "/failed-order", element: <FailedOrder /> },
+  { path: "/faqs", element: <FAQsPage /> },
 
   // protected route
   {

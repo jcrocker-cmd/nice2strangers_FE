@@ -2,7 +2,7 @@ import "../../../assets/css/navbar.css";
 import logo from "../../../assets/img/logo.png";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Section from "../../../client/components/common/Section";
+import Section from "../../components/common/Section";
 import NavbarMobile from "./NavbarMobile";
 import NavbarDropDown from "../../components/common/NavbarDropDown";
 import { servicesItems } from "../../components/data/navbarDropDown";

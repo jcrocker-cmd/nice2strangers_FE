@@ -23,6 +23,7 @@ export class ApiRoutes {
     softDelete: `${this.baseUrlApi}/Product/softDeleteProduct`,
     recoverProduct: `${this.baseUrlApi}/Product/recoverProduct`,
     countActiveProducts: `${this.baseUrlApi}/Product/countActiveProducts`,
+    totalStocks: `${this.baseUrlApi}/Product/totalStocks`,
   };
 
   static readonly Newsletter = {
@@ -65,6 +66,20 @@ export class ApiRoutes {
     postSSService: `${this.baseUrlApi}/Services/post-software-service`,
     getSSServiceData: `${this.baseUrlApi}/Services/get-software-services-data`,
     sendReplySS: `${this.baseUrlApi}/Services/send-reply-software`,
+  };
+
+  static readonly FAQs = {
+    getFAQs: `${this.baseUrlApi}/FAQs/FAQs`,
+    addFAQ: `${this.baseUrlApi}/FAQs/addFAQs`,
+    updateFAQ: `${this.baseUrlApi}/FAQs/updateFAQ`,
+    deleteFAQ: `${this.baseUrlApi}/FAQs/softDeleteFAQ`,
+    recoverFAQ: `${this.baseUrlApi}/FAQs/recoverFAQ`,
+    countFAQs: `${this.baseUrlApi}/FAQs/FAQsCount`,
+  };
+
+  static readonly SocialLinks = {
+    getAll: `${this.baseUrlApi}/SocialLinks/getall`,
+    update: `${this.baseUrlApi}/SocialLinks/update`,
   };
 
   static readonly Cart = {

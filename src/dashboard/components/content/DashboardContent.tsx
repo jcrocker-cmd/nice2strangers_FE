@@ -50,17 +50,17 @@ const DashboardContent = () => {
     fetchProductsCount();
   }, []);
 
-  // useEffect(() => {
-  //   const fetchTotalStocks = async () => {
-  //     try {
-  //       const res = await axios.get<TotalStocks>(ApiRoutes.Product.totalStocks);
-  //       setTotalStocks(res.data);
-  //     } catch (error) {
-  //       console.error("Error fetching Products", error);
-  //     }
-  //   };
-  //   fetchTotalStocks();
-  // }, []);
+  useEffect(() => {
+    const fetchTotalStocks = async () => {
+      try {
+        const res = await axios.get<TotalStocks>(ApiRoutes.Product.totalStocks);
+        setTotalStocks(res.data);
+      } catch (error) {
+        console.error("Error fetching Products", error);
+      }
+    };
+    fetchTotalStocks();
+  }, []);
 
   console.log("Dashboard is mounted");
   return (
@@ -98,8 +98,7 @@ const DashboardContent = () => {
             className="bg-warning"
           ></DashboardCards>
           <DashboardCards
-            // data={totalStocks?.totalStocks ?? 0}
-            data={0}
+            data={totalStocks?.totalStocks ?? 0}
             cardName="Stocks"
             className="bg-danger"
           ></DashboardCards>
