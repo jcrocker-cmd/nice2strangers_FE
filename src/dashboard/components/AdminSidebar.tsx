@@ -44,7 +44,7 @@ const Sidenav = ({
         </div>
 
         {/* Menu Items */}
-        <div className="flex-1 overflow-y-auto px-4 space-y-3 text-white sidebar-scroll">
+        <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3 text-white sidebar-scroll">
           <NormalMenu
             MenuName="Dashboard"
             Icon="pi pi-home"
@@ -133,6 +133,13 @@ const Sidenav = ({
             onClick={() => setActiveMenu("Newsletter")}
           />
 
+          <NormalMenu
+            MenuName="FAQs"
+            Icon="pi pi-comments"
+            isActive={activeMenu === "FAQs"}
+            onClick={() => setActiveMenu("FAQs")}
+          />
+
           <h2 className="pt-3">General</h2>
 
           <NormalMenu
@@ -141,12 +148,17 @@ const Sidenav = ({
             isActive={activeMenu === "Account"}
             onClick={() => setActiveMenu("Account")}
           />
-          <NormalMenu
+          <ExpandedMenu
             MenuName="Settings"
             Icon="pi pi-cog"
-            isActive={activeMenu === "Settings"}
-            onClick={() => setActiveMenu("Settings")}
-          />
+            isActive={["Social Links"].includes(activeMenu)}
+          >
+            <ExpandedSubMenu
+              MenuName="Social Links"
+              Icon="pi pi-globe"
+              onClick={() => setActiveMenu("Social Links")}
+            />
+          </ExpandedMenu>
           <NormalMenu
             MenuName="Log Out"
             Icon="pi pi-sign-out"

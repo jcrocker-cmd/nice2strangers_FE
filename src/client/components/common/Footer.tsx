@@ -1,17 +1,30 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ScrollReveal from "scrollreveal";
 import Wrapper from "./Wrapper";
 import Section from "./Section";
 import logo from "../../../assets/img/logo.png";
 import "../../../assets/css/main.css";
+import axios from "axios";
+import { ApiRoutes } from "../../../constants/constants";
 import {
   FaFacebookF,
   FaXTwitter,
   FaInstagram,
   FaYoutube,
+  FaTiktok,
 } from "react-icons/fa6";
 
+interface SocialLinks {
+  facebook?: string;
+  twitter?: string;
+  instagram?: string;
+  youtube?: string;
+  tiktok?: string;
+}
+
 const Footer = () => {
+  const [links, setLinks] = useState<SocialLinks>({});
+
   useEffect(() => {
     ScrollReveal().reveal(".footer-section", {
       delay: 400,
@@ -19,6 +32,17 @@ const Footer = () => {
       distance: "50px",
       origin: "bottom",
     });
+
+    const fetchLinks = async () => {
+      try {
+        const res = await axios.get(ApiRoutes.SocialLinks.getAll);
+        setLinks(res.data);
+      } catch (err) {
+        console.error("Failed to fetch social links", err);
+      }
+    };
+
+    fetchLinks();
   }, []);
   return (
     <Wrapper id="footer-page" className="w-full py-20 bg-[#F7F0D7] text-black ">
@@ -63,9 +87,9 @@ const Footer = () => {
           <div>
             <h3 className="mb-6 font-semibold text-2xl">Help</h3>
             <ul className="space-y-2 text-base">
-              {/* <li>
-                <a href="#">FAQs</a>
-              </li> */}
+              <li>
+                <a href="/faqs">FAQs</a>
+              </li>
               <li>
                 <a href="/about-us">About Us</a>
               </li>
@@ -82,18 +106,46 @@ const Footer = () => {
               </p>
               <h2 className="text-4xl font-bold mt-2">Let's talk</h2>
             </div>
-            <div className="flex space-x-4 mt-6">
-              <a href="#">
+            <div className="flex space-x-4 mt-6 text-xl">
+              <a
+                href={links.facebook || "#"}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+              >
                 <FaFacebookF />
               </a>
-              <a href="#">
+              <a
+                href={links.twitter || "#"}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Twitter"
+              >
                 <FaXTwitter />
               </a>
-              <a href="#">
+              <a
+                href={links.instagram || "#"}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+              >
                 <FaInstagram />
               </a>
-              <a href="#">
+              <a
+                href={links.youtube || "#"}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="YouTube"
+              >
                 <FaYoutube />
+              </a>
+              <a
+                href={links.tiktok || "#"}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="TikTok"
+              >
+                <FaTiktok />
               </a>
             </div>
           </div>

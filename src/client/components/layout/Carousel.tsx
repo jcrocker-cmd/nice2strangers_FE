@@ -20,7 +20,7 @@ const slides: Slide[] = [
     image: Slide_1,
     alt: "Slide 1",
     heading: "Capture stunning aerial views with our drones",
-    buttonText: "GET A QOUTE",
+    buttonText: "GET A QUOTE",
     link: "/drone-services",
   },
   {

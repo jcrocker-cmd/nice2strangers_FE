@@ -4,11 +4,13 @@ import CustomTable from "./OrdersContent";
 import ProductsContent from "./ProductsContent";
 import Newsletter from "./NewsletterContent";
 import InquiryContent from "./Inquiry";
+import SocialLinks from "./SoicalURLs";
 import DroneServiceInquiry from "./services/DroneServiceInquiry";
 import SMConsulting from "./services/SocialMediaConsulting";
 import SMCreation from "./services/SocialMediaCreation";
 import VideoEditing from "./services/VideoEditing";
 import Software from "./services/Software";
+import FAQs from "./FAQsContent";
 
 export const renderContent = (
   activeMenu: string | null,
@@ -23,14 +25,16 @@ export const renderContent = (
       );
     case "Transactions":
       return <TransactionContent setIsGlobalLoading={setIsGlobalLoading} />;
-    case "Team":
-      return <div>This is Team</div>;
+    case "FAQs":
+      return <FAQs setIsGlobalLoading={setIsGlobalLoading} />;
     case "Items":
       return <ProductsContent setIsGlobalLoading={setIsGlobalLoading} />;
     case "Account":
       return <div>This is Account</div>;
     case "Settings":
       return <div>This is Settings</div>;
+    case "Social Links":
+      return <SocialLinks setIsGlobalLoading={setIsGlobalLoading} />;
     case "Orders":
       return <CustomTable />;
     case "Inquiry":

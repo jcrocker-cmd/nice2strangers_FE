@@ -26,13 +26,13 @@ const NavbarMobile = ({ toggleMenu }: NavbarMobileMenuProps) => {
             </Link>
           </li>
           <li>
-            <Link to="/ministries" onClick={toggleMenu}>
-              Ministries
+            <Link to="/shop-page" onClick={toggleMenu}>
+              Shop
             </Link>
           </li>
           <li>
-            <a href="/gallery" onClick={toggleMenu}>
-              Gallery
+            <a href="/dashboard" onClick={toggleMenu}>
+              Account
             </a>
           </li>
           <li>

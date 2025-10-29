@@ -4,6 +4,9 @@ import "@splidejs/react-splide/css";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import Wrapper from "../common/Wrapper";
 import Section from "../common/Section";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { ApiRoutes } from "../../../constants/constants";
 import { SocialIcon } from "react-social-icons";
 import img1 from "../../../assets/img/w_1.png";
 import img2 from "../../../assets/img/w_2.png";
@@ -12,14 +15,37 @@ import "../../../assets/css/main.css";
 
 const dummyImages = [img1, img2, img3, img1, img2, img3];
 
-const socialLinks = [
-  { name: "Facebook", url: "https://www.facebook.com/yourusername" },
-  { name: "YouTube", url: "https://www.youtube.com/yourchannel" },
-  { name: "TikTok", url: "https://www.tiktok.com/@yourusername" },
-  { name: "Instagram", url: "https://www.instagram.com/yourusername" },
-];
+interface SocialLinks {
+  facebook?: string | null;
+  instagram?: string | null;
+  twitter?: string | null;
+  youtube?: string | null;
+  tiktok?: string | null;
+}
 
 const SplideCarousel: React.FC = () => {
+  const [socialLinks, setSocialLinks] = useState<SocialLinks>({});
+
+  useEffect(() => {
+    const fetchSocialLinks = async () => {
+      try {
+        const res = await axios.get(ApiRoutes.SocialLinks.getAll);
+        setSocialLinks(res.data || {});
+      } catch (error) {
+        console.error("Error fetching social links:", error);
+      }
+    };
+    fetchSocialLinks();
+  }, []);
+
+  const socialLinksList = [
+    { name: "Facebook", url: socialLinks.facebook, network: "facebook" },
+    { name: "YouTube", url: socialLinks.youtube, network: "youtube" },
+    { name: "TikTok", url: socialLinks.tiktok, network: "tiktok" },
+    { name: "Instagram", url: socialLinks.instagram, network: "instagram" },
+    { name: "X", url: socialLinks.twitter, network: "x" },
+  ];
+
   return (
     <Wrapper
       id="watch-page"
@@ -30,19 +56,20 @@ const SplideCarousel: React.FC = () => {
           Watch My Contents
         </h1>
         {/* Social Links */}
-        <div className="flex justify-center space-x-8 mb-10 mt-8">
-          {socialLinks.map(({ name, url }) => (
+        <div className="flex justify-center space-x-8 mb-10 mt-8 no-drag">
+          {socialLinksList.map(({ name, url, network }) => (
             <a
               key={name}
-              href={url}
+              href={url || "#"}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`Watch on ${name}`}
               className="transform transition-transform hover:scale-110"
             >
               <SocialIcon
-                url={url}
+                url={url || "#"}
                 fgColor="#fff"
+                network={network as any}
                 style={{ height: 40, width: 40 }}
               />
             </a>
