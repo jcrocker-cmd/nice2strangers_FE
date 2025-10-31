@@ -15,7 +15,7 @@ const AdminProtectedRoute: React.FC<ProtectedRouteProps> = ({
 
   if (!token) {
     // not logged in, redirect to login
-    return <Navigate to="/adminlogin" replace />;
+    return <Navigate to="/login" replace />;
   }
 
   if (role && userRole !== role) {
