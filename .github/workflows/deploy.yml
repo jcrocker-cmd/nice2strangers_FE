@@ -3,7 +3,7 @@ name: Deploy to VPS Server
 on:
   push:
     branches:
-      - main-prod   # change if you deploy from a different branch
+      - main   # change if you deploy from a different branch
 
 jobs:
   deploy:
@@ -24,7 +24,7 @@ jobs:
               git clone https://github.com/jcrocker-cmd/nice2strangers_FE.git /srv/nice2strangers-frontend
             else
               cd /srv/nice2strangers-frontend
-              git pull origin main-prod
+              git pull origin main
             fi
             cd /srv/nice2strangers-frontend
             docker compose down
