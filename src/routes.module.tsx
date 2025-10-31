@@ -1,5 +1,7 @@
 import { lazy } from "react";
 import AdminProtectedRoute from "./middleware/protected-admin-route";
+import ForgotPassword from "./dashboard/forgot_password";
+import ResetPassword from "./dashboard/reset_password";
 import AdminLogin from "./dashboard/login";
 import PublicRoute from "./middleware/publicroute";
 
@@ -24,4 +26,7 @@ export const appRoutes = () => [
       </PublicRoute>
     ),
   },
+
+  { path: "/reset-password", element: <ResetPassword /> },
+  { path: "/forgot-password", element: <ForgotPassword /> },
 ];
