@@ -24,6 +24,8 @@ jobs:
               git clone https://github.com/jcrocker-cmd/nice2strangers_FE.git /srv/nice2strangers-frontend
             else
               cd /srv/nice2strangers-frontend
+              git fetch
+              git checkout main-prod
               git pull origin main-prod
             fi
             cd /srv/nice2strangers-frontend
