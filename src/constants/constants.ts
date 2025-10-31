@@ -1,8 +1,8 @@
 export class ApiRoutes {
-  // static readonly baseUrlApi = "https://api.nice2strangers.org/api";
-  // static readonly baseUrl = "https://api.nice2strangers.org/";
-  static readonly baseUrlApi = "https://localhost:7095/api";
-  static readonly baseUrl = "https://localhost:7095";
+  static readonly baseUrlApi = "https://api.nice2strangers.org/api";
+  static readonly baseUrl = "https://api.nice2strangers.org/";
+  // static readonly baseUrlApi = "https://localhost:7095/api";
+  // static readonly baseUrl = "https://localhost:7095";
 
   static readonly Payments = {
     createCheckout: `${this.baseUrlApi}/Payments/create-checkout`,
@@ -41,7 +41,7 @@ export class ApiRoutes {
   static readonly Auth = {
     SignUp: `${this.baseUrlApi}/Auth/register`,
     login: `${this.baseUrlApi}/Auth/login`,
-    forgotPassword: `${this.baseUrlApi}/Auth/forgot-password`,
+    forgotPassword: `${this.baseUrlApi}/Auth/forgot-password-admin`,
     resetPassword: `${this.baseUrlApi}/Auth/reset-password`,
     googleLogin: `${this.baseUrlApi}/Auth/google-login`,
   };

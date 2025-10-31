@@ -42,9 +42,9 @@ const Login: React.FC = () => {
       localStorage.setItem("lastName", lastName);
       localStorage.setItem("userId", userId);
       if (role === Roles.ADMIN) {
-        navigate("/dashboard");
+        navigate("/");
       } else if (role === Roles.USER) {
-        navigate("/shop-page");
+        navigate("/not-found");
       } else {
         navigate("/");
       }
