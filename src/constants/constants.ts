@@ -41,7 +41,7 @@ export class ApiRoutes {
   static readonly Auth = {
     SignUp: `${this.baseUrlApi}/Auth/register`,
     login: `${this.baseUrlApi}/Auth/login`,
-    forgotPassword: `${this.baseUrlApi}/Auth/forgot-password`,
+    forgotPassword: `${this.baseUrlApi}/Auth/forgot-password-admin`,
     resetPassword: `${this.baseUrlApi}/Auth/reset-password`,
     googleLogin: `${this.baseUrlApi}/Auth/google-login`,
   };
