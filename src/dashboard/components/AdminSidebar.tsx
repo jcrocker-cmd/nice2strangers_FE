@@ -44,7 +44,7 @@ const Sidenav = ({
         </div>
 
         {/* Menu Items */}
-        <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3 text-white sidebar-scroll">
+        <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3 text-white sidebar-scroll font-grotesk">
           <NormalMenu
             MenuName="Dashboard"
             Icon="pi pi-home"
@@ -89,7 +89,7 @@ const Sidenav = ({
               "SM Creation",
               "SM Consulting",
               "Video Editing",
-              "Software Creation",
+              "Software Solutions",
             ].includes(activeMenu)}
           >
             <ExpandedSubMenu
@@ -113,9 +113,9 @@ const Sidenav = ({
               onClick={() => setActiveMenu("Video Editing")}
             />
             <ExpandedSubMenu
-              MenuName="Software Creation"
+              MenuName="Software Solutions"
               Icon="pi pi-code"
-              onClick={() => setActiveMenu("Software Creation")}
+              onClick={() => setActiveMenu("Software Solutions")}
             />
           </ExpandedMenu>
 

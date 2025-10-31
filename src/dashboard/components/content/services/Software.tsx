@@ -110,9 +110,7 @@ export default function VideoEditing({}: SMCreationProps) {
         <>
           <Paper sx={{ width: "100%", overflow: "hidden", p: 4 }}>
             <div className="flex items-center py-3 justify-between">
-              <h2 className="font-semibold text-xl">
-                Socftware Creation Service
-              </h2>
+              <h2 className="font-semibold text-xl">Software Solutions</h2>
               <div className="flex items-center gap-2">
                 <ActionButton
                   sx="bg-disabled text-gray-800 text-sm"

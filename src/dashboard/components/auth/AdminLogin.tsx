@@ -15,7 +15,7 @@ interface LoginFormInputs {
   lastName: string;
 }
 
-const Login = () => {
+const Login: React.FC = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
@@ -58,12 +58,10 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-6">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-6 font-grotesk">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
         {/* Header */}
-        <h2 className="text-2xl font-bold text-center text-gray-900">
-          Welcome Back
-        </h2>
+        <h2 className="text-2xl font-bold text-center text-gray-900">Admin</h2>
         <p className="text-sm text-gray-500 text-center mb-6">
           Login to your account
         </p>
@@ -140,33 +138,6 @@ const Login = () => {
             {isSubmitting ? "Logging in..." : "Login"}
           </button>
         </form>
-
-        {/* Divider */}
-        <div className="flex items-center gap-3 my-6">
-          <div className="flex-1 h-px bg-gray-300" />
-          <span className="text-gray-400 text-sm">OR</span>
-          <div className="flex-1 h-px bg-gray-300" />
-        </div>
-
-        {/* Google Login */}
-        <button
-          onClick={() => (window.location.href = ApiRoutes.Auth.googleLogin)}
-          className="w-full flex items-center cursor-pointer justify-center gap-3 py-3 border border-gray-300 rounded-xl hover:bg-gray-50 transition"
-        >
-          <FcGoogle className="text-xl" />
-          <span className="font-medium">Sign in with Google</span>
-        </button>
-
-        {/* Footer */}
-        <p className="text-sm text-center text-gray-600 mt-6">
-          Don’t have an account?{" "}
-          <a
-            href="/signup"
-            className="text-yellow-500 font-medium hover:underline"
-          >
-            Sign Up
-          </a>
-        </p>
       </div>
     </div>
   );

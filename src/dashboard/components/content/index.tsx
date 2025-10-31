@@ -47,7 +47,7 @@ export const renderContent = (
       return <SMCreation setIsGlobalLoading={setIsGlobalLoading} />;
     case "Video Editing":
       return <VideoEditing setIsGlobalLoading={setIsGlobalLoading} />;
-    case "Software Creation":
+    case "Software Solutions":
       return <Software setIsGlobalLoading={setIsGlobalLoading} />;
     case "Chart":
       return <div>This is Chart</div>;

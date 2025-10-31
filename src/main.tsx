@@ -1,7 +1,7 @@
 import { Provider } from "react-redux";
 import { store } from "./state/store.ts";
 import { StrictMode, Suspense } from "react";
-import SmileyPreloader from "./client/components/common/Preloader.tsx";
+import SmileyPreloader from "./dashboard/components/common/Preloader.tsx";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.tsx";
